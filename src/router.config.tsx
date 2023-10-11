@@ -1,5 +1,5 @@
 import { Navigate, createBrowserRouter } from "react-router-dom"
-import StyleGuide from "./Components/StyleGuides";
+import StyleGuide from "./Components/StyleGuides/StyleGuide";
 import { styleGuidesRouterConfig } from "./Components/StyleGuides/styleGuideRouter.config"
 export const mainRouterConfig = createBrowserRouter([
     {
