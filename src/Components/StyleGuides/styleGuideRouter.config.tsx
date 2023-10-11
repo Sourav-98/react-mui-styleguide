@@ -8,18 +8,18 @@ const SelectFieldsStyleGuide = lazy(() => import('./SelectFields'));
 export const styleGuidesRouterConfig: RouteObject[] = [
     {
         path: 'textfield',
-        element: <TextFieldStyleGuide/>
+        element: <TextFieldStyleGuide/>,
     },
     {
         path: 'autocomplete',
-        element: <AutoCompleteStyleGuide/>
+        element: <AutoCompleteStyleGuide/>,
     },
     {
         path: 'select',
-        element: <SelectFieldsStyleGuide/>
+        element: <SelectFieldsStyleGuide/>,
     },
     {
         path: '',
-        element: <Navigate to='textfield'/>
+        element: <Navigate to='textfield'/>,
     }
 ]

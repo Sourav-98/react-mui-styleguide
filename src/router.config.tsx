@@ -1,11 +1,11 @@
 import { Navigate, createBrowserRouter } from "react-router-dom"
-import StyleGuide from "./Components/StyleGuide"
+import StyleGuide from "./Components/StyleGuides";
 import { styleGuidesRouterConfig } from "./Components/StyleGuides/styleGuideRouter.config"
 export const mainRouterConfig = createBrowserRouter([
     {
         path: '/styleguide',
         element: <StyleGuide/>,
-        children: styleGuidesRouterConfig
+        children: styleGuidesRouterConfig,
     },
     {
         path: '/',
