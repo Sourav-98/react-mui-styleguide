@@ -160,7 +160,7 @@ export const StationTypeAhead: React.FC<StationTypeAheadProps> = ({
             ...props.InputProps,
             endAdornment: (
               <>
-                {(isLoading || isStationsLoading) && <CircularProgress color='primary' size={20} />}
+                {(isLoading || isStationsLoading) && <CircularProgress color={textFieldProps.color} size={20} />}
                 {props.InputProps.endAdornment}
               </>
             ),
