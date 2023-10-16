@@ -2,6 +2,25 @@ import {
   createTheme,
   inputBaseClasses,
 } from "@mui/material";
+import { LightModePalette } from './AppPalette';
+
+declare module '@mui/material/styles' {
+  interface PaletteColor {
+    lighter: string;
+    darker: string;
+    saturated: string;
+    50: string;
+    100: string;
+    200: string;
+    300: string;
+    400: string;
+    500: string;
+    600: string;
+    700: string;
+    800: string;
+    900: string;
+  }
+}
 
 const stdInputPadding = {
   LR: 12,
@@ -16,11 +35,7 @@ const smallInputPadding = {
 const theme = createTheme({
   palette: {
     mode: "light",
-    primary: {
-      main: "#026fdb",
-      light: "#0270de",
-      dark: "#026fdb",
-    },
+    ...LightModePalette
   },
   components: {
     MuiInputBase: {
