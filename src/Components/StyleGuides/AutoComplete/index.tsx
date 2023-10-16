@@ -65,11 +65,11 @@ const AutoCompleteStyleGuide: React.FC = (): JSX.Element => {
         </Box>
         <Box display={'flex'} flexDirection={'column'} m={1} width={200}>
           <Typography variant='subtitle2' fontSize={13}>Station Search Success</Typography>
-          <StationTypeAhead color='secondary' fullWidth placeholder='Station'/>
+          <StationTypeAhead color='success' fullWidth placeholder='Station'/>
         </Box>
         <Box display={'flex'} flexDirection={'column'} m={1} width={200}>
           <Typography variant='subtitle2' fontSize={13}>Station Search Error</Typography>
-          <StationTypeAhead color='secondary' fullWidth placeholder='Station'/>
+          <StationTypeAhead color='error' fullWidth placeholder='Station'/>
         </Box>
         <Box display={'flex'} flexDirection={'column'} m={1} width={200}>
           <Typography variant='subtitle2' fontSize={13}>Station Search Warning</Typography>
@@ -100,11 +100,11 @@ const AutoCompleteStyleGuide: React.FC = (): JSX.Element => {
         </Box>
         <Box display={'flex'} flexDirection={'column'} m={1} width={200}>
           <Typography variant='subtitle2' fontSize={13}>Station Search Success</Typography>
-          <StationTypeAhead size='small' color='secondary' fullWidth placeholder='Station'/>
+          <StationTypeAhead size='small' color='success' fullWidth placeholder='Station'/>
         </Box>
         <Box display={'flex'} flexDirection={'column'} m={1} width={200}>
           <Typography variant='subtitle2' fontSize={13}>Station Search Error</Typography>
-          <StationTypeAhead size='small' color='secondary' fullWidth placeholder='Station'/>
+          <StationTypeAhead size='small' color='error' fullWidth placeholder='Station'/>
         </Box>
         <Box display={'flex'} flexDirection={'column'} m={1} width={200}>
           <Typography variant='subtitle2' fontSize={13}>Station Search Warning</Typography>
