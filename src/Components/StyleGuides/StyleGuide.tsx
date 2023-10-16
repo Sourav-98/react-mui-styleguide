@@ -1,10 +1,13 @@
-import { AppBar, CircularProgress, Drawer, IconButton, List, ListItem, ListItemText, Toolbar, Typography } from "@mui/material";
-import { Suspense, useEffect, useState } from "react";
+import { AppBar, Box, CircularProgress, Drawer, IconButton, List, ListItem, ListItemText, Switch, Toolbar, Typography } from "@mui/material";
+import { Suspense, useContext, useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from "react-router-dom";
+import { ThemeContext } from "Context/ThemeContext";
 
 const StyleGuide: React.FC = (): JSX.Element => {
+
+  const themeContext = useContext(ThemeContext);
 
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
 
@@ -41,6 +44,12 @@ const StyleGuide: React.FC = (): JSX.Element => {
               pathname.includes('/textfield') ? 'TextField Styles' : pathname.includes('/select') ? 'Select Styles' : pathname.includes('/autocomplete') ? 'Autocomplete Styles' : ''
             }
           </Typography>
+          <Box sx={{ marginLeft: 'auto', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+            <Typography variant="subtitle2">Light</Typography>
+            <Switch checked={themeContext.darkMode} onClick={themeContext.toggleDarkMode} />
+            <Typography variant="subtitle2">Dark</Typography>
+          </Box>
+
         </Toolbar>
       </AppBar>
       <Drawer
@@ -49,14 +58,14 @@ const StyleGuide: React.FC = (): JSX.Element => {
         onClose={() => setDrawerOpen(() => false)}
       >
         <List>
-          <ListItem component={Link} to='./autocomplete'>
-            <ListItemText>AutoComplete StyleGuide</ListItemText>
+          <ListItem sx={{ color: 'inherit'}} component={Link} to='./autocomplete'>
+            <ListItemText sx={{ color: 'inherit'}}>AutoComplete StyleGuide</ListItemText>
           </ListItem>
-          <ListItem component={Link} to='./textfield'>
-            <ListItemText>TextFields StyleGuide</ListItemText>
+          <ListItem sx={{ color: 'inherit'}} component={Link} to='./textfield'>
+            <ListItemText sx={{ color: 'inherit'}}>TextFields StyleGuide</ListItemText>
           </ListItem>
-          <ListItem component={Link} to='./select'>
-            <ListItemText>Select StyleGuide</ListItemText>
+          <ListItem sx={{ color: 'inherit'}} component={Link} to='./select'>
+            <ListItemText sx={{ color: 'inherit'}}>Select StyleGuide</ListItemText>
           </ListItem>
         </List>
       </Drawer>

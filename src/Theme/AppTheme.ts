@@ -1,8 +1,9 @@
 import {
-  createTheme,
+  PaletteMode,
+  ThemeOptions,
   inputBaseClasses,
 } from "@mui/material";
-import { LightModePalette } from './AppPalette';
+import { LightModePalette, DarkModePalette } from './AppPalette';
 
 declare module '@mui/material/styles' {
   interface PaletteColor {
@@ -32,10 +33,18 @@ const smallInputPadding = {
   TB: 8
 }
 
-const theme = createTheme({
+export const AppThemeOptions = (mode: PaletteMode): ThemeOptions => ({
   palette: {
-    mode: "light",
-    ...LightModePalette
+    mode,
+    ...(mode === 'light'
+      ? {
+          // palette values for light mode
+          ...LightModePalette,
+        }
+      : {
+          // palette values for dark mode
+          ...DarkModePalette,
+        }),
   },
   components: {
     MuiInputBase: {
@@ -161,6 +170,6 @@ const theme = createTheme({
       },
     },
   },
-});
+})
 
-export default theme;
+export default AppThemeOptions;

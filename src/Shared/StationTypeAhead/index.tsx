@@ -6,6 +6,7 @@ import {
   Typography,
   autocompleteClasses,
   TextField,
+  alpha,
 } from '@mui/material';
 import { MutableRefObject, SyntheticEvent, useRef, useState, useTransition } from 'react';
 import match from 'autosuggest-highlight/match';
@@ -71,6 +72,7 @@ export const StationTypeAhead: React.FC<StationTypeAheadProps> = ({
   return (
     <Autocomplete
       freeSolo
+      disabled={textFieldProps.disabled}
       inputValue={stationSearchText}
       sx={sx}
       options={stations}
@@ -109,12 +111,28 @@ export const StationTypeAhead: React.FC<StationTypeAheadProps> = ({
             sx={(theme) => ({
               [`&.${autocompleteClasses.option}`]: {
                 '&.Mui-focused': {
-                  backgroundColor: textFieldProps.color === 'secondary' ? theme.palette.secondary[100]
-                    : textFieldProps.color === 'success' ? theme.palette.success[100]
-                    : textFieldProps.color === 'error' ? theme.palette.error[100]
-                    : textFieldProps.color === 'warning' ? theme.palette.warning[100]
-                    : textFieldProps.color === 'info' ? theme.palette.info[100]
-                    : theme.palette.primary[100]
+                  backgroundColor: textFieldProps.color === 'secondary' ? alpha(theme.palette.secondary[200], 0.4)
+                    : textFieldProps.color === 'success' ? alpha(theme.palette.success[200], 0.4)
+                    : textFieldProps.color === 'error' ? alpha(theme.palette.error[200], 0.4)
+                    : textFieldProps.color === 'warning' ? alpha(theme.palette.warning[200], 0.4)
+                    : textFieldProps.color === 'info' ? alpha(theme.palette.info[200], 0.4)
+                    : alpha(theme.palette.primary[200], 0.4)
+                },
+                '&[aria-selected="true"]': {
+                  backgroundColor: textFieldProps.color === 'secondary' ? alpha(theme.palette.secondary[100], 0.5)
+                    : textFieldProps.color === 'success' ? alpha(theme.palette.success[100], 0.5)
+                    : textFieldProps.color === 'error' ? alpha(theme.palette.error[200], 0.5)
+                    : textFieldProps.color === 'warning' ? alpha(theme.palette.warning[100], 0.5)
+                    : textFieldProps.color === 'info' ? alpha(theme.palette.info[200], 0.5)
+                    : alpha(theme.palette.primary[200], 0.25)
+                },
+                '&[aria-selected="true"].Mui-focused': {
+                  backgroundColor: textFieldProps.color === 'secondary' ? alpha(theme.palette.secondary[200], 0.6)
+                    : textFieldProps.color === 'success' ? alpha(theme.palette.success[200], 0.6)
+                    : textFieldProps.color === 'error' ? alpha(theme.palette.error[200], 0.6)
+                    : textFieldProps.color === 'warning' ? alpha(theme.palette.warning[200], 0.6)
+                    : textFieldProps.color === 'info' ? alpha(theme.palette.info[200], 0.6)
+                    : alpha(theme.palette.primary[200], 0.6)
                 },
               },
             })}

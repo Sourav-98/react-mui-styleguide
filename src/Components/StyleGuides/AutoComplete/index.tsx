@@ -47,21 +47,73 @@ const AutoCompleteStyleGuide: React.FC = (): JSX.Element => {
       </Box>
       <Typography variant='h6'>Station Type Ahead - Size : Medium</Typography>
       <Box display={'flex'} flexDirection={'row'}>
-        <StationTypeAhead sx={{ m: 1, width: 200 }} placeholder='Station'/>
-        <StationTypeAhead sx={{ m: 1, width: 200 }} color='secondary' placeholder='Station'/>
-        <StationTypeAhead sx={{ m: 1, width: 200 }} color='success' placeholder='Station'/>
-        <StationTypeAhead sx={{ m: 1, width: 200 }} color='error' placeholder='Station'/>
-        <StationTypeAhead sx={{ m: 1, width: 200 }} color='warning' placeholder='Station'/>
-        <StationTypeAhead sx={{ m: 1, width: 200 }} color='info' placeholder='Station'/>
+        <Box display={'flex'} flexDirection={'column'} m={1} width={200}>
+          <Typography variant='subtitle2' fontSize={13}>Station Search Disabled</Typography>
+          <StationTypeAhead disabled fullWidth placeholder='Station'/>
+        </Box>
+        <Box display={'flex'} flexDirection={'column'} m={1} width={200}>
+          <Typography variant='subtitle2' fontSize={13}>Station Search Primary</Typography>
+          <StationTypeAhead fullWidth placeholder='Station'/>
+        </Box>
+        <Box display={'flex'} flexDirection={'column'} m={1} width={200}>
+          <Typography variant='subtitle2' fontSize={13}>{`Station Search Primary (Error)`}</Typography>
+          <StationTypeAhead error fullWidth placeholder='Station'/>
+        </Box>
+        <Box display={'flex'} flexDirection={'column'} m={1} width={200}>
+          <Typography variant='subtitle2' fontSize={13}>Station Search Secondary</Typography>
+          <StationTypeAhead color='secondary' fullWidth placeholder='Station'/>
+        </Box>
+        <Box display={'flex'} flexDirection={'column'} m={1} width={200}>
+          <Typography variant='subtitle2' fontSize={13}>Station Search Success</Typography>
+          <StationTypeAhead color='secondary' fullWidth placeholder='Station'/>
+        </Box>
+        <Box display={'flex'} flexDirection={'column'} m={1} width={200}>
+          <Typography variant='subtitle2' fontSize={13}>Station Search Error</Typography>
+          <StationTypeAhead color='secondary' fullWidth placeholder='Station'/>
+        </Box>
+        <Box display={'flex'} flexDirection={'column'} m={1} width={200}>
+          <Typography variant='subtitle2' fontSize={13}>Station Search Warning</Typography>
+          <StationTypeAhead color='warning' fullWidth placeholder='Station'/>
+        </Box>
+        <Box display={'flex'} flexDirection={'column'} m={1} width={200}>
+          <Typography variant='subtitle2' fontSize={13}>Station Search Info</Typography>
+          <StationTypeAhead color='info' fullWidth placeholder='Station'/>
+        </Box>
       </Box>
       <Typography variant='h6'>Station Type Ahead - Size : Small</Typography>
       <Box display={'flex'} flexDirection={'row'}>
-        <StationTypeAhead sx={{ m: 1, width: 200 }} size='small' placeholder='Station'/>
-        <StationTypeAhead sx={{ m: 1, width: 200 }} size='small' color='secondary' placeholder='Station'/>
-        <StationTypeAhead sx={{ m: 1, width: 200 }} size='small' color='success' placeholder='Station'/>
-        <StationTypeAhead sx={{ m: 1, width: 200 }} size='small' color='error' placeholder='Station'/>
-        <StationTypeAhead sx={{ m: 1, width: 200 }} size='small' color='warning' placeholder='Station'/>
-        <StationTypeAhead sx={{ m: 1, width: 200 }} size='small' color='info' placeholder='Station'/>
+      <Box display={'flex'} flexDirection={'column'} m={1} width={200}>
+          <Typography variant='subtitle2' fontSize={13}>Station Search Disabled</Typography>
+          <StationTypeAhead size='small' disabled fullWidth placeholder='Station'/>
+        </Box>
+        <Box display={'flex'} flexDirection={'column'} m={1} width={200}>
+          <Typography variant='subtitle2' fontSize={13}>Station Search Primary</Typography>
+          <StationTypeAhead size='small' fullWidth placeholder='Station'/>
+        </Box>
+        <Box display={'flex'} flexDirection={'column'} m={1} width={200}>
+          <Typography variant='subtitle2' fontSize={13}>{`Station Search Primary (Error)`}</Typography>
+          <StationTypeAhead size='small' error fullWidth placeholder='Station'/>
+        </Box>
+        <Box display={'flex'} flexDirection={'column'} m={1} width={200}>
+          <Typography variant='subtitle2' fontSize={13}>Station Search Secondary</Typography>
+          <StationTypeAhead size='small' color='secondary' fullWidth placeholder='Station'/>
+        </Box>
+        <Box display={'flex'} flexDirection={'column'} m={1} width={200}>
+          <Typography variant='subtitle2' fontSize={13}>Station Search Success</Typography>
+          <StationTypeAhead size='small' color='secondary' fullWidth placeholder='Station'/>
+        </Box>
+        <Box display={'flex'} flexDirection={'column'} m={1} width={200}>
+          <Typography variant='subtitle2' fontSize={13}>Station Search Error</Typography>
+          <StationTypeAhead size='small' color='secondary' fullWidth placeholder='Station'/>
+        </Box>
+        <Box display={'flex'} flexDirection={'column'} m={1} width={200}>
+          <Typography variant='subtitle2' fontSize={13}>Station Search Warning</Typography>
+          <StationTypeAhead size='small' color='warning' fullWidth placeholder='Station'/>
+        </Box>
+        <Box display={'flex'} flexDirection={'column'} m={1} width={200}>
+          <Typography variant='subtitle2' fontSize={13}>Station Search Info</Typography>
+          <StationTypeAhead size='small' color='info' fullWidth placeholder='Station'/>
+        </Box>
       </Box>
     </Box>
   )
