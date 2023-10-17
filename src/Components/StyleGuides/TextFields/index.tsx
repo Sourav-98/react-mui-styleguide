@@ -4,7 +4,7 @@ const TextFieldStyleGuide: React.FC = (): JSX.Element => {
 
   return (
     <Box display={'flex'} flexDirection={'column'} p={2}>
-      <Typography variant="h6">{`Color`}</Typography>
+      <Typography variant="h6">{`Color Scheme`}</Typography>
       <Box display={'flex'} flexDirection={'row'}>
         <TextField disabled sx={{ m: 1, width: 200 }} placeholder='Outlined Disabled'></TextField>
         <TextField sx={{ m: 1, width: 200 }} placeholder='Outlined Primary'></TextField>

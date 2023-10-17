@@ -5,6 +5,8 @@ import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 import { useContext } from 'react';
 import { ThemeContext } from 'Context/ThemeContext';
 import AppThemeOptions from 'Theme/AppTheme';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 
 function App() {
 
@@ -13,10 +15,12 @@ function App() {
   const appTheme = createTheme(AppThemeOptions(themeContext.darkMode ? 'dark' : 'light'));
 
   return (
-    <ThemeProvider theme={appTheme}>
-      <CssBaseline />
-      <RouterProvider router={mainRouterConfig}></RouterProvider>
-    </ThemeProvider>
+    <LocalizationProvider dateAdapter={AdapterMoment}>
+      <ThemeProvider theme={appTheme}>
+        <CssBaseline />
+        <RouterProvider router={mainRouterConfig}></RouterProvider>
+      </ThemeProvider>
+    </LocalizationProvider>
   )
 }
 

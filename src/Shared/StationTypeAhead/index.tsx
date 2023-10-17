@@ -79,8 +79,8 @@ export const StationTypeAhead: React.FC<StationTypeAheadProps> = ({
       componentsProps={{
         popper: {
           sx: {
-            display: 'flex',
-          },
+            display: 'flex'
+          }
         },
         paper: {
           elevation: 4,
@@ -95,6 +95,7 @@ export const StationTypeAhead: React.FC<StationTypeAheadProps> = ({
       onChange={(_, value) => {
         setAvailableStations([]);
       }}
+      onBlur={() => resetTimeout()}
       filterOptions={(options) => options}
       isOptionEqualToValue={(option, value) => option.OId === value.OId}
       getOptionLabel={(option) => {
@@ -113,26 +114,26 @@ export const StationTypeAhead: React.FC<StationTypeAheadProps> = ({
                 '&.Mui-focused': {
                   backgroundColor: textFieldProps.color === 'secondary' ? alpha(theme.palette.secondary[200], 0.4)
                     : textFieldProps.color === 'success' ? alpha(theme.palette.success[200], 0.4)
-                    : textFieldProps.color === 'error' ? alpha(theme.palette.error[200], 0.4)
-                    : textFieldProps.color === 'warning' ? alpha(theme.palette.warning[200], 0.4)
-                    : textFieldProps.color === 'info' ? alpha(theme.palette.info[200], 0.4)
-                    : alpha(theme.palette.primary[200], 0.4)
+                      : textFieldProps.color === 'error' ? alpha(theme.palette.error[200], 0.4)
+                        : textFieldProps.color === 'warning' ? alpha(theme.palette.warning[200], 0.4)
+                          : textFieldProps.color === 'info' ? alpha(theme.palette.info[200], 0.4)
+                            : alpha(theme.palette.primary[200], 0.4)
                 },
                 '&[aria-selected="true"]': {
                   backgroundColor: textFieldProps.color === 'secondary' ? alpha(theme.palette.secondary[100], 0.5)
                     : textFieldProps.color === 'success' ? alpha(theme.palette.success[100], 0.5)
-                    : textFieldProps.color === 'error' ? alpha(theme.palette.error[200], 0.5)
-                    : textFieldProps.color === 'warning' ? alpha(theme.palette.warning[100], 0.5)
-                    : textFieldProps.color === 'info' ? alpha(theme.palette.info[200], 0.5)
-                    : alpha(theme.palette.primary[200], 0.25)
+                      : textFieldProps.color === 'error' ? alpha(theme.palette.error[200], 0.5)
+                        : textFieldProps.color === 'warning' ? alpha(theme.palette.warning[100], 0.5)
+                          : textFieldProps.color === 'info' ? alpha(theme.palette.info[200], 0.5)
+                            : alpha(theme.palette.primary[200], 0.25)
                 },
                 '&[aria-selected="true"].Mui-focused': {
                   backgroundColor: textFieldProps.color === 'secondary' ? alpha(theme.palette.secondary[200], 0.6)
                     : textFieldProps.color === 'success' ? alpha(theme.palette.success[200], 0.6)
-                    : textFieldProps.color === 'error' ? alpha(theme.palette.error[200], 0.6)
-                    : textFieldProps.color === 'warning' ? alpha(theme.palette.warning[200], 0.6)
-                    : textFieldProps.color === 'info' ? alpha(theme.palette.info[200], 0.6)
-                    : alpha(theme.palette.primary[200], 0.6)
+                      : textFieldProps.color === 'error' ? alpha(theme.palette.error[200], 0.6)
+                        : textFieldProps.color === 'warning' ? alpha(theme.palette.warning[200], 0.6)
+                          : textFieldProps.color === 'info' ? alpha(theme.palette.info[200], 0.6)
+                            : alpha(theme.palette.primary[200], 0.6)
                 },
               },
             })}

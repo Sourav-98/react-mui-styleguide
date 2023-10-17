@@ -1,9 +1,16 @@
 import {
   PaletteMode,
   ThemeOptions,
+  alpha,
   inputBaseClasses,
 } from "@mui/material";
 import { LightModePalette, DarkModePalette } from './AppPalette';
+
+declare module '@mui/material/TextField' {
+  interface BaseTextFieldProps {
+    touched?: 'true' | 'false'
+  }
+}
 
 declare module '@mui/material/styles' {
   interface PaletteColor {
@@ -24,8 +31,8 @@ declare module '@mui/material/styles' {
 }
 
 const stdInputPadding = {
-  LR: 12,
-  TB: 11,
+  LR: 14,
+  TB: 13,
 };
 
 const smallInputPadding = {
@@ -47,6 +54,11 @@ export const AppThemeOptions = (mode: PaletteMode): ThemeOptions => ({
         }),
   },
   components: {
+    MuiButtonBase: {
+      defaultProps: {
+        disableTouchRipple: true
+      }
+    },
     MuiInputBase: {
       styleOverrides: {
         root: {
@@ -146,6 +158,21 @@ export const AppThemeOptions = (mode: PaletteMode): ThemeOptions => ({
       },
     },
     MuiTextField: {
+      styleOverrides: {
+        root: ({ownerState, theme}) => ({
+          ...(ownerState.touched === 'true' && {
+            [`& > .${inputBaseClasses.root}`]: {
+              backgroundColor: alpha(ownerState.color === 'secondary' ? theme.palette.secondary.main 
+              : ownerState.color === 'success' ? theme.palette.success.main
+              : ownerState.color === 'error' ? theme.palette.error.main
+              : ownerState.color === 'warning' ? theme.palette.warning.main
+              : ownerState.color === 'info' ? theme.palette.info.main
+              : theme.palette.primary.main, 0.2)
+            }
+          })
+          
+        })
+      },
       defaultProps: {
         variant: "outlined",
       },
@@ -166,10 +193,13 @@ export const AppThemeOptions = (mode: PaletteMode): ThemeOptions => ({
           paddingTop: "0px !important",
           paddingBottom: "0px !important",
           paddingLeft: "0px !important",
-        }),
+        })
       },
     },
   },
+  typography: {
+    fontSize: 12.6
+  }
 })
 
 export default AppThemeOptions;

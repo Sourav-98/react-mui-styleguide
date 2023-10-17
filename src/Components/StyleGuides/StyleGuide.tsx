@@ -41,7 +41,12 @@ const StyleGuide: React.FC = (): JSX.Element => {
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             {
-              pathname.includes('/textfield') ? 'TextField Styles' : pathname.includes('/select') ? 'Select Styles' : pathname.includes('/autocomplete') ? 'Autocomplete Styles' : ''
+              pathname.includes('/textfield') ? 'TextField Styles'
+                : pathname.includes('/select') ? 'Select Styles'
+                  : pathname.includes('/autocomplete') ? 'Autocomplete Styles'
+                    : pathname.includes('/buttons') ? 'Buttons Styles'
+                      : pathname.includes('/formik') ? 'Formik Forms Styles'
+                        : ''
             }
           </Typography>
           <Box sx={{ marginLeft: 'auto', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
@@ -58,14 +63,23 @@ const StyleGuide: React.FC = (): JSX.Element => {
         onClose={() => setDrawerOpen(() => false)}
       >
         <List>
-          <ListItem sx={{ color: 'inherit'}} component={Link} to='./autocomplete'>
-            <ListItemText sx={{ color: 'inherit'}}>AutoComplete StyleGuide</ListItemText>
+          <ListItem sx={{ color: 'inherit' }} component={Link} to='./autocomplete'>
+            <ListItemText sx={{ color: 'inherit' }}>AutoComplete StyleGuide</ListItemText>
           </ListItem>
-          <ListItem sx={{ color: 'inherit'}} component={Link} to='./textfield'>
-            <ListItemText sx={{ color: 'inherit'}}>TextFields StyleGuide</ListItemText>
+          <ListItem sx={{ color: 'inherit' }} component={Link} to='./textfield'>
+            <ListItemText sx={{ color: 'inherit' }}>TextFields StyleGuide</ListItemText>
           </ListItem>
-          <ListItem sx={{ color: 'inherit'}} component={Link} to='./select'>
-            <ListItemText sx={{ color: 'inherit'}}>Select StyleGuide</ListItemText>
+          <ListItem sx={{ color: 'inherit' }} component={Link} to='./select'>
+            <ListItemText sx={{ color: 'inherit' }}>Select StyleGuide</ListItemText>
+          </ListItem>
+          <ListItem sx={{ color: 'inherit' }} component={Link} to='./button'>
+            <ListItemText sx={{ color: 'inherit' }}>Button StyleGuide</ListItemText>
+          </ListItem>
+          <ListItem sx={{ color: 'inherit' }} component={Link} to='./datepicker'>
+            <ListItemText sx={{ color: 'inherit' }}>DatePicker StyleGuide</ListItemText>
+          </ListItem>
+          <ListItem sx={{ color: 'inherit' }} component={Link} to='./formik'>
+            <ListItemText sx={{ color: 'inherit' }}>Formik StyleGuide</ListItemText>
           </ListItem>
         </List>
       </Drawer>
