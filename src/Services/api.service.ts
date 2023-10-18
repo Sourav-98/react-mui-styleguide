@@ -1,4 +1,3 @@
-
 export interface StationOption {
   version: number;
   OId: number;
@@ -41696,10 +41695,18 @@ const _stationList: StationOption[] = [
 ];
 
 export const stationSearchMockAPI = async (
-  searchText: string
+  searchText: string,
+  { signal }: { signal: AbortSignal }
 ): Promise<Array<StationOption>> => {
+  if (signal.aborted) {
+    console.log("Station Search API canceled");
+    return Promise.reject({
+      code: "ERR_CANCELED",
+      message: "Canceled",
+    });
+  }
   console.log("Station Search API called");
-  return new Promise((resolve) =>
+  return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(
         _stationList.filter(
@@ -41708,6 +41715,13 @@ export const stationSearchMockAPI = async (
             stationName.includes(searchText)
         )
       );
-    }, 1300)
-  );
+    }, 1300);
+    signal.addEventListener('abort', () => {
+      console.log("Station Search API canceled");
+      reject({
+        code: "ERR_CANCELED",
+        message: "Canceled",
+      })
+    })
+  });
 };
