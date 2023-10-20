@@ -1,12 +1,23 @@
-import { AppBar, Box, CircularProgress, Drawer, IconButton, List, ListItem, ListItemText, Switch, Toolbar, Typography } from "@mui/material";
-import { Suspense, useContext, useEffect, useState } from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import {
+  AppBar,
+  Box,
+  CircularProgress,
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  ListItemText,
+  Switch,
+  Toolbar,
+  Typography,
+} from '@mui/material';
+import { Suspense, useContext, useEffect, useState } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Link } from "react-router-dom";
-import { ThemeContext } from "Context/ThemeContext";
+import { Link } from 'react-router-dom';
+import { ThemeContext } from 'Context/ThemeContext';
 
 const StyleGuide: React.FC = (): JSX.Element => {
-
   const themeContext = useContext(ThemeContext);
 
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
@@ -27,41 +38,47 @@ const StyleGuide: React.FC = (): JSX.Element => {
 
   return (
     <>
-      <AppBar position="sticky" sx={{ mb: 2 }}>
+      <AppBar position='sticky' sx={{ mb: 2 }}>
         <Toolbar>
           <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
+            size='large'
+            edge='start'
+            color='inherit'
+            aria-label='menu'
             sx={{ mr: 2 }}
             onClick={() => setDrawerOpen(() => true)}
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            {
-              pathname.includes('/textfield') ? 'TextField Styles'
-                : pathname.includes('/select') ? 'Select Styles'
-                  : pathname.includes('/autocomplete') ? 'Autocomplete Styles'
-                    : pathname.includes('/buttons') ? 'Buttons Styles'
-                      : pathname.includes('/formik') ? 'Formik Forms Styles'
-                        : ''
-            }
+          <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
+            {pathname.includes('/textfield')
+              ? 'TextField Styles'
+              : pathname.includes('/select')
+              ? 'Select Styles'
+              : pathname.includes('/autocomplete')
+              ? 'Autocomplete Styles'
+              : pathname.includes('/buttons')
+              ? 'Buttons Styles'
+              : pathname.includes('/formik')
+              ? 'Formik Forms Styles'
+              : ''}
           </Typography>
-          <Box sx={{ marginLeft: 'auto', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-            <Typography variant="subtitle2">Light</Typography>
+          <Box
+            sx={{
+              marginLeft: 'auto',
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Typography variant='subtitle2'>Light</Typography>
             <Switch checked={themeContext.darkMode} onClick={themeContext.toggleDarkMode} />
-            <Typography variant="subtitle2">Dark</Typography>
+            <Typography variant='subtitle2'>Dark</Typography>
           </Box>
-
         </Toolbar>
       </AppBar>
-      <Drawer
-        anchor={'left'}
-        open={drawerOpen}
-        onClose={() => setDrawerOpen(() => false)}
-      >
+      <Drawer anchor={'left'} open={drawerOpen} onClose={() => setDrawerOpen(() => false)}>
         <List>
           <ListItem sx={{ color: 'inherit' }} component={Link} to='./autocomplete'>
             <ListItemText sx={{ color: 'inherit' }}>AutoComplete StyleGuide</ListItemText>
@@ -83,11 +100,26 @@ const StyleGuide: React.FC = (): JSX.Element => {
           </ListItem>
         </List>
       </Drawer>
-      <Suspense fallback={<CircularProgress />}>
+      <Suspense
+        fallback={
+          <Box
+            sx={{
+              width: '100%',
+              height: '100%',
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <CircularProgress />
+          </Box>
+        }
+      >
         <Outlet />
       </Suspense>
     </>
-  )
-}
+  );
+};
 
 export default StyleGuide;

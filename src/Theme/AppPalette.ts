@@ -30,7 +30,7 @@ export const LightModePalette: PaletteOptions = {
   success: generatePaletteColor('#2e7d32'),
   error: generatePaletteColor('#d32f2f'),
   warning: generatePaletteColor('#ed6c02'),
-  info: generatePaletteColor('#0288d1')
+  info: generatePaletteColor('#0288d1'),
 };
 
 export const DarkModePalette: PaletteOptions = {
@@ -39,5 +39,5 @@ export const DarkModePalette: PaletteOptions = {
   success: generatePaletteColor('#66bb6a'),
   error: generatePaletteColor('#f44336'),
   warning: generatePaletteColor('#ffa726'),
-  info: generatePaletteColor('#29b6f6')
+  info: generatePaletteColor('#29b6f6'),
 };

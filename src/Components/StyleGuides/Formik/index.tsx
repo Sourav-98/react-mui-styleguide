@@ -1,13 +1,12 @@
-import { Box, Grid, Paper, TextField, Typography } from "@mui/material";
-import TextFieldDatePicker from "Elements/DatePickers/TextFieldDatePicker";
-import { StationTypeAhead } from "Shared/StationTypeAhead";
-import { Form, Formik, FormikProps } from "formik";
-import { Moment } from "moment";
+import { Box, Grid, Paper, TextField, Typography } from '@mui/material';
+import TextFieldDatePicker from 'Elements/DatePickers/TextFieldDatePicker';
+import { StationTypeAhead } from 'Shared/StationTypeAhead';
+import { Form, Formik, FormikProps } from 'formik';
+import { Moment } from 'moment';
 
-export { }
+export {};
 
 const FormikStyleGuide: React.FC = (): JSX.Element => {
-
   type LoginFormType = {
     textfield1: string;
     textfield2: string;
@@ -29,7 +28,7 @@ const FormikStyleGuide: React.FC = (): JSX.Element => {
     station3: '',
     loginDate1: null,
     loginDate2: null,
-    loginDate3: null
+    loginDate3: null,
   };
   return (
     <Box
@@ -39,10 +38,7 @@ const FormikStyleGuide: React.FC = (): JSX.Element => {
         alignItems: 'center',
       }}
     >
-      <Formik
-        initialValues={loginFormInitValues}
-        onSubmit={(values, helpers) => { }}
-      >
+      <Formik initialValues={loginFormInitValues} onSubmit={(values, helpers) => {}}>
         {({
           values,
           errors,
@@ -55,7 +51,7 @@ const FormikStyleGuide: React.FC = (): JSX.Element => {
           <Grid container spacing={0} justifyContent={'center'} alignItems={'center'} height={'100%'}>
             <Grid item xs={12} style={{ maxWidth: 400 }}>
               <Paper elevation={3} sx={{ padding: 3, display: 'flex', flexDirection: 'column' }}>
-                <Typography variant="body1">Formik Styling for touched fields</Typography>
+                <Typography variant='body1'>Formik Styling for touched fields</Typography>
                 <Form>
                   <Box display={'flex'} flexDirection={'column'}>
                     <TextField
@@ -79,8 +75,8 @@ const FormikStyleGuide: React.FC = (): JSX.Element => {
                       touched={touched.textfield2 ? 'true' : 'false'}
                       name='textfield2'
                       placeholder='Filled Info'
-                      variant="filled"
-                      color="info"
+                      variant='filled'
+                      color='info'
                       value={values.textfield2}
                       aria-label='textfield2'
                       onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
@@ -90,20 +86,21 @@ const FormikStyleGuide: React.FC = (): JSX.Element => {
                     />
                     <TextField
                       sx={{ mt: 1, mb: 1 }}
+                      variant='standard'
                       error={touched.textfield3 && !!errors.textfield3}
                       helperText={touched.textfield3 ? errors.textfield3 : null}
                       touched={touched.textfield3 ? 'true' : 'false'}
                       name='textfield3'
                       placeholder='Standard Success'
                       value={values.textfield3}
-                      color="success"
+                      color='success'
                       aria-label='textfield3'
                       onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                         setFieldValue('textfield3', event.target.value);
                       }}
                       onBlur={() => setFieldTouched('textfield3', true, true)}
                     />
-                    <Typography variant="subtitle2">Station Search Outlined Primary</Typography>
+                    <Typography variant='subtitle2'>Station Search Outlined Primary</Typography>
                     <StationTypeAhead
                       name='station1'
                       value={values.station1}
@@ -117,13 +114,13 @@ const FormikStyleGuide: React.FC = (): JSX.Element => {
                       }}
                       onBlur={() => setFieldTouched('station1', true, true)}
                     />
-                    <Typography variant="subtitle2">Station Search Filled Info</Typography>
+                    <Typography variant='subtitle2'>Station Search Filled Info</Typography>
                     <StationTypeAhead
                       name='station2'
                       value={values.station2}
                       sx={{ mt: 1, mb: 1 }}
-                      variant="filled"
-                      color="info"
+                      variant='filled'
+                      color='info'
                       error={touched.station2 && !!errors.station2}
                       helperText={touched.station2 ? errors.station2 : null}
                       touched={touched.station2 ? 'true' : 'false'}
@@ -133,13 +130,13 @@ const FormikStyleGuide: React.FC = (): JSX.Element => {
                       }}
                       onBlur={() => setFieldTouched('station2', true, true)}
                     />
-                    <Typography variant="subtitle2">Station Search Standard Success</Typography>
+                    <Typography variant='subtitle2'>Station Search Standard Success</Typography>
                     <StationTypeAhead
                       name='station3'
                       value={values.station3}
                       sx={{ mt: 1, mb: 1 }}
-                      variant="standard"
-                      color="success"
+                      variant='standard'
+                      color='success'
                       error={touched.station3 && !!errors.station3}
                       helperText={touched.station3 ? errors.station3 : null}
                       touched={touched.station3 ? 'true' : 'false'}
@@ -149,7 +146,7 @@ const FormikStyleGuide: React.FC = (): JSX.Element => {
                       }}
                       onBlur={() => setFieldTouched('station3', true, true)}
                     />
-                    <Typography variant="subtitle2">Typable Datepicker Outlined Primary</Typography>
+                    <Typography variant='subtitle2'>Typable Datepicker Outlined Primary</Typography>
                     <TextFieldDatePicker
                       sx={{ mt: 1, mb: 1 }}
                       aria-label='loginDate1'
@@ -163,7 +160,7 @@ const FormikStyleGuide: React.FC = (): JSX.Element => {
                       }}
                       onBlur={() => setFieldTouched('loginDate1', true, true)}
                     />
-                    <Typography variant="subtitle2">Typable Datepicker Filled Info</Typography>
+                    <Typography variant='subtitle2'>Typable Datepicker Filled Info</Typography>
                     <TextFieldDatePicker
                       sx={{ mt: 1, mb: 1 }}
                       aria-label='loginDate2'
@@ -172,14 +169,14 @@ const FormikStyleGuide: React.FC = (): JSX.Element => {
                       error={touched.loginDate2 && !!errors.loginDate2}
                       helperText={touched.loginDate2 ? errors.loginDate2 : null}
                       touched={touched.loginDate2 ? 'true' : 'false'}
-                      variant="filled"
-                      color="info"
+                      variant='filled'
+                      color='info'
                       onDateChange={(date) => {
                         setFieldValue('loginDate2', date);
                       }}
                       onBlur={() => setFieldTouched('loginDate2', true, true)}
                     />
-                    <Typography variant="subtitle2">Typable Datepicker Standard Success</Typography>
+                    <Typography variant='subtitle2'>Typable Datepicker Standard Success</Typography>
                     <TextFieldDatePicker
                       sx={{ mt: 1, mb: 1 }}
                       aria-label='loginDate3'
@@ -187,8 +184,8 @@ const FormikStyleGuide: React.FC = (): JSX.Element => {
                       value={values.loginDate3}
                       error={touched.loginDate3 && !!errors.loginDate3}
                       helperText={touched.loginDate3 ? errors.loginDate3 : null}
-                      variant="standard"
-                      color="success"
+                      variant='standard'
+                      color='success'
                       touched={touched.loginDate3 ? 'true' : 'false'}
                       onDateChange={(date) => {
                         setFieldValue('loginDate3', date);
@@ -203,7 +200,7 @@ const FormikStyleGuide: React.FC = (): JSX.Element => {
         )}
       </Formik>
     </Box>
-  )
-}
+  );
+};
 
 export default FormikStyleGuide;

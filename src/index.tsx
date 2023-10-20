@@ -5,13 +5,11 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ThemeContextProvider } from 'Context/ThemeContext';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
     <ThemeContextProvider>
-      <App/>
+      <App />
     </ThemeContextProvider>
   </React.StrictMode>
 );

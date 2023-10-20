@@ -58,7 +58,7 @@ export const StationTypeAhead: React.FC<StationTypeAheadProps> = ({
       setLoading(true);
       debounceTimeout.current = setTimeout(() => {
         stationSearchMockAPI(stationSearchText, {
-          signal: abortController.signal
+          signal: abortController.signal,
         })
           .then((res) => {
             setStations(res);
@@ -70,7 +70,7 @@ export const StationTypeAhead: React.FC<StationTypeAheadProps> = ({
 
               setLoading(false);
             }
-          })
+          });
       }, debounceDuration);
     }
     return () => {
@@ -88,10 +88,10 @@ export const StationTypeAhead: React.FC<StationTypeAheadProps> = ({
 
   /**
    * the textbox onChange handler, to handle `stationSearchText` change made by the user
-   * @param _ 
-   * @param inputValue 
-   * @param reason 
-   * @returns 
+   * @param _
+   * @param inputValue
+   * @param reason
+   * @returns
    */
   const stationSearchOnTextChangeHandler = (
     _: SyntheticEvent<Element, Event>,
@@ -171,42 +171,42 @@ export const StationTypeAhead: React.FC<StationTypeAheadProps> = ({
                     textFieldProps.color === 'secondary'
                       ? alpha(theme.palette.secondary[200], 0.28)
                       : textFieldProps.color === 'success'
-                        ? alpha(theme.palette.success[200], 0.28)
-                        : textFieldProps.color === 'error'
-                          ? alpha(theme.palette.error[200], 0.28)
-                          : textFieldProps.color === 'warning'
-                            ? alpha(theme.palette.warning[200], 0.28)
-                            : textFieldProps.color === 'info'
-                              ? alpha(theme.palette.info[200], 0.28)
-                              : alpha(theme.palette.primary[200], 0.28),
+                      ? alpha(theme.palette.success[200], 0.28)
+                      : textFieldProps.color === 'error'
+                      ? alpha(theme.palette.error[200], 0.28)
+                      : textFieldProps.color === 'warning'
+                      ? alpha(theme.palette.warning[200], 0.28)
+                      : textFieldProps.color === 'info'
+                      ? alpha(theme.palette.info[200], 0.28)
+                      : alpha(theme.palette.primary[200], 0.28),
                 },
                 '&[aria-selected="true"]': {
                   backgroundColor:
                     textFieldProps.color === 'secondary'
                       ? alpha(theme.palette.secondary[100], 0.4)
                       : textFieldProps.color === 'success'
-                        ? alpha(theme.palette.success[100], 0.4)
-                        : textFieldProps.color === 'error'
-                          ? alpha(theme.palette.error[200], 0.4)
-                          : textFieldProps.color === 'warning'
-                            ? alpha(theme.palette.warning[100], 0.4)
-                            : textFieldProps.color === 'info'
-                              ? alpha(theme.palette.info[200], 0.4)
-                              : alpha(theme.palette.primary[200], 0.4),
+                      ? alpha(theme.palette.success[100], 0.4)
+                      : textFieldProps.color === 'error'
+                      ? alpha(theme.palette.error[200], 0.4)
+                      : textFieldProps.color === 'warning'
+                      ? alpha(theme.palette.warning[100], 0.4)
+                      : textFieldProps.color === 'info'
+                      ? alpha(theme.palette.info[200], 0.4)
+                      : alpha(theme.palette.primary[200], 0.4),
                 },
                 '&[aria-selected="true"].Mui-focused': {
                   backgroundColor:
                     textFieldProps.color === 'secondary'
                       ? alpha(theme.palette.secondary[200], 0.58)
                       : textFieldProps.color === 'success'
-                        ? alpha(theme.palette.success[200], 0.58)
-                        : textFieldProps.color === 'error'
-                          ? alpha(theme.palette.error[200], 0.58)
-                          : textFieldProps.color === 'warning'
-                            ? alpha(theme.palette.warning[200], 0.58)
-                            : textFieldProps.color === 'info'
-                              ? alpha(theme.palette.info[200], 0.58)
-                              : alpha(theme.palette.primary[200], 0.58),
+                      ? alpha(theme.palette.success[200], 0.58)
+                      : textFieldProps.color === 'error'
+                      ? alpha(theme.palette.error[200], 0.58)
+                      : textFieldProps.color === 'warning'
+                      ? alpha(theme.palette.warning[200], 0.58)
+                      : textFieldProps.color === 'info'
+                      ? alpha(theme.palette.info[200], 0.58)
+                      : alpha(theme.palette.primary[200], 0.58),
                 },
               },
             })}

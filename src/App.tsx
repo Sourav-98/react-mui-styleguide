@@ -9,7 +9,6 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 
 function App() {
-
   const themeContext = useContext(ThemeContext);
 
   const appTheme = createTheme(AppThemeOptions(themeContext.darkMode ? 'dark' : 'light'));
@@ -21,7 +20,7 @@ function App() {
         <RouterProvider router={mainRouterConfig}></RouterProvider>
       </ThemeProvider>
     </LocalizationProvider>
-  )
+  );
 }
 
 export default App;

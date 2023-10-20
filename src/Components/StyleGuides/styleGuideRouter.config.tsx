@@ -1,5 +1,5 @@
-import { Navigate, RouteObject } from "react-router-dom";
-import { lazy } from "react";
+import { Navigate, RouteObject } from 'react-router-dom';
+import { lazy } from 'react';
 
 const TextFieldStyleGuide = lazy(() => import('./TextFields'));
 const AutoCompleteStyleGuide = lazy(() => import('./AutoComplete'));
@@ -9,32 +9,32 @@ const ButtonStyleGuide = lazy(() => import('./Buttons'));
 const FormikStyleGuide = lazy(() => import('./Formik'));
 
 export const styleGuidesRouterConfig: RouteObject[] = [
-    {
-        path: 'textfield',
-        element: <TextFieldStyleGuide/>,
-    },
-    {
-        path: 'autocomplete',
-        element: <AutoCompleteStyleGuide/>,
-    },
-    {
-        path: 'select',
-        element: <SelectFieldsStyleGuide/>,
-    },
-    {
-        path: 'button',
-        element: <ButtonStyleGuide/>
-    },
-    {
-        path: 'datepicker',
-        element: <DatePickerStyleGuide/>
-    },
-    {
-        path: 'formik',
-        element: <FormikStyleGuide/>
-    },
-    {
-        path: '',
-        element: <Navigate to='textfield'/>,
-    }
-]
+  {
+    path: 'textfield',
+    element: <TextFieldStyleGuide />,
+  },
+  {
+    path: 'autocomplete',
+    element: <AutoCompleteStyleGuide />,
+  },
+  {
+    path: 'select',
+    element: <SelectFieldsStyleGuide />,
+  },
+  {
+    path: 'button',
+    element: <ButtonStyleGuide />,
+  },
+  {
+    path: 'datepicker',
+    element: <DatePickerStyleGuide />,
+  },
+  {
+    path: 'formik',
+    element: <FormikStyleGuide />,
+  },
+  {
+    path: '',
+    element: <Navigate to='textfield' />,
+  },
+];

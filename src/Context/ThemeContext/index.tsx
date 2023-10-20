@@ -3,7 +3,7 @@ import { ThemeContextType } from './ThemeContext';
 
 export const ThemeContext = React.createContext<ThemeContextType>({
   darkMode: false,
-  toggleDarkMode: () => { },
+  toggleDarkMode: () => {},
 });
 
 export const ThemeContextProvider: React.FC<{ children: React.ReactNode }> = ({ ...props }): JSX.Element => {
