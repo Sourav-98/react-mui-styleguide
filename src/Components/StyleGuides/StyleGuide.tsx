@@ -57,10 +57,12 @@ const StyleGuide: React.FC = (): JSX.Element => {
               ? 'Select Styles'
               : pathname.includes('/autocomplete')
               ? 'Autocomplete Styles'
-              : pathname.includes('/buttons')
+              : pathname.includes('/button')
               ? 'Buttons Styles'
               : pathname.includes('/formik')
               ? 'Formik Forms Styles'
+              : pathname.includes('/datepicker')
+              ? 'DatePicker Styles'
               : ''}
           </Typography>
           <Box

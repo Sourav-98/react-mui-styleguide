@@ -49,7 +49,7 @@ const FormikStyleGuide: React.FC = (): JSX.Element => {
           setFieldTouched,
         }: FormikProps<LoginFormType>) => (
           <Grid container spacing={0} justifyContent={'center'} alignItems={'center'} height={'100%'}>
-            <Grid item xs={12} style={{ maxWidth: 400 }}>
+            <Grid item xs={12} style={{ width: '90%', maxWidth: 400 }}>
               <Paper elevation={3} sx={{ padding: 3, display: 'flex', flexDirection: 'column' }}>
                 <Typography variant='body1'>Formik Styling for touched fields</Typography>
                 <Form>
