@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, FormHelperText, Typography } from '@mui/material';
 import TextFieldDatePicker from 'Elements/DatePickers/TextFieldDatePicker';
 
 const DatePickerStyleGuide: React.FC = (): JSX.Element => {

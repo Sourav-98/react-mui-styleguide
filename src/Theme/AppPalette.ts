@@ -31,6 +31,9 @@ export const LightModePalette: PaletteOptions = {
   error: generatePaletteColor('#d32f2f'),
   warning: generatePaletteColor('#ed6c02'),
   info: generatePaletteColor('#0288d1'),
+  background: {
+    default: generatePaletteColor(primaryMain_light)[100]
+  }
 };
 
 export const DarkModePalette: PaletteOptions = {

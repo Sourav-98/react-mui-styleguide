@@ -1,6 +1,6 @@
 import React, { useState, useRef, MutableRefObject, useEffect, RefObject } from 'react';
 
-import { IconButton, TextField, InputAdornment, TextFieldProps, PopperPlacementType } from '@mui/material';
+import { IconButton, TextField, InputAdornment, TextFieldProps, PopperPlacementType, Box, FormHelperText } from '@mui/material';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import { DatePicker } from '@mui/x-date-pickers';
 import moment, { Moment } from 'moment';
@@ -40,6 +40,7 @@ export const TextFieldDatePicker: React.FC<
 > = ({
   dateFormat = 'DDMMMYY',
   placement = 'bottom-end',
+  label,
   value,
   defaultToday,
   onDateChange,
@@ -131,7 +132,8 @@ export const TextFieldDatePicker: React.FC<
   };
 
   return (
-    <>
+    <Box>
+      <FormHelperText>{label}</FormHelperText>
       <TextField
         {...textFieldProps}
         value={dateText}
@@ -185,7 +187,7 @@ export const TextFieldDatePicker: React.FC<
           },
         }}
       ></DatePicker>
-    </>
+    </Box>
   );
 };
 
