@@ -112,13 +112,12 @@ const FormikStyleGuide: React.FC = (): JSX.Element => {
                         }}
                         onBlur={() => setFieldTouched('station1', true, true)}
                       />
-                      <Typography variant='subtitle2'>Station Search Filled Info</Typography>
+                      <Typography variant='subtitle2'>Station Search Filled</Typography>
                       <StationTypeAhead
                         name='station2'
                         value={values.station2}
                         sx={{ mt: 1, mb: 1 }}
                         variant='filled'
-                        color='info'
                         error={touched.station2 && !!errors.station2}
                         helperText={touched.station2 ? errors.station2 : null}
                         touched={touched.station2 ? 'true' : 'false'}
@@ -128,13 +127,12 @@ const FormikStyleGuide: React.FC = (): JSX.Element => {
                         }}
                         onBlur={() => setFieldTouched('station2', true, true)}
                       />
-                      <Typography variant='subtitle2'>Station Search Standard Success</Typography>
+                      <Typography variant='subtitle2'>Station Search Standard</Typography>
                       <StationTypeAhead
                         name='station3'
                         value={values.station3}
                         sx={{ mt: 1, mb: 1 }}
                         variant='standard'
-                        color='success'
                         error={touched.station3 && !!errors.station3}
                         helperText={touched.station3 ? errors.station3 : null}
                         touched={touched.station3 ? 'true' : 'false'}

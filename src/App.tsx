@@ -1,4 +1,5 @@
 import './App.css';
+import 'i18n/i18n';
 import { RouterProvider } from 'react-router-dom';
 import { mainRouterConfig } from './router.config';
 import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';

@@ -1,4 +1,12 @@
-import { PaletteMode, ThemeOptions, alpha, inputBaseClasses } from '@mui/material';
+import {
+  PaletteMode,
+  ThemeOptions,
+  alpha,
+  autocompleteClasses,
+  inputBaseClasses,
+  listItemButtonClasses,
+  menuItemClasses,
+} from '@mui/material';
 import { LightModePalette, DarkModePalette } from './AppPalette';
 
 declare module '@mui/material/TextField' {
@@ -175,7 +183,7 @@ export const AppThemeOptions = (mode: PaletteMode): ThemeOptions => ({
     },
     MuiAutocomplete: {
       styleOverrides: {
-        inputRoot: ({ ownerState }) => ({
+        inputRoot: {
           [`& > .${inputBaseClasses.inputSizeSmall}`]: {
             paddingTop: `${smallInputPadding.TB}px !important`,
             paddingBottom: `${smallInputPadding.TB}px !important`,
@@ -189,6 +197,82 @@ export const AppThemeOptions = (mode: PaletteMode): ThemeOptions => ({
           paddingTop: '0px !important',
           paddingBottom: '0px !important',
           paddingLeft: '0px !important',
+        },
+        option: ({ theme }) => ({
+          [`&.${autocompleteClasses.option}`]: {
+            margin: 5,
+            borderRadius: 4,
+            borderColor: alpha('#000', 0),
+            borderWidth: 1,
+            borderStyle: 'solid',
+            '&.Mui-focused': {
+              backgroundColor: alpha(theme.palette.primary[100], 0.28),
+              borderColor: theme.palette.primary.main
+            },
+            '&[aria-selected="true"]': {
+              backgroundColor: alpha(theme.palette.primary[200], 0.4)
+            },
+            '&[aria-selected="true"].Mui-focused': {
+              backgroundColor: alpha(theme.palette.primary[200], 0.58),
+            },
+          },
+        }),
+        listbox: {
+          padding: 0,
+        },
+      },
+    },
+    MuiListItemButton: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          margin: 5,
+          borderRadius: 4,
+          borderColor: alpha('#000', 0),
+          borderWidth: 1,
+          borderStyle: 'solid',
+          [`&.${listItemButtonClasses.focusVisible}`]: {
+            backgroundColor: alpha(theme.palette.primary[100], 0.18),
+            borderColor: theme.palette.primary.main
+          },
+          [`&:hover`]: {
+            backgroundColor: alpha(theme.palette.primary[200], 0.28),
+          },
+          [`&.${listItemButtonClasses.selected}`]: {
+            backgroundColor: alpha(theme.palette.primary[200], 0.4),
+          },
+          [`&.${listItemButtonClasses.selected}.${listItemButtonClasses.focusVisible}`]: {
+            backgroundColor: alpha(theme.palette.primary[200], 0.58),
+          },
+          [`&.${listItemButtonClasses.selected}:hover`]: {
+            backgroundColor: alpha(theme.palette.primary[200], 0.58),
+          },
+        }),
+      },
+    },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          margin: 5,
+          borderRadius: 4,
+          borderColor: alpha('#000', 0),
+          borderWidth: 1,
+          borderStyle: 'solid',
+          [`&.${menuItemClasses.focusVisible}`]: {
+            backgroundColor: alpha(theme.palette.primary[100], 0.18),
+            borderColor: theme.palette.primary.main
+          },
+          [`&:hover`]: {
+            backgroundColor: alpha(theme.palette.primary[200], 0.28),
+          },
+          [`&.${menuItemClasses.selected}`]: {
+            backgroundColor: alpha(theme.palette.primary[200], 0.4),
+          },
+          [`&.${menuItemClasses.selected}.${menuItemClasses.focusVisible}`]: {
+            backgroundColor: alpha(theme.palette.primary[200], 0.58),
+          },
+          [`&.${menuItemClasses.selected}:hover`]: {
+            backgroundColor: alpha(theme.palette.primary[200], 0.58),
+          },
         }),
       },
     },

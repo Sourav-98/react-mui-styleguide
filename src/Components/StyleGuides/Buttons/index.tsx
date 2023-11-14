@@ -1,6 +1,9 @@
 import { Button, Typography, Grid } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 const ButtonStyleGuide: React.FC = (): JSX.Element => {
+  const { t } = useTranslation();
+
   return (
     <Grid container spacing={2} p={2}>
       <Grid item xs={12}>

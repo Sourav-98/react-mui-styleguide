@@ -5,7 +5,7 @@ import {
   Drawer,
   IconButton,
   List,
-  ListItem,
+  ListItemButton,
   ListItemText,
   Toolbar,
   Tooltip,
@@ -17,8 +17,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
 import { ThemeContext } from 'Context/ThemeContext';
 import { DarkModeSwitch } from 'Elements/Switch';
+import { useTranslation } from 'react-i18next';
 
 const StyleGuide: React.FC = (): JSX.Element => {
+  const { t } = useTranslation();
   const themeContext = useContext(ThemeContext);
 
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
@@ -75,35 +77,34 @@ const StyleGuide: React.FC = (): JSX.Element => {
               alignItems: 'center',
             }}
           >
-            <Tooltip title={`Switch to ${themeContext.darkMode ? 'Light' : 'Dark'} Mode`}>
-              <DarkModeSwitch aria-label='Toggle Preview Mode' checked={themeContext.darkMode} onClick={themeContext.toggleDarkMode} />
+            <Tooltip arrow title={`Switch to ${themeContext.darkMode ? 'Light' : 'Dark'} Mode`}>
+              <Box>
+                <DarkModeSwitch aria-label='Toggle Preview Mode' checked={themeContext.darkMode} onClick={themeContext.toggleDarkMode} />
+              </Box>
             </Tooltip>
           </Box>
         </Toolbar>
       </AppBar>
       <Drawer anchor={'left'} open={drawerOpen} onClose={() => setDrawerOpen(() => false)}>
         <List>
-          <ListItem sx={{ color: 'inherit' }} component={Link} to='./autocomplete'>
-            <ListItemText sx={{ color: 'inherit' }}>AutoComplete StyleGuide</ListItemText>
-          </ListItem>
-          <ListItem sx={{ color: 'inherit' }} component={Link} to='./textfield'>
-            <ListItemText sx={{ color: 'inherit' }}>TextFields StyleGuide</ListItemText>
-          </ListItem>
-          <ListItem sx={{ color: 'inherit' }} component={Link} to='./select'>
-            <ListItemText sx={{ color: 'inherit' }}>Select StyleGuide</ListItemText>
-          </ListItem>
-          <ListItem sx={{ color: 'inherit' }} component={Link} to='./button'>
-            <ListItemText sx={{ color: 'inherit' }}>Button StyleGuide</ListItemText>
-          </ListItem>
-          <ListItem sx={{ color: 'inherit' }} component={Link} to='./datepicker'>
-            <ListItemText sx={{ color: 'inherit' }}>DatePicker StyleGuide</ListItemText>
-          </ListItem>
-          <ListItem sx={{ color: 'inherit' }} component={Link} to='./formik'>
-            <ListItemText sx={{ color: 'inherit' }}>Formik StyleGuide</ListItemText>
-          </ListItem>
-          <ListItem sx={{ marginTop: 'auto', color: 'inherit' }} component={Link} to='/test'>
-            <ListItemText sx={{ color: 'inherit' }}>Test Area</ListItemText>
-          </ListItem>
+          <ListItemButton sx={{ color: 'inherit' }} component={Link} to='./autocomplete' selected={pathname.includes('/autocomplete')}>
+            <ListItemText sx={{ color: 'inherit' }}>{`AutoComplete ${t('styleGuide')}`}</ListItemText>
+          </ListItemButton>
+          <ListItemButton sx={{ color: 'inherit' }} component={Link} to='./textfield' selected={pathname.includes('/textfield')}>
+            <ListItemText sx={{ color: 'inherit' }}>{`${t('textField')} ${t('styleGuide')}`}</ListItemText>
+          </ListItemButton>
+          <ListItemButton sx={{ color: 'inherit' }} component={Link} to='./select' selected={pathname.includes('/select')}>
+            <ListItemText sx={{ color: 'inherit' }}>{`${t('select')} ${t('styleGuide')}`}</ListItemText>
+          </ListItemButton>
+          <ListItemButton sx={{ color: 'inherit' }} component={Link} to='./button' selected={pathname.includes('/button')}>
+            <ListItemText sx={{ color: 'inherit' }}>{`${t('button')} ${t('styleGuide')}`}</ListItemText>
+          </ListItemButton>
+          <ListItemButton sx={{ color: 'inherit' }} component={Link} to='./datepicker' selected={pathname.includes('/datepicker')}>
+            <ListItemText sx={{ color: 'inherit' }}>{`${t('datePicker')} ${t('styleGuide')}`}</ListItemText>
+          </ListItemButton>
+          <ListItemButton sx={{ color: 'inherit' }} component={Link} to='./formik' selected={pathname.includes('/formik')}>
+            <ListItemText sx={{ color: 'inherit' }}>{`Formik ${t('styleGuide')}`}</ListItemText>
+          </ListItemButton>
         </List>
       </Drawer>
       <Suspense
@@ -122,7 +123,9 @@ const StyleGuide: React.FC = (): JSX.Element => {
           </Box>
         }
       >
-        <Outlet />
+        <Box width={'100%'} p={1} display={'flex'} flexDirection={'column'}>
+          <Outlet />
+        </Box>
       </Suspense>
     </>
   );

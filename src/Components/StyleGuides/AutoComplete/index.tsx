@@ -1,15 +1,21 @@
-import { Autocomplete, Box, Grid, TextField, Typography } from '@mui/material';
+import { Autocomplete, Box, Grid, Paper, TextField, Typography } from '@mui/material';
 import { StationTypeAhead } from 'Shared/StationTypeAhead';
+import { useTranslation } from 'react-i18next';
 
 const AutoCompleteStyleGuide: React.FC = (): JSX.Element => {
+
+  const { t } = useTranslation();
+
   return (
-    <Grid container spacing={2} p={2}>
-      <Grid item xs={12}>
-        <Typography variant='h5'>Outlined Autocomplete - Color Schemes</Typography>
-      </Grid>
-      <Grid item xs={6}>
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={6} md={3}>
+    <>
+      <Paper sx={{
+        display: 'flex'
+      }}>
+        <Grid container spacing={2} p={2}>
+          <Grid item xs={12}>
+            <Typography variant='h5'>Outlined Autocomplete - Color Schemes</Typography>
+          </Grid>
+          <Grid item xs={6} sm={3} md={1.5}>
             <Box display={'flex'} flexDirection={'column'}>
               <Typography variant='subtitle1' fontSize={13} sx={(theme) => ({
                 color: theme.palette.grey[600]
@@ -21,16 +27,16 @@ const AutoCompleteStyleGuide: React.FC = (): JSX.Element => {
               />
             </Box>
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={6} sm={3} md={1.5}>
             <Box display={'flex'} flexDirection={'column'}>
-              <Typography variant='subtitle1' fontSize={13}>{`Primary`}</Typography>
+              <Typography variant='subtitle1' fontSize={13}>{t('primary')}</Typography>
               <Autocomplete
                 options={[]}
                 renderInput={(props) => <TextField {...props} placeholder='Primary' />}
               />
             </Box>
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={6} sm={3} md={1.5}>
             <Box display={'flex'} flexDirection={'column'}>
               <Typography variant='subtitle1' fontSize={13}>{`Field Error`}</Typography>
               <Autocomplete
@@ -39,7 +45,7 @@ const AutoCompleteStyleGuide: React.FC = (): JSX.Element => {
               />
             </Box>
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={6} sm={3} md={1.5}>
             <Box display={'flex'} flexDirection={'column'}>
               <Typography variant='subtitle1' fontSize={13}>{`Secondary`}</Typography>
               <Autocomplete
@@ -48,11 +54,7 @@ const AutoCompleteStyleGuide: React.FC = (): JSX.Element => {
               />
             </Box>
           </Grid>
-        </Grid>
-      </Grid>
-      <Grid item xs={6}>
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={6} sm={3} md={1.5}>
             <Box display={'flex'} flexDirection={'column'}>
               <Typography variant='subtitle1' fontSize={13}>{`Success`}</Typography>
               <Autocomplete
@@ -61,7 +63,7 @@ const AutoCompleteStyleGuide: React.FC = (): JSX.Element => {
               />
             </Box>
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={6} sm={3} md={1.5}>
             <Box display={'flex'} flexDirection={'column'}>
               <Typography variant='subtitle1' fontSize={13}>{`Error`}</Typography>
               <Autocomplete
@@ -70,7 +72,7 @@ const AutoCompleteStyleGuide: React.FC = (): JSX.Element => {
               />
             </Box>
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={6} sm={3} md={1.5}>
             <Box display={'flex'} flexDirection={'column'}>
               <Typography variant='subtitle1' fontSize={13}>{`Warning`}</Typography>
               <Autocomplete
@@ -79,7 +81,7 @@ const AutoCompleteStyleGuide: React.FC = (): JSX.Element => {
               />
             </Box>
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={6} sm={3} md={1.5}>
             <Box display={'flex'} flexDirection={'column'}>
               <Typography variant='subtitle1' fontSize={13}>{`Info`}</Typography>
               <Autocomplete
@@ -89,139 +91,134 @@ const AutoCompleteStyleGuide: React.FC = (): JSX.Element => {
             </Box>
           </Grid>
         </Grid>
-      </Grid>
-      <Grid item xs={12}>
-        <Typography variant='h5'>Variants and Sizes</Typography>
-      </Grid>
-      <Grid item xs={12} mb={2}>
-        <Grid container spacing={2}>
-          <Grid item xs={6}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <Typography variant='h6'>Size Medium</Typography>
-              </Grid>
-              <Grid item xs={12} sm={6} md={3}>
-                <Box display={'flex'} flexDirection={'column'}>
-                  <Typography variant='subtitle1' fontSize={13}>{`Outlined`}</Typography>
-                  <Autocomplete
-                    options={[]}
-                    renderInput={(props) => <TextField {...props} placeholder='Outlined' />}
-                  />
-                </Box>
-              </Grid>
-              <Grid item xs={12} sm={6} md={3}>
-                <Box display={'flex'} flexDirection={'column'}>
-                  <Typography variant='subtitle1' fontSize={13}>{`Filled`}</Typography>
-                  <Autocomplete
-                    options={[]}
-                    renderInput={(props) => <TextField variant='filled' {...props} placeholder='Filled' />}
-                  />
-                </Box>
-              </Grid>
-              <Grid item xs={12} sm={6} md={3}>
-                <Box display={'flex'} flexDirection={'column'}>
-                  <Typography variant='subtitle1' fontSize={13}>{`Standard`}</Typography>
-                  <Autocomplete
-                    options={[]}
-                    renderInput={(props) => <TextField variant='standard' {...props} placeholder='Standard' />}
-                  />
-                </Box>
-              </Grid>
-            </Grid>
+      </Paper>
+      <Paper sx={(theme) => ({
+        display: 'flex',
+        mt: theme.spacing(2)
+      })}>
+        <Grid container spacing={2} p={2}>
+          <Grid item xs={12}>
+            <Typography variant='h5'>Variants and Sizes</Typography>
           </Grid>
-          <Grid item xs={6}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <Typography variant='h6'>Size Small</Typography>
-              </Grid>
-              <Grid item xs={12} sm={6} md={3}>
-                <Box display={'flex'} flexDirection={'column'}>
-                  <Typography variant='subtitle1' fontSize={13}>{`Outlined`}</Typography>
-                  <Autocomplete
-                    size='small'
-                    options={[]}
-                    renderInput={(props) => <TextField {...props} placeholder='Outlined' />}
-                  />
-                </Box>
-              </Grid>
-              <Grid item xs={12} sm={6} md={3}>
-                <Box display={'flex'} flexDirection={'column'}>
-                  <Typography variant='subtitle1' fontSize={13}>{`Filled`}</Typography>
-                  <Autocomplete
-                    size='small'
-                    options={[]}
-                    renderInput={(props) => <TextField variant='filled' {...props} placeholder='Filled' />}
-                  />
-                </Box>
-              </Grid>
-              <Grid item xs={12} sm={6} md={3}>
-                <Box display={'flex'} flexDirection={'column'}>
-                  <Typography variant='subtitle1' fontSize={13}>{`Standard`}</Typography>
-                  <Autocomplete
-                    size='small'
-                    options={[]}
-                    renderInput={(props) => <TextField variant='standard' {...props} placeholder='Standard' />}
-                  />
-                </Box>
-              </Grid>
-            </Grid>
+          <Grid item xs={12}>
+            <Typography variant='h6'>Size Medium</Typography>
+          </Grid>
+          <Grid item xs={6} sm={3} md={1.5}>
+            <Box display={'flex'} flexDirection={'column'}>
+              <Typography variant='subtitle1' fontSize={13}>{`Outlined`}</Typography>
+              <Autocomplete
+                options={[]}
+                renderInput={(props) => <TextField {...props} placeholder='Outlined' />}
+              />
+            </Box>
+          </Grid>
+          <Grid item xs={6} sm={3} md={1.5}>
+            <Box display={'flex'} flexDirection={'column'}>
+              <Typography variant='subtitle1' fontSize={13}>{`Filled`}</Typography>
+              <Autocomplete
+                options={[]}
+                renderInput={(props) => <TextField variant='filled' {...props} placeholder='Filled' />}
+              />
+            </Box>
+          </Grid>
+          <Grid item xs={6} sm={3} md={1.5}>
+            <Box display={'flex'} flexDirection={'column'}>
+              <Typography variant='subtitle1' fontSize={13}>{`Standard`}</Typography>
+              <Autocomplete
+                options={[]}
+                renderInput={(props) => <TextField variant='standard' {...props} placeholder='Standard' />}
+              />
+            </Box>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant='h6'>Size Small</Typography>
+          </Grid>
+          <Grid item xs={6} sm={3} md={1.5}>
+            <Box display={'flex'} flexDirection={'column'}>
+              <Typography variant='subtitle1' fontSize={13}>{`Outlined`}</Typography>
+              <Autocomplete
+                size='small'
+                options={[]}
+                renderInput={(props) => <TextField {...props} placeholder='Outlined' />}
+              />
+            </Box>
+          </Grid>
+          <Grid item xs={6} sm={3} md={1.5}>
+            <Box display={'flex'} flexDirection={'column'}>
+              <Typography variant='subtitle1' fontSize={13}>{`Filled`}</Typography>
+              <Autocomplete
+                size='small'
+                options={[]}
+                renderInput={(props) => <TextField variant='filled' {...props} placeholder='Filled' />}
+              />
+            </Box>
+          </Grid>
+          <Grid item xs={6} sm={3} md={1.5}>
+            <Box display={'flex'} flexDirection={'column'}>
+              <Typography variant='subtitle1' fontSize={13}>{`Standard`}</Typography>
+              <Autocomplete
+                size='small'
+                options={[]}
+                renderInput={(props) => <TextField variant='standard' {...props} placeholder='Standard' />}
+              />
+            </Box>
           </Grid>
         </Grid>
-      </Grid>
-      <Grid item xs={12}>
-        <Typography variant='h5'>Station Search - Variants, Sizes and Color</Typography>
-      </Grid>
-      <Grid item xs={12}>
-        <Grid container spacing={2}>
-          <Grid item xs={6}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <Typography variant='h6'>Size Medium</Typography>
-              </Grid>
-              <Grid item xs={12} sm={6} md={3}>
-                <Typography variant='subtitle1' fontSize={13}>Outlined Disabled</Typography>
-                <StationTypeAhead disabled fullWidth placeholder='Station' />
-              </Grid>
-              <Grid item xs={12} sm={6} md={3}>
-                <Typography variant='subtitle1' fontSize={13}>Outlined Primary</Typography>
-                <StationTypeAhead fullWidth placeholder='Station' />
-              </Grid>
-              <Grid item xs={12} sm={6} md={3}>
-                <Typography variant='subtitle1' fontSize={13}>Filled Info</Typography>
-                <StationTypeAhead variant='filled' color='info' fullWidth placeholder='Station' />
-              </Grid>
-              <Grid item xs={12} sm={6} md={3}>
-                <Typography variant='subtitle1' fontSize={13}>Standard Warning</Typography>
-                <StationTypeAhead variant='standard' color='warning' fullWidth placeholder='Station' />
-              </Grid>
-            </Grid>
+      </Paper>
+      <Paper sx={(theme) => ({
+        display: 'flex',
+        mt: theme.spacing(2)
+      })}>
+        <Grid container spacing={2} p={2}>
+          <Grid item xs={12}>
+            <Typography variant='h5'>Station Search - Variants, Sizes and Color</Typography>
           </Grid>
-          <Grid item xs={6}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <Typography variant='h6'>Size Small</Typography>
-              </Grid>
-              <Grid item xs={12} sm={6} md={3}>
-                <Typography variant='subtitle1' fontSize={13}>Outlined Disabled</Typography>
-                <StationTypeAhead size='small' disabled fullWidth placeholder='Station' />
-              </Grid>
-              <Grid item xs={12} sm={6} md={3}>
-                <Typography variant='subtitle1' fontSize={13}>Outlined Primary</Typography>
-                <StationTypeAhead size='small' fullWidth placeholder='Station' />
-              </Grid>
-              <Grid item xs={12} sm={6} md={3}>
-                <Typography variant='subtitle1' fontSize={13}>Filled Info</Typography>
-                <StationTypeAhead size='small' variant='filled' color='info' fullWidth placeholder='Station' />
-              </Grid>
-              <Grid item xs={12} sm={6} md={3}>
-                <Typography variant='subtitle1' fontSize={13}>Standard Warning</Typography>
-                <StationTypeAhead size='small' variant='standard' color='warning' fullWidth placeholder='Station' />
-              </Grid>
-            </Grid>
+          <Grid item xs={12}>
+            <Typography variant='h6'>Size Medium</Typography>
           </Grid>
+          <Grid item xs={6} sm={3} md={1.5}>
+            <Typography variant='subtitle1' fontSize={13}>Outlined Disabled</Typography>
+            <StationTypeAhead disabled fullWidth placeholder='Station' />
+          </Grid>
+          <Grid item xs={6} sm={3} md={1.5}>
+            <Typography variant='subtitle1' fontSize={13}>Outlined</Typography>
+            <StationTypeAhead fullWidth placeholder='Station' />
+          </Grid>
+          <Grid item xs={6} sm={3} md={1.5}>
+            <Typography variant='subtitle1' fontSize={13}>Filled</Typography>
+            <StationTypeAhead variant='filled' fullWidth placeholder='Station' />
+          </Grid>
+          <Grid item xs={6} sm={3} md={1.5}>
+            <Typography variant='subtitle1' fontSize={13}>Standard</Typography>
+            <StationTypeAhead variant='standard' fullWidth placeholder='Station' />
+          </Grid>
+          <Grid item xs={12}>
+              <Typography variant='h6'>Size Small</Typography>
+            </Grid>
+            <Grid item xs={6} sm={3} md={1.5}>
+              <Typography variant='subtitle1' fontSize={13}>Outlined Disabled</Typography>
+              <StationTypeAhead size='small' disabled fullWidth placeholder='Station' />
+            </Grid>
+            <Grid item xs={6} sm={3} md={1.5}>
+              <Typography variant='subtitle1' fontSize={13}>Outlined Primary</Typography>
+              <StationTypeAhead size='small' fullWidth placeholder='Station' />
+            </Grid>
+            <Grid item xs={6} sm={3} md={1.5}>
+              <Typography variant='subtitle1' fontSize={13}>Filled</Typography>
+              <StationTypeAhead size='small' variant='filled' fullWidth placeholder='Station' />
+            </Grid>
+            <Grid item xs={6} sm={3} md={1.5}>
+              <Typography variant='subtitle1' fontSize={13}>Standard</Typography>
+              <StationTypeAhead size='small' variant='standard' fullWidth placeholder='Station' />
+            </Grid>
         </Grid>
-      </Grid>
-    </Grid>
+      </Paper>
+      <Paper sx={{
+        display: 'flex'
+      }}>
+
+      </Paper>
+    </>
   );
 };
 

@@ -32,7 +32,7 @@ export const LightModePalette: PaletteOptions = {
   warning: generatePaletteColor('#ed6c02'),
   info: generatePaletteColor('#0288d1'),
   background: {
-    default: generatePaletteColor(primaryMain_light)[100]
+    default: generatePaletteColor(primaryMain_light)[50]
   }
 };
 

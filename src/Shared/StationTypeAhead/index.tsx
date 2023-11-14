@@ -4,9 +4,7 @@ import {
   CircularProgress,
   Box,
   Typography,
-  autocompleteClasses,
   TextField,
-  alpha,
 } from '@mui/material';
 import { MutableRefObject, SyntheticEvent, useEffect, useRef, useState } from 'react';
 import match from 'autosuggest-highlight/match';
@@ -129,7 +127,7 @@ export const StationTypeAhead: React.FC<StationTypeAheadProps> = ({
       componentsProps={{
         popper: {
           sx: {
-            display: 'flex',
+            display: 'flex'
           },
         },
         paper: {
@@ -137,7 +135,7 @@ export const StationTypeAhead: React.FC<StationTypeAheadProps> = ({
           sx: {
             display: 'flex',
             overflow: 'visible',
-            whiteSpace: 'nowrap',
+            whiteSpace: 'nowrap'
           },
         },
       }}
@@ -164,52 +162,6 @@ export const StationTypeAhead: React.FC<StationTypeAheadProps> = ({
           <Box
             component={'li'}
             {...props}
-            sx={(theme) => ({
-              [`&.${autocompleteClasses.option}`]: {
-                '&.Mui-focused': {
-                  backgroundColor:
-                    textFieldProps.color === 'secondary'
-                      ? alpha(theme.palette.secondary[200], 0.28)
-                      : textFieldProps.color === 'success'
-                      ? alpha(theme.palette.success[200], 0.28)
-                      : textFieldProps.color === 'error'
-                      ? alpha(theme.palette.error[200], 0.28)
-                      : textFieldProps.color === 'warning'
-                      ? alpha(theme.palette.warning[200], 0.28)
-                      : textFieldProps.color === 'info'
-                      ? alpha(theme.palette.info[200], 0.28)
-                      : alpha(theme.palette.primary[200], 0.28),
-                },
-                '&[aria-selected="true"]': {
-                  backgroundColor:
-                    textFieldProps.color === 'secondary'
-                      ? alpha(theme.palette.secondary[100], 0.4)
-                      : textFieldProps.color === 'success'
-                      ? alpha(theme.palette.success[100], 0.4)
-                      : textFieldProps.color === 'error'
-                      ? alpha(theme.palette.error[200], 0.4)
-                      : textFieldProps.color === 'warning'
-                      ? alpha(theme.palette.warning[100], 0.4)
-                      : textFieldProps.color === 'info'
-                      ? alpha(theme.palette.info[200], 0.4)
-                      : alpha(theme.palette.primary[200], 0.4),
-                },
-                '&[aria-selected="true"].Mui-focused': {
-                  backgroundColor:
-                    textFieldProps.color === 'secondary'
-                      ? alpha(theme.palette.secondary[200], 0.58)
-                      : textFieldProps.color === 'success'
-                      ? alpha(theme.palette.success[200], 0.58)
-                      : textFieldProps.color === 'error'
-                      ? alpha(theme.palette.error[200], 0.58)
-                      : textFieldProps.color === 'warning'
-                      ? alpha(theme.palette.warning[200], 0.58)
-                      : textFieldProps.color === 'info'
-                      ? alpha(theme.palette.info[200], 0.58)
-                      : alpha(theme.palette.primary[200], 0.58),
-                },
-              },
-            })}
           >
             <Typography variant='subtitle1'>
               {parts.map((part, index) => (
@@ -226,21 +178,21 @@ export const StationTypeAhead: React.FC<StationTypeAheadProps> = ({
           </Box>
         );
       }}
-      renderInput={(props) => (
+      renderInput={({inputProps, InputProps, ...props}) => (
         <TextField
           {...props}
           {...textFieldProps}
           InputProps={{
-            ...props.InputProps,
+            ...InputProps,
             endAdornment: (
               <>
-                {isLoading && <CircularProgress color={textFieldProps.color} size={20} />}
-                {props.InputProps.endAdornment}
+                {isLoading && <CircularProgress size={20} />}
+                {InputProps.endAdornment}
               </>
             ),
           }}
           inputProps={{
-            ...props.inputProps,
+            ...inputProps,
             style: {
               textTransform: 'uppercase',
             },

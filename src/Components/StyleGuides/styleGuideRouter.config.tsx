@@ -35,6 +35,6 @@ export const styleGuidesRouterConfig: RouteObject[] = [
   },
   {
     path: '',
-    element: <Navigate to='textfield' />,
+    element: <Navigate to='autocomplete' />,
   },
 ];

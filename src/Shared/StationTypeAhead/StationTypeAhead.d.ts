@@ -1,6 +1,6 @@
 import { TextFieldProps } from '@mui/material';
 
-export interface StationTypeAheadProps extends Partial<Omit<TextFieldProps, 'value'>> {
+export interface StationTypeAheadProps extends Partial<Omit<TextFieldProps, 'value' | 'color'>> {
   /**
    * the initial station value to be set for the station typeahead component
    * @override TextField's `value`
