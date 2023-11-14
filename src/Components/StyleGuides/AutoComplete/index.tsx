@@ -13,7 +13,7 @@ const AutoCompleteStyleGuide: React.FC = (): JSX.Element => {
       }}>
         <Grid container spacing={2} p={2}>
           <Grid item xs={12}>
-            <Typography variant='h5'>Outlined Autocomplete - Color Schemes</Typography>
+            <Typography variant='h5'>{`${t('outlined')} AutoComplete - ${t('color')}`}</Typography>
           </Grid>
           <Grid item xs={6} sm={3} md={1.5}>
             <Box display={'flex'} flexDirection={'column'}>
@@ -21,6 +21,7 @@ const AutoCompleteStyleGuide: React.FC = (): JSX.Element => {
                 color: theme.palette.grey[600]
               })}>Disabled</Typography>
               <Autocomplete
+                noOptionsText={`${t('noOptions')}`}
                 disabled
                 options={[]}
                 renderInput={(props) => <TextField {...props} placeholder='Disabled' />}
@@ -31,6 +32,7 @@ const AutoCompleteStyleGuide: React.FC = (): JSX.Element => {
             <Box display={'flex'} flexDirection={'column'}>
               <Typography variant='subtitle1' fontSize={13}>{t('primary')}</Typography>
               <Autocomplete
+                noOptionsText={`${t('noOptions')}`}
                 options={[]}
                 renderInput={(props) => <TextField {...props} placeholder='Primary' />}
               />
@@ -40,6 +42,7 @@ const AutoCompleteStyleGuide: React.FC = (): JSX.Element => {
             <Box display={'flex'} flexDirection={'column'}>
               <Typography variant='subtitle1' fontSize={13}>{`Field Error`}</Typography>
               <Autocomplete
+                noOptionsText={`${t('noOptions')}`}
                 options={[]}
                 renderInput={(props) => <TextField error {...props} placeholder='Primary' />}
               />
@@ -47,8 +50,9 @@ const AutoCompleteStyleGuide: React.FC = (): JSX.Element => {
           </Grid>
           <Grid item xs={6} sm={3} md={1.5}>
             <Box display={'flex'} flexDirection={'column'}>
-              <Typography variant='subtitle1' fontSize={13}>{`Secondary`}</Typography>
+              <Typography variant='subtitle1' fontSize={13}>{`${t('secondary')}`}</Typography>
               <Autocomplete
+                noOptionsText={`${t('noOptions')}`}
                 options={[]}
                 renderInput={(props) => <TextField color='secondary' {...props} placeholder='Secondary' />}
               />
@@ -56,8 +60,9 @@ const AutoCompleteStyleGuide: React.FC = (): JSX.Element => {
           </Grid>
           <Grid item xs={6} sm={3} md={1.5}>
             <Box display={'flex'} flexDirection={'column'}>
-              <Typography variant='subtitle1' fontSize={13}>{`Success`}</Typography>
+              <Typography variant='subtitle1' fontSize={13}>{`${t('success')}`}</Typography>
               <Autocomplete
+                noOptionsText={`${t('noOptions')}`}
                 options={[]}
                 renderInput={(props) => <TextField color='success' {...props} placeholder='Success' />}
               />
@@ -65,8 +70,9 @@ const AutoCompleteStyleGuide: React.FC = (): JSX.Element => {
           </Grid>
           <Grid item xs={6} sm={3} md={1.5}>
             <Box display={'flex'} flexDirection={'column'}>
-              <Typography variant='subtitle1' fontSize={13}>{`Error`}</Typography>
+              <Typography variant='subtitle1' fontSize={13}>{`${t('error')}`}</Typography>
               <Autocomplete
+                noOptionsText={`${t('noOptions')}`}
                 options={[]}
                 renderInput={(props) => <TextField color='error' {...props} placeholder='Error' />}
               />
@@ -74,8 +80,9 @@ const AutoCompleteStyleGuide: React.FC = (): JSX.Element => {
           </Grid>
           <Grid item xs={6} sm={3} md={1.5}>
             <Box display={'flex'} flexDirection={'column'}>
-              <Typography variant='subtitle1' fontSize={13}>{`Warning`}</Typography>
+              <Typography variant='subtitle1' fontSize={13}>{`${t('warning')}`}</Typography>
               <Autocomplete
+                noOptionsText={`${t('noOptions')}`}
                 options={[]}
                 renderInput={(props) => <TextField color='warning' {...props} placeholder='Warning' />}
               />
@@ -83,8 +90,9 @@ const AutoCompleteStyleGuide: React.FC = (): JSX.Element => {
           </Grid>
           <Grid item xs={6} sm={3} md={1.5}>
             <Box display={'flex'} flexDirection={'column'}>
-              <Typography variant='subtitle1' fontSize={13}>{`Info`}</Typography>
+              <Typography variant='subtitle1' fontSize={13}>{`${t('info')}`}</Typography>
               <Autocomplete
+                noOptionsText={`${t('noOptions')}`}
                 options={[]}
                 renderInput={(props) => <TextField color='info' {...props} placeholder='Info' />}
               />
@@ -98,17 +106,18 @@ const AutoCompleteStyleGuide: React.FC = (): JSX.Element => {
       })}>
         <Grid container spacing={2} p={2}>
           <Grid item xs={12}>
-            <Typography variant='h5'>Variants and Sizes</Typography>
+            <Typography variant='h5'>{`AutoComplete - ${t('variantsAndSizes')}`}</Typography>
           </Grid>
           <Grid item xs={12}>
-            <Typography variant='h6'>Size Medium</Typography>
+            <Typography variant='h6'>{`${t('size')} - ${t('medium')}`}</Typography>
           </Grid>
           <Grid item xs={6} sm={3} md={1.5}>
             <Box display={'flex'} flexDirection={'column'}>
-              <Typography variant='subtitle1' fontSize={13}>{`Outlined`}</Typography>
+              <Typography variant='subtitle1' fontSize={13}>{`${t('outlined')}`}</Typography>
               <Autocomplete
+                noOptionsText={`${t('noOptions')}`}
                 options={[]}
-                renderInput={(props) => <TextField {...props} placeholder='Outlined' />}
+                renderInput={(props) => <TextField {...props} placeholder={`${t('outlined')}`} />}
               />
             </Box>
           </Grid>
@@ -116,6 +125,7 @@ const AutoCompleteStyleGuide: React.FC = (): JSX.Element => {
             <Box display={'flex'} flexDirection={'column'}>
               <Typography variant='subtitle1' fontSize={13}>{`Filled`}</Typography>
               <Autocomplete
+                noOptionsText={`${t('noOptions')}`}
                 options={[]}
                 renderInput={(props) => <TextField variant='filled' {...props} placeholder='Filled' />}
               />
@@ -125,18 +135,20 @@ const AutoCompleteStyleGuide: React.FC = (): JSX.Element => {
             <Box display={'flex'} flexDirection={'column'}>
               <Typography variant='subtitle1' fontSize={13}>{`Standard`}</Typography>
               <Autocomplete
+                noOptionsText={`${t('noOptions')}`}
                 options={[]}
                 renderInput={(props) => <TextField variant='standard' {...props} placeholder='Standard' />}
               />
             </Box>
           </Grid>
           <Grid item xs={12}>
-            <Typography variant='h6'>Size Small</Typography>
+            <Typography variant='h6'>{`${t('size')} - ${t('small')}`}</Typography>
           </Grid>
           <Grid item xs={6} sm={3} md={1.5}>
             <Box display={'flex'} flexDirection={'column'}>
               <Typography variant='subtitle1' fontSize={13}>{`Outlined`}</Typography>
               <Autocomplete
+                noOptionsText={`${t('noOptions')}`}
                 size='small'
                 options={[]}
                 renderInput={(props) => <TextField {...props} placeholder='Outlined' />}
@@ -147,6 +159,7 @@ const AutoCompleteStyleGuide: React.FC = (): JSX.Element => {
             <Box display={'flex'} flexDirection={'column'}>
               <Typography variant='subtitle1' fontSize={13}>{`Filled`}</Typography>
               <Autocomplete
+                noOptionsText={`${t('noOptions')}`}
                 size='small'
                 options={[]}
                 renderInput={(props) => <TextField variant='filled' {...props} placeholder='Filled' />}
@@ -157,6 +170,7 @@ const AutoCompleteStyleGuide: React.FC = (): JSX.Element => {
             <Box display={'flex'} flexDirection={'column'}>
               <Typography variant='subtitle1' fontSize={13}>{`Standard`}</Typography>
               <Autocomplete
+                noOptionsText={`${t('noOptions')}`}
                 size='small'
                 options={[]}
                 renderInput={(props) => <TextField variant='standard' {...props} placeholder='Standard' />}
@@ -171,10 +185,10 @@ const AutoCompleteStyleGuide: React.FC = (): JSX.Element => {
       })}>
         <Grid container spacing={2} p={2}>
           <Grid item xs={12}>
-            <Typography variant='h5'>Station Search - Variants, Sizes and Color</Typography>
+            <Typography variant='h5'>{`${t('stationSearch')} - ${t('variantsSizesAndColor')}`}</Typography>
           </Grid>
           <Grid item xs={12}>
-            <Typography variant='h6'>Size Medium</Typography>
+            <Typography variant='h6'>{`${t('size')} - ${t('medium')}`}m</Typography>
           </Grid>
           <Grid item xs={6} sm={3} md={1.5}>
             <Typography variant='subtitle1' fontSize={13}>Outlined Disabled</Typography>
@@ -193,24 +207,24 @@ const AutoCompleteStyleGuide: React.FC = (): JSX.Element => {
             <StationTypeAhead variant='standard' fullWidth placeholder='Station' />
           </Grid>
           <Grid item xs={12}>
-              <Typography variant='h6'>Size Small</Typography>
-            </Grid>
-            <Grid item xs={6} sm={3} md={1.5}>
-              <Typography variant='subtitle1' fontSize={13}>Outlined Disabled</Typography>
-              <StationTypeAhead size='small' disabled fullWidth placeholder='Station' />
-            </Grid>
-            <Grid item xs={6} sm={3} md={1.5}>
-              <Typography variant='subtitle1' fontSize={13}>Outlined Primary</Typography>
-              <StationTypeAhead size='small' fullWidth placeholder='Station' />
-            </Grid>
-            <Grid item xs={6} sm={3} md={1.5}>
-              <Typography variant='subtitle1' fontSize={13}>Filled</Typography>
-              <StationTypeAhead size='small' variant='filled' fullWidth placeholder='Station' />
-            </Grid>
-            <Grid item xs={6} sm={3} md={1.5}>
-              <Typography variant='subtitle1' fontSize={13}>Standard</Typography>
-              <StationTypeAhead size='small' variant='standard' fullWidth placeholder='Station' />
-            </Grid>
+            <Typography variant='h6'>{`${t('size')} - ${t('small')}`}</Typography>
+          </Grid>
+          <Grid item xs={6} sm={3} md={1.5}>
+            <Typography variant='subtitle1' fontSize={13}>Outlined Disabled</Typography>
+            <StationTypeAhead size='small' disabled fullWidth placeholder='Station' />
+          </Grid>
+          <Grid item xs={6} sm={3} md={1.5}>
+            <Typography variant='subtitle1' fontSize={13}>Outlined Primary</Typography>
+            <StationTypeAhead size='small' fullWidth placeholder='Station' />
+          </Grid>
+          <Grid item xs={6} sm={3} md={1.5}>
+            <Typography variant='subtitle1' fontSize={13}>Filled</Typography>
+            <StationTypeAhead size='small' variant='filled' fullWidth placeholder='Station' />
+          </Grid>
+          <Grid item xs={6} sm={3} md={1.5}>
+            <Typography variant='subtitle1' fontSize={13}>Standard</Typography>
+            <StationTypeAhead size='small' variant='standard' fullWidth placeholder='Station' />
+          </Grid>
         </Grid>
       </Paper>
       <Paper sx={{

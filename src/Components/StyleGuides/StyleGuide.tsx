@@ -1,12 +1,15 @@
 import {
   AppBar,
   Box,
+  Button,
   CircularProgress,
   Drawer,
   IconButton,
   List,
   ListItemButton,
   ListItemText,
+  Menu,
+  MenuItem,
   Toolbar,
   Tooltip,
   Typography
@@ -20,8 +23,10 @@ import { DarkModeSwitch } from 'Elements/Switch';
 import { useTranslation } from 'react-i18next';
 
 const StyleGuide: React.FC = (): JSX.Element => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const themeContext = useContext(ThemeContext);
+
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
 
@@ -57,16 +62,16 @@ const StyleGuide: React.FC = (): JSX.Element => {
             {pathname.includes('/textfield')
               ? 'TextField Styles'
               : pathname.includes('/select')
-              ? 'Select Styles'
-              : pathname.includes('/autocomplete')
-              ? 'Autocomplete Styles'
-              : pathname.includes('/button')
-              ? 'Buttons Styles'
-              : pathname.includes('/formik')
-              ? 'Formik Forms Styles'
-              : pathname.includes('/datepicker')
-              ? 'DatePicker Styles'
-              : ''}
+                ? 'Select Styles'
+                : pathname.includes('/autocomplete')
+                  ? 'Autocomplete Styles'
+                  : pathname.includes('/button')
+                    ? 'Buttons Styles'
+                    : pathname.includes('/formik')
+                      ? 'Formik Forms Styles'
+                      : pathname.includes('/datepicker')
+                        ? 'DatePicker Styles'
+                        : ''}
           </Typography>
           <Box
             sx={{
@@ -82,6 +87,41 @@ const StyleGuide: React.FC = (): JSX.Element => {
                 <DarkModeSwitch aria-label='Toggle Preview Mode' checked={themeContext.darkMode} onClick={themeContext.toggleDarkMode} />
               </Box>
             </Tooltip>
+            <Box>
+              <Button variant='outlined'
+                sx={{
+                  color: 'white',
+                  textTransform: 'none'
+                }}
+                onClick={(event) => setAnchorEl(event.currentTarget)}
+              >{`Current Language: ${i18n.language}`}</Button>
+              <Menu
+                id="language-toggle"
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={() => setAnchorEl(null)}
+                MenuListProps={{
+                  'aria-labelledby': 'basic-button',
+                  sx: {
+                    pt: 0,
+                    pb: 0
+                  }
+                }}
+              >
+                <MenuItem selected={i18n.language === 'en-US'} onClick={() => {
+                    i18n.changeLanguage('en-US');
+                    setAnchorEl(null)
+                  }}>en-US</MenuItem>
+                  <MenuItem selected={i18n.language === 'de-DE'} onClick={() => {
+                    i18n.changeLanguage('de-DE');
+                    setAnchorEl(null)
+                  }}>de-DE</MenuItem>
+                  <MenuItem selected={i18n.language === 'es-ES'} onClick={() => {
+                    i18n.changeLanguage('es-ES');
+                    setAnchorEl(null);
+                  }}>es-ES</MenuItem>
+              </Menu>
+            </Box>
           </Box>
         </Toolbar>
       </AppBar>
