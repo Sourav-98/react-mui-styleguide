@@ -1,17 +1,30 @@
 import i18n from 'i18next';
-import i18nConfig from './i18n.config.json';
+// import commonConfig from './common.config.json';
+// import toastConfig from './toast.config.json'
 import { initReactI18next } from 'react-i18next';
+import Backend from 'i18next-http-backend';
 
+// const resources = {
+//   ...commonConfig,
+// };
 
-const resources = {
-  ...i18nConfig
-}
+// declare module 'react-i18next' {
+//   interface CustomTypeOptions {
+//     defaultNS: 'common';
+//     resources: {
+//       common: typeof commonConfig;
+//       toast: typeof toastConfig;
+//     };
+//   }
+// }
 
 i18n
-    .use(initReactI18next)
-    .init({
-        resources,
-        lng: 'de-DE'
-    })
+  .use(Backend)
+  .use(initReactI18next).init({
+  // ns: ['common', 'toast'],
+  // defaultNS: 'common',
+  // resources,
+  fallbackLng: 'en_US'
+});
 
 export default i18n;
