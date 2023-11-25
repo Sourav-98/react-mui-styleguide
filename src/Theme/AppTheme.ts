@@ -194,14 +194,16 @@ export const AppThemeOptions = (mode: PaletteMode): ThemeOptions => ({
             paddingTop: `${stdInputPadding.TB}px`,
             paddingBottom: `${stdInputPadding.TB}px`,
             paddingLeft: `${stdInputPadding.LR}px`,
-          },
-          [`& > .${inputBaseClasses.inputSizeSmall}`]: {
-            paddingTop: `${smallInputPadding.TB}px !important`,
-            paddingBottom: `${smallInputPadding.TB}px !important`,
-            paddingLeft: `${smallInputPadding.LR}px !important`,
+            paddingRight: 0
           },
           [`& > .${autocompleteClasses.endAdornment}`]: {
             top: `calc(50% - 13px)`
+          },
+          [`&.${inputBaseClasses.sizeSmall} > .${inputBaseClasses.inputSizeSmall}`]: {
+            paddingTop: `${smallInputPadding.TB}px`,
+            paddingBottom: `${smallInputPadding.TB}px`,
+            paddingLeft: `${smallInputPadding.LR}px`,
+            paddingRight: 0
           },
           [`&.${inputBaseClasses.sizeSmall} > .${autocompleteClasses.endAdornment}`]: {
             top: `calc(50% - 12px)`
