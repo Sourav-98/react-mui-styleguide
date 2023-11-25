@@ -1,10 +1,14 @@
 import { Box, Grid, TextField, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 const TextFieldStyleGuide: React.FC = (): JSX.Element => {
+
+  const { t } = useTranslation(['textField']);
+
   return (
     <Grid container spacing={2} p={2}>
       <Grid item xs={12}>
-        <Typography variant='h6'>Outlined Textbox - Color Schemes</Typography>
+        <Typography variant='h6'>{`${t('common:outlined')} ${t('textField:textField')} - ${t('textField:colorSchemes')}`}</Typography>
       </Grid>
       <Grid item xs={12} sm={6} md={4} lg={3} xl={1.5}>
         <Box display={'flex'} flexDirection={'column'}>

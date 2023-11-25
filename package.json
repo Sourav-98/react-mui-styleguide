@@ -23,6 +23,7 @@
     "i18next": "^22.5.1",
     "i18next-browser-languagedetector": "^7.2.0",
     "i18next-http-backend": "^2.4.1",
+    "locize-cli": "^7.14.12",
     "moment": "^2.29.4",
     "polished": "^4.2.2",
     "prettier": "^3.0.3",

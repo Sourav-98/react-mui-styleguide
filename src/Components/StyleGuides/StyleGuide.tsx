@@ -23,7 +23,7 @@ import { DarkModeSwitch } from 'Elements/Switch';
 import { useTranslation } from 'react-i18next';
 
 const StyleGuide: React.FC = (): JSX.Element => {
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation(['textField']);
   const themeContext = useContext(ThemeContext);
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
