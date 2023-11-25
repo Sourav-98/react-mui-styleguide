@@ -34,13 +34,13 @@ declare module '@mui/material/styles' {
 }
 
 const stdInputPadding = {
-  LR: 14,
-  TB: 13,
+  LR: 13,
+  TB: 9,
 };
 
 const smallInputPadding = {
   LR: 9,
-  TB: 8,
+  TB: 6,
 };
 
 export const AppThemeOptions = (mode: PaletteMode): ThemeOptions => ({
@@ -121,6 +121,9 @@ export const AppThemeOptions = (mode: PaletteMode): ThemeOptions => ({
                 ? theme.palette.info.main
                 : theme.palette.primary.main,
           },
+          [`&.${inputBaseClasses.adornedEnd}`]: {
+            paddingRight: 0
+          }
         }),
       },
     },
@@ -151,6 +154,9 @@ export const AppThemeOptions = (mode: PaletteMode): ThemeOptions => ({
                 ? theme.palette.info.main
                 : theme.palette.primary.main,
           },
+          [`&.${inputBaseClasses.adornedEnd}`]: {
+            paddingRight: 0
+          }
         }),
       },
     },
@@ -184,15 +190,21 @@ export const AppThemeOptions = (mode: PaletteMode): ThemeOptions => ({
     MuiAutocomplete: {
       styleOverrides: {
         inputRoot: {
+          [`& > .${inputBaseClasses.input}`]: {
+            paddingTop: `${stdInputPadding.TB}px`,
+            paddingBottom: `${stdInputPadding.TB}px`,
+            paddingLeft: `${stdInputPadding.LR}px`,
+          },
           [`& > .${inputBaseClasses.inputSizeSmall}`]: {
             paddingTop: `${smallInputPadding.TB}px !important`,
             paddingBottom: `${smallInputPadding.TB}px !important`,
             paddingLeft: `${smallInputPadding.LR}px !important`,
           },
-          [`& > .${inputBaseClasses.input}`]: {
-            paddingTop: `${stdInputPadding.TB}px`,
-            paddingBottom: `${stdInputPadding.TB}px`,
-            paddingLeft: `${stdInputPadding.LR}px`,
+          [`& > .${autocompleteClasses.endAdornment}`]: {
+            top: `calc(50% - 13px)`
+          },
+          [`&.${inputBaseClasses.sizeSmall} > .${autocompleteClasses.endAdornment}`]: {
+            top: `calc(50% - 12px)`
           },
           paddingTop: '0px !important',
           paddingBottom: '0px !important',
