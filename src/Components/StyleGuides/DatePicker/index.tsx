@@ -9,6 +9,12 @@ const DatePickerStyleGuide: React.FC = (): JSX.Element => {
           <Typography variant='subtitle2' fontSize={13}>
             DatePicker Outlined
           </Typography>
+          <TextFieldDatePicker disabled />
+        </Box>
+        <Box display={'flex'} flexDirection={'column'} m={1} width={170}>
+          <Typography variant='subtitle2' fontSize={13}>
+            DatePicker Outlined
+          </Typography>
           <TextFieldDatePicker />
         </Box>
         <Box display={'flex'} flexDirection={'column'} m={1} width={170}>

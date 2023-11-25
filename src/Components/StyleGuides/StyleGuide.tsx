@@ -1,7 +1,6 @@
 import {
   AppBar,
   Box,
-  Button,
   CircularProgress,
   Drawer,
   IconButton,
@@ -21,9 +20,10 @@ import { Link } from 'react-router-dom';
 import { ThemeContext } from 'Context/ThemeContext';
 import { DarkModeSwitch } from 'Elements/Switch';
 import { useTranslation } from 'react-i18next';
+import TranslateIcon from '@mui/icons-material/Translate';
 
 const StyleGuide: React.FC = (): JSX.Element => {
-  const { t, i18n } = useTranslation(['textField']);
+  const { t, i18n } = useTranslation(['common', 'textField']);
   const themeContext = useContext(ThemeContext);
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -53,7 +53,7 @@ const StyleGuide: React.FC = (): JSX.Element => {
             edge='start'
             color='inherit'
             aria-label='menu'
-            sx={{ mr: 2 }}
+            sx={{ mr: 1 }}
             onClick={() => setDrawerOpen(() => true)}
           >
             <MenuIcon />
@@ -84,17 +84,22 @@ const StyleGuide: React.FC = (): JSX.Element => {
           >
             <Tooltip arrow title={`Switch to ${themeContext.darkMode ? 'Light' : 'Dark'} Mode`}>
               <Box>
+                <DarkModeSwitch size='small' aria-label='Toggle Preview Mode' checked={themeContext.darkMode} onClick={themeContext.toggleDarkMode} />
+              </Box>
+            </Tooltip>
+            <Tooltip arrow title={`Switch to ${themeContext.darkMode ? 'Light' : 'Dark'} Mode`}>
+              <Box>
                 <DarkModeSwitch aria-label='Toggle Preview Mode' checked={themeContext.darkMode} onClick={themeContext.toggleDarkMode} />
               </Box>
             </Tooltip>
             <Box>
-              <Button variant='outlined'
+              <IconButton
                 sx={{
                   color: 'white',
                   textTransform: 'none'
                 }}
                 onClick={(event) => setAnchorEl(event.currentTarget)}
-              >{`Current Language: ${i18n.language}`}</Button>
+              ><TranslateIcon/></IconButton>
               <Menu
                 id="language-toggle"
                 anchorEl={anchorEl}
@@ -131,7 +136,7 @@ const StyleGuide: React.FC = (): JSX.Element => {
             <ListItemText sx={{ color: 'inherit' }}>{`AutoComplete ${t('styleGuide')}`}</ListItemText>
           </ListItemButton>
           <ListItemButton sx={{ color: 'inherit' }} component={Link} to='./textfield' selected={pathname.includes('/textfield')}>
-            <ListItemText sx={{ color: 'inherit' }}>{`${t('textField')} ${t('styleGuide')}`}</ListItemText>
+            <ListItemText sx={{ color: 'inherit' }}>{`${t('textField:textField')} ${t('styleGuide')}`}</ListItemText>
           </ListItemButton>
           <ListItemButton sx={{ color: 'inherit' }} component={Link} to='./select' selected={pathname.includes('/select')}>
             <ListItemText sx={{ color: 'inherit' }}>{`${t('select')} ${t('styleGuide')}`}</ListItemText>
