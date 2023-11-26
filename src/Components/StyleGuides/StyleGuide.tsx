@@ -47,7 +47,7 @@ const StyleGuide: React.FC = (): JSX.Element => {
   return (
     <>
       <AppBar position='sticky' sx={{ mb: 2 }}>
-        <Toolbar>
+        <Toolbar sx={{ width: '100%', display: 'flex' }}>
           <IconButton
             size='large'
             edge='start'
@@ -58,62 +58,57 @@ const StyleGuide: React.FC = (): JSX.Element => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
-            {pathname.includes('/textfield')
-              ? 'TextField Styles'
-              : pathname.includes('/select')
-                ? 'Select Styles'
-                : pathname.includes('/autocomplete')
-                  ? 'Autocomplete Styles'
-                  : pathname.includes('/button')
-                    ? 'Buttons Styles'
-                    : pathname.includes('/formik')
-                      ? 'Formik Forms Styles'
-                      : pathname.includes('/datepicker')
-                        ? 'DatePicker Styles'
-                        : ''}
-          </Typography>
-          <Box
-            sx={{
-              marginLeft: 'auto',
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <Tooltip arrow title={`Switch to ${themeContext.darkMode ? 'Light' : 'Dark'} Mode`}>
+          <Box display={'flex'} flexGrow={1} justifyContent={'space-between'} alignItems={'center'}>
+            <Typography variant='h6' component='div'>
+              {pathname.includes('/textfield')
+                ? 'TextField'
+                : pathname.includes('/select')
+                  ? 'Select'
+                  : pathname.includes('/autocomplete')
+                    ? 'Autocomplete'
+                    : pathname.includes('/button')
+                      ? 'Buttons'
+                      : pathname.includes('/formik')
+                        ? 'Formik'
+                        : pathname.includes('/datepicker')
+                          ? 'DatePicker'
+                          : ''}
+            </Typography>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <Tooltip arrow title={`Switch to ${themeContext.darkMode ? 'Light' : 'Dark'} Mode`}>
+                <Box>
+                  <DarkModeSwitch size='small' aria-label='Toggle Preview Mode' checked={themeContext.darkMode} onClick={themeContext.toggleDarkMode} />
+                </Box>
+              </Tooltip>
               <Box>
-                <DarkModeSwitch size='small' aria-label='Toggle Preview Mode' checked={themeContext.darkMode} onClick={themeContext.toggleDarkMode} />
-              </Box>
-            </Tooltip>
-            <Tooltip arrow title={`Switch to ${themeContext.darkMode ? 'Light' : 'Dark'} Mode`}>
-              <Box>
-                <DarkModeSwitch aria-label='Toggle Preview Mode' checked={themeContext.darkMode} onClick={themeContext.toggleDarkMode} />
-              </Box>
-            </Tooltip>
-            <Box>
-              <IconButton
-                sx={{
-                  color: 'white',
-                  textTransform: 'none'
-                }}
-                onClick={(event) => setAnchorEl(event.currentTarget)}
-              ><TranslateIcon/></IconButton>
-              <Menu
-                id="language-toggle"
-                anchorEl={anchorEl}
-                open={Boolean(anchorEl)}
-                onClose={() => setAnchorEl(null)}
-                MenuListProps={{
-                  'aria-labelledby': 'basic-button',
-                  sx: {
-                    pt: 0,
-                    pb: 0
-                  }
-                }}
-              >
-                <MenuItem selected={i18n.language === 'en_US'} onClick={() => {
+                <IconButton
+                  sx={{
+                    color: 'white',
+                    textTransform: 'none'
+                  }}
+                  onClick={(event) => setAnchorEl(event.currentTarget)}
+                ><TranslateIcon /></IconButton>
+                <Menu
+                  id="language-toggle"
+                  anchorEl={anchorEl}
+                  open={Boolean(anchorEl)}
+                  onClose={() => setAnchorEl(null)}
+                  MenuListProps={{
+                    'aria-labelledby': 'basic-button',
+                    sx: {
+                      pt: 0,
+                      pb: 0
+                    }
+                  }}
+                >
+                  <MenuItem selected={i18n.language === 'en_US'} onClick={() => {
                     i18n.changeLanguage('en_US');
                     setAnchorEl(null)
                   }}>en-US</MenuItem>
@@ -125,7 +120,8 @@ const StyleGuide: React.FC = (): JSX.Element => {
                     i18n.changeLanguage('es_ES');
                     setAnchorEl(null);
                   }}>es-ES</MenuItem>
-              </Menu>
+                </Menu>
+              </Box>
             </Box>
           </Box>
         </Toolbar>

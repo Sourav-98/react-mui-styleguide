@@ -208,9 +208,14 @@ export const AppThemeOptions = (mode: PaletteMode): ThemeOptions => ({
           [`&.${inputBaseClasses.sizeSmall} > .${autocompleteClasses.endAdornment}`]: {
             top: `calc(50% - 12px)`
           },
-          paddingTop: '0px !important',
-          paddingBottom: '0px !important',
-          paddingLeft: '0px !important',
+          [`&.${inputBaseClasses.sizeSmall}`]: {
+            paddingTop: '0px',
+            paddingBottom: '0px',
+            paddingLeft: '0px',
+          },
+          paddingTop: '0px',
+          paddingBottom: '0px',
+          paddingLeft: '0px',
         },
         option: ({ theme }) => ({
           [`&.${autocompleteClasses.option}`]: {
