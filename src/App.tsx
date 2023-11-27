@@ -1,4 +1,3 @@
-import './App.css';
 import { RouterProvider } from 'react-router-dom';
 import { mainRouterConfig } from './router.config';
 import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';

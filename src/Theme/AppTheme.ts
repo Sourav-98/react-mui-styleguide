@@ -34,13 +34,13 @@ declare module '@mui/material/styles' {
 }
 
 const stdInputPadding = {
-  LR: 13,
-  TB: 9,
+  LR: 0.8125,
+  TB: 0.5625,
 };
 
 const smallInputPadding = {
-  LR: 9,
-  TB: 6,
+  LR: 0.5625,
+  TB: 0.375,
 };
 
 export const AppThemeOptions = (mode: PaletteMode): ThemeOptions => ({
@@ -66,9 +66,9 @@ export const AppThemeOptions = (mode: PaletteMode): ThemeOptions => ({
       styleOverrides: {
         root: {
           [`& > .${inputBaseClasses.input}`]: {
-            paddingTop: `${stdInputPadding.TB}px`,
-            paddingBottom: `${stdInputPadding.TB}px`,
-            paddingLeft: `${stdInputPadding.LR}px`,
+            paddingTop: `${stdInputPadding.TB}em`,
+            paddingBottom: `${stdInputPadding.TB}em`,
+            paddingLeft: `${stdInputPadding.LR}em`,
           },
           paddingTop: 0,
           paddingBottom: 0,
@@ -76,9 +76,9 @@ export const AppThemeOptions = (mode: PaletteMode): ThemeOptions => ({
         },
         sizeSmall: {
           [`& > .${inputBaseClasses.inputSizeSmall}`]: {
-            paddingTop: `${smallInputPadding.TB}px`,
-            paddingBottom: `${smallInputPadding.TB}px`,
-            paddingLeft: `${smallInputPadding.LR}px`,
+            paddingTop: `${smallInputPadding.TB}em`,
+            paddingBottom: `${smallInputPadding.TB}em`,
+            paddingLeft: `${smallInputPadding.LR}em`,
           },
         },
       },
@@ -92,14 +92,14 @@ export const AppThemeOptions = (mode: PaletteMode): ThemeOptions => ({
               ownerState.color === 'secondary'
                 ? theme.palette.secondary.main
                 : ownerState.color === 'success'
-                ? theme.palette.success.main
-                : ownerState.color === 'warning'
-                ? theme.palette.warning.main
-                : ownerState.color === 'error'
-                ? theme.palette.error.main
-                : ownerState.color === 'info'
-                ? theme.palette.info.main
-                : theme.palette.primary.main,
+                  ? theme.palette.success.main
+                  : ownerState.color === 'warning'
+                    ? theme.palette.warning.main
+                    : ownerState.color === 'error'
+                      ? theme.palette.error.main
+                      : ownerState.color === 'info'
+                        ? theme.palette.info.main
+                        : theme.palette.primary.main,
           },
         }),
       },
@@ -112,18 +112,18 @@ export const AppThemeOptions = (mode: PaletteMode): ThemeOptions => ({
               ownerState.color === 'secondary'
                 ? theme.palette.secondary.main
                 : ownerState.color === 'success'
-                ? theme.palette.success.main
-                : ownerState.color === 'warning'
-                ? theme.palette.warning.main
-                : ownerState.color === 'error'
-                ? theme.palette.error.main
-                : ownerState.color === 'info'
-                ? theme.palette.info.main
-                : theme.palette.primary.main,
+                  ? theme.palette.success.main
+                  : ownerState.color === 'warning'
+                    ? theme.palette.warning.main
+                    : ownerState.color === 'error'
+                      ? theme.palette.error.main
+                      : ownerState.color === 'info'
+                        ? theme.palette.info.main
+                        : theme.palette.primary.main,
           },
           [`&.${inputBaseClasses.adornedEnd}`]: {
-            paddingRight: 0
-          }
+            paddingRight: 0,
+          },
         }),
       },
     },
@@ -145,18 +145,18 @@ export const AppThemeOptions = (mode: PaletteMode): ThemeOptions => ({
               ownerState.color === 'secondary'
                 ? theme.palette.secondary.main
                 : ownerState.color === 'success'
-                ? theme.palette.success.main
-                : ownerState.color === 'warning'
-                ? theme.palette.warning.main
-                : ownerState.color === 'error'
-                ? theme.palette.error.main
-                : ownerState.color === 'info'
-                ? theme.palette.info.main
-                : theme.palette.primary.main,
+                  ? theme.palette.success.main
+                  : ownerState.color === 'warning'
+                    ? theme.palette.warning.main
+                    : ownerState.color === 'error'
+                      ? theme.palette.error.main
+                      : ownerState.color === 'info'
+                        ? theme.palette.info.main
+                        : theme.palette.primary.main,
           },
           [`&.${inputBaseClasses.adornedEnd}`]: {
-            paddingRight: 0
-          }
+            paddingRight: 0,
+          },
         }),
       },
     },
@@ -169,14 +169,14 @@ export const AppThemeOptions = (mode: PaletteMode): ThemeOptions => ({
                 ownerState.color === 'secondary'
                   ? theme.palette.secondary.main
                   : ownerState.color === 'success'
-                  ? theme.palette.success.main
-                  : ownerState.color === 'error'
-                  ? theme.palette.error.main
-                  : ownerState.color === 'warning'
-                  ? theme.palette.warning.main
-                  : ownerState.color === 'info'
-                  ? theme.palette.info.main
-                  : theme.palette.primary.main,
+                    ? theme.palette.success.main
+                    : ownerState.color === 'error'
+                      ? theme.palette.error.main
+                      : ownerState.color === 'warning'
+                        ? theme.palette.warning.main
+                        : ownerState.color === 'info'
+                          ? theme.palette.info.main
+                          : theme.palette.primary.main,
                 0.2
               ),
             },
@@ -191,22 +191,22 @@ export const AppThemeOptions = (mode: PaletteMode): ThemeOptions => ({
       styleOverrides: {
         inputRoot: {
           [`& > .${inputBaseClasses.input}`]: {
-            paddingTop: `${stdInputPadding.TB}px`,
-            paddingBottom: `${stdInputPadding.TB}px`,
-            paddingLeft: `${stdInputPadding.LR}px`,
-            paddingRight: 0
+            paddingTop: `${stdInputPadding.TB}em`,
+            paddingBottom: `${stdInputPadding.TB}em`,
+            paddingLeft: `${stdInputPadding.LR}em`,
+            paddingRight: 0,
           },
           [`& > .${autocompleteClasses.endAdornment}`]: {
-            top: `calc(50% - 13px)`
+            top: `calc(50% - 0.845em)`,
           },
           [`&.${inputBaseClasses.sizeSmall} > .${inputBaseClasses.inputSizeSmall}`]: {
-            paddingTop: `${smallInputPadding.TB}px`,
-            paddingBottom: `${smallInputPadding.TB}px`,
-            paddingLeft: `${smallInputPadding.LR}px`,
-            paddingRight: 0
+            paddingTop: `${smallInputPadding.TB}em`,
+            paddingBottom: `${smallInputPadding.TB}em`,
+            paddingLeft: `${smallInputPadding.LR}em`,
+            paddingRight: 0,
           },
           [`&.${inputBaseClasses.sizeSmall} > .${autocompleteClasses.endAdornment}`]: {
-            top: `calc(50% - 12px)`
+            top: `calc(50% - 0.845em)`,
           },
           [`&.${inputBaseClasses.sizeSmall}`]: {
             paddingTop: '0px',
@@ -226,10 +226,10 @@ export const AppThemeOptions = (mode: PaletteMode): ThemeOptions => ({
             borderStyle: 'solid',
             '&.Mui-focused': {
               backgroundColor: alpha(theme.palette.primary[100], 0.28),
-              borderColor: theme.palette.primary.main
+              borderColor: theme.palette.primary.main,
             },
             '&[aria-selected="true"]': {
-              backgroundColor: alpha(theme.palette.primary[200], 0.4)
+              backgroundColor: alpha(theme.palette.primary[200], 0.4),
             },
             '&[aria-selected="true"].Mui-focused': {
               backgroundColor: alpha(theme.palette.primary[200], 0.58),
@@ -251,7 +251,7 @@ export const AppThemeOptions = (mode: PaletteMode): ThemeOptions => ({
           borderStyle: 'solid',
           [`&.${listItemButtonClasses.focusVisible}`]: {
             backgroundColor: alpha(theme.palette.primary[100], 0.18),
-            borderColor: theme.palette.primary.main
+            borderColor: theme.palette.primary.main,
           },
           [`&:hover`]: {
             backgroundColor: alpha(theme.palette.primary[200], 0.28),
@@ -278,7 +278,7 @@ export const AppThemeOptions = (mode: PaletteMode): ThemeOptions => ({
           borderStyle: 'solid',
           [`&.${menuItemClasses.focusVisible}`]: {
             backgroundColor: alpha(theme.palette.primary[100], 0.18),
-            borderColor: theme.palette.primary.main
+            borderColor: theme.palette.primary.main,
           },
           [`&:hover`]: {
             backgroundColor: alpha(theme.palette.primary[200], 0.28),
@@ -297,7 +297,10 @@ export const AppThemeOptions = (mode: PaletteMode): ThemeOptions => ({
     },
   },
   typography: {
-    fontSize: 12.6,
+    // fontSize: 12.6,
+    subtitle1: {
+      fontSize: '0.8125em !important'
+    }
   },
 });
 
