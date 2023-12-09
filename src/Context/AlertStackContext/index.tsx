@@ -19,7 +19,9 @@ export const AlertStackContextProvider: React.FC<{ maxAlerts: number, children: 
   useEffect(() => {
     /** To restrict the number of alerts displated to the max limit set */
     if(alertList.length === maxAlerts+1){
-      removeAlert(alertList[maxAlerts].id);
+      let lastAlertId = alertList[maxAlerts].id;
+      delete alertAutoCloseTimeoutRegister.current[lastAlertId];
+      setAlertList(prevAlertList => prevAlertList.filter(alert => alert.id !== lastAlertId));
     }
 }, [alertList, maxAlerts])
 
@@ -32,6 +34,8 @@ export const AlertStackContextProvider: React.FC<{ maxAlerts: number, children: 
 
   const pushAlert = ({ message = '', variant = 'filled', severity = 'info', autoClose = true, autoCloseDuration = 6500 }: Omit<AlertMessage, 'id' | 'in'>): void => {
     let id: string = uuid();
+    // if (alertList.length && message === alertList[0].message)
+    //   return;
     setAlertList(prevAlertsList => [
       {
         id: id,
