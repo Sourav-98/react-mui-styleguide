@@ -5,12 +5,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ThemeContextProvider } from 'Context/ThemeContext';
 import 'i18n/i18n';
+import { AlertStackContextProvider } from 'Context/AlertStackContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
     <ThemeContextProvider>
-      <App />
+      <AlertStackContextProvider maxAlerts={6}>
+        <App />
+      </AlertStackContextProvider>
     </ThemeContextProvider>
   </React.StrictMode>
 );

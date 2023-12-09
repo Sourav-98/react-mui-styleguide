@@ -1,8 +1,11 @@
 import { Button, Typography, Grid } from '@mui/material';
+import AlertStackContext from 'Context/AlertStackContext';
+import { useContext } from 'react';
 // import { useTranslation } from 'react-i18next';
 
 const ButtonStyleGuide: React.FC = (): JSX.Element => {
   // const { t } = useTranslation();
+  const alertContext = useContext(AlertStackContext);
 
   return (
     <Grid container spacing={2} p={2}>
@@ -15,7 +18,10 @@ const ButtonStyleGuide: React.FC = (): JSX.Element => {
         </Button>
       </Grid>
       <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-        <Button variant='outlined' fullWidth>
+        <Button variant='outlined' fullWidth onClick={() => alertContext.pushAlert({
+          message: 'Hello world',
+          autoClose: false
+        })}>
           Primary
         </Button>
       </Grid>
@@ -25,7 +31,10 @@ const ButtonStyleGuide: React.FC = (): JSX.Element => {
         </Button>
       </Grid>
       <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-        <Button variant='outlined' color='error' fullWidth>
+        <Button variant='outlined' color='error' fullWidth onClick={() => alertContext.pushAlert({
+          message: 'Hello world Long Text Lorem Ipsum',
+          severity: 'error'
+        })}>
           Error
         </Button>
       </Grid>

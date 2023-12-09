@@ -160,6 +160,7 @@ export const TextFieldDatePicker: React.FC<
           open={isOpen}
           onClose={() => setIsOpen(false)}
           onChange={onDatePickerChangeHandler}
+          // dayOfWeekFormatter={(day) => `${day}`}
           PopperProps={{
             anchorEl: datepickerAnchorEl,
             placement: placement,

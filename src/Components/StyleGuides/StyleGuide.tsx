@@ -31,15 +31,7 @@ const StyleGuide: React.FC = (): JSX.Element => {
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
 
   const { pathname } = useLocation();
-
-  useEffect(() => {
-    console.log('StyleGuide rendered - Onetime useEffect...');
-  }, []);
-
-  useEffect(() => {
-    console.log('StyleGuide rendered - All time useEffect...');
-  });
-
+  
   useEffect(() => {
     setDrawerOpen(false);
   }, [pathname]);
