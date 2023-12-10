@@ -18,10 +18,17 @@ const ButtonStyleGuide: React.FC = (): JSX.Element => {
         </Button>
       </Grid>
       <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-        <Button variant='outlined' fullWidth onClick={() => alertContext.pushAlert({
-          message: 'Hello world',
-          autoClose: false
-        })}>
+        <Button variant='outlined' fullWidth onClick={() => {
+          alertContext.pushAlert({
+            message: 'Hello world',
+            // autoClose: false
+          });
+          alertContext.pushAlert({
+            message: 'Hello world',
+            // autoClose: false
+          });
+          
+        }}>
           Primary
         </Button>
       </Grid>

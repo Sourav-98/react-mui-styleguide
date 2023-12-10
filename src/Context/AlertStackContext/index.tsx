@@ -14,48 +14,76 @@ const AlertStackContext: React.Context<AlertContextProps> = React.createContext<
 
 export const AlertStackContextProvider: React.FC<{ maxAlerts: number, children: React.ReactNode }> = ({ maxAlerts, ...props }): JSX.Element => {
 
+  const [alertQueue, setAlertQueue] = useState<Array<Omit<AlertMessage, 'id' | 'in'>>>([]);
   const [alertList, setAlertList] = useState<Array<AlertMessage>>([]);
-
-  useEffect(() => {
-    /** To restrict the number of alerts displated to the max limit set */
-    if(alertList.length === maxAlerts+1){
-      let lastAlertId = alertList[maxAlerts].id;
-      delete alertAutoCloseTimeoutRegister.current[lastAlertId];
-      setAlertList(prevAlertList => prevAlertList.filter(alert => alert.id !== lastAlertId));
-    }
-}, [alertList, maxAlerts])
-
+  const [isNewAlertDispatched, setNewAlertDispatched] = useState<boolean>(false);
   /**
-   * This will keep a record of alert message ids with their respective timeouts
-   */
+ * This will keep a record of alert message ids with their respective timeouts
+ */
   const alertAutoCloseTimeoutRegister: MutableRefObject<Record<string, NodeJS.Timeout>> = useRef({
-    '_': setTimeout(() => {}, 0)
+    '_': setTimeout(() => { }, 0)
   });
 
-  const pushAlert = ({ message = '', variant = 'filled', severity = 'info', autoClose = true, autoCloseDuration = 6500 }: Omit<AlertMessage, 'id' | 'in'>): void => {
-    let id: string = uuid();
-    // if (alertList.length && message === alertList[0].message)
-    //   return;
-    setAlertList(prevAlertsList => [
-      {
-        id: id,
-        message: message,
-        variant: variant,
-        severity: severity,
-        autoClose: autoClose,
-        autoCloseDuration: autoCloseDuration
-      }, ...prevAlertsList
-    ]);
-    setTimeout(() => {
-      setAlertList((prevAlertList) => {
-        let tempAlerts = [...prevAlertList];
-        tempAlerts[0].in = true;
-        return tempAlerts;
-      });
-      if(autoClose) {
-        alertAutoCloseTimeoutRegister.current[id] = setTimeout(() => removeAlert(id), autoCloseDuration);
+  useEffect(() => {
+    if (alertQueue.length && !isNewAlertDispatched) {
+      setNewAlertDispatched(true);
+      // if the alert queue contains a message, then push the last message in the queue to the alertList for display (with a delay of 151ms).
+      // remove that item from alert queue
+      setTimeout(() => {
+        setAlertList(prevAlertsList => [
+          {
+            id: uuid(),
+            in: false,
+            message: alertQueue[alertQueue.length - 1].message,
+            variant: alertQueue[alertQueue.length - 1].variant,
+            severity: alertQueue[alertQueue.length - 1].severity,
+            autoClose: alertQueue[alertQueue.length - 1].autoClose,
+            autoCloseDuration: alertQueue[alertQueue.length - 1].autoCloseDuration
+          }, ...prevAlertsList
+        ]);
+        setNewAlertDispatched(false);
+        setAlertQueue(prevAlertQueue => prevAlertQueue.slice(0, prevAlertQueue.length - 1));
+      }, 150);
+    }
+  }, [alertQueue, isNewAlertDispatched]);
+
+  useEffect(() => {
+    if (alertList.length && isNewAlertDispatched) {
+      if (alertList.length <= maxAlerts) {
+        if (alertList[0].autoClose && !alertAutoCloseTimeoutRegister.current[alertList[0].id]) {
+          alertAutoCloseTimeoutRegister.current[alertList[0].id] = setTimeout(() => removeAlert(alertList[0].id), alertList[0].autoCloseDuration);
+        }
+        if (!alertList[0].in) {
+          setTimeout(() => {
+            setAlertList((prevAlertList) => {
+              let tempAlerts = [...prevAlertList];
+              tempAlerts[0].in = true;
+              return tempAlerts;
+            });
+            setNewAlertDispatched(false);
+          }, 300);
+        }
+      } else {
+        setTimeout(() => {
+          setAlertList((prevAlertList) => {
+            delete alertAutoCloseTimeoutRegister.current[prevAlertList[prevAlertList.length - 1].id];
+            return prevAlertList.slice(0, prevAlertList.length - 1);
+          });
+        }, 50);
       }
-    }, 50);
+    }
+  }, [alertList, isNewAlertDispatched]);  // eslint-disable-line react-hooks/exhaustive-deps
+
+  const pushAlert = ({ message = '', variant = 'filled', severity = 'info', autoClose = true, autoCloseDuration = 16500 }: Omit<AlertMessage, 'id' | 'in'>): void => {
+    setAlertQueue(prevAlertQueue => [
+      {
+        message,
+        variant,
+        severity,
+        autoClose,
+        autoCloseDuration
+      }, ...prevAlertQueue
+    ]);
   }
 
   const removeAlert = (id: string): void => {
@@ -66,7 +94,7 @@ export const AlertStackContextProvider: React.FC<{ maxAlerts: number, children: 
     setTimeout(() => {
       delete alertAutoCloseTimeoutRegister.current[id];
       setAlertList(prevAlertList => prevAlertList.filter(alert => alert.id !== id));
-    }, 150);
+    }, 100);
   }
 
   return (
