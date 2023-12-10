@@ -1,5 +1,5 @@
 
-import React, { MutableRefObject, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import { AlertContextProps, AlertMessage } from './AlertStackContext';
 import { Alert, Box, Collapse, Grow, alertClasses } from '@mui/material';
@@ -12,17 +12,67 @@ let AlertsContextDefault = {
 
 const AlertStackContext: React.Context<AlertContextProps> = React.createContext<AlertContextProps>(AlertsContextDefault);
 
+const AlertElement: React.FC<AlertMessage & { closeFunc: () => void }> = ({ closeFunc, message, variant, severity, autoClose, autoCloseDuration }): JSX.Element => {
+
+  const [open, setOpen] = useState<boolean>(false);
+  const delayCloseTimer = useRef(setTimeout(() => { }, 0));
+
+  const noDelayClose = () => {
+    if (delayCloseTimer) {
+      clearTimeout(delayCloseTimer.current);
+    }
+    setOpen(false);
+    setTimeout(() => closeFunc(), 100);
+  }
+
+  useEffect(() => {
+    setTimeout(() => setOpen(true), 50);
+  }, []);   // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (autoClose) {
+      delayCloseTimer.current = setTimeout(noDelayClose, autoCloseDuration);
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  return (
+    <Collapse sx={{
+      alignContent: 'flex-end'
+    }} in={open} timeout={{
+      enter: 100,
+      exit: 100
+    }}>
+      <Box maxWidth={310} display={'flex'} flexDirection={'column'} justifySelf={'flex-end'}>
+        <Grow in={open} timeout={{
+          enter: 300,
+          exit: 100
+        }}>
+          <Alert
+            component={'div'}
+            variant={variant}
+            severity={severity}
+            sx={{
+              mb: 1,
+              [`& > .${alertClasses.message}`]: {
+                wordWrap: 'break-word'
+              }
+            }}
+            onClose={() => noDelayClose()}
+          >{message}</Alert>
+        </Grow>
+      </Box>
+    </Collapse>
+  )
+}
+
 export const AlertStackContextProvider: React.FC<{ maxAlerts: number, children: React.ReactNode }> = ({ maxAlerts, ...props }): JSX.Element => {
 
   const [alertQueue, setAlertQueue] = useState<Array<Omit<AlertMessage, 'id' | 'in'>>>([]);
   const [alertList, setAlertList] = useState<Array<AlertMessage>>([]);
-  const [isNewAlertDispatched, setNewAlertDispatched] = useState<boolean>(false);
   /**
- * This will keep a record of alert message ids with their respective timeouts
- */
-  const alertAutoCloseTimeoutRegister: MutableRefObject<Record<string, NodeJS.Timeout>> = useRef({
-    '_': setTimeout(() => { }, 0)
-  });
+   * This is used to queued dispatch of alert messages
+   */
+  const [isNewAlertDispatched, setNewAlertDispatched] = useState<boolean>(false);
 
   useEffect(() => {
     if (alertQueue.length && !isNewAlertDispatched) {
@@ -33,7 +83,6 @@ export const AlertStackContextProvider: React.FC<{ maxAlerts: number, children: 
         setAlertList(prevAlertsList => [
           {
             id: uuid(),
-            in: false,
             message: alertQueue[alertQueue.length - 1].message,
             variant: alertQueue[alertQueue.length - 1].variant,
             severity: alertQueue[alertQueue.length - 1].severity,
@@ -43,38 +92,19 @@ export const AlertStackContextProvider: React.FC<{ maxAlerts: number, children: 
         ]);
         setNewAlertDispatched(false);
         setAlertQueue(prevAlertQueue => prevAlertQueue.slice(0, prevAlertQueue.length - 1));
-      }, 150);
+      }, 200);
     }
   }, [alertQueue, isNewAlertDispatched]);
 
   useEffect(() => {
-    if (alertList.length && isNewAlertDispatched) {
-      if (alertList.length <= maxAlerts) {
-        if (alertList[0].autoClose && !alertAutoCloseTimeoutRegister.current[alertList[0].id]) {
-          alertAutoCloseTimeoutRegister.current[alertList[0].id] = setTimeout(() => removeAlert(alertList[0].id), alertList[0].autoCloseDuration);
-        }
-        if (!alertList[0].in) {
-          setTimeout(() => {
-            setAlertList((prevAlertList) => {
-              let tempAlerts = [...prevAlertList];
-              tempAlerts[0].in = true;
-              return tempAlerts;
-            });
-            setNewAlertDispatched(false);
-          }, 300);
-        }
-      } else {
-        setTimeout(() => {
-          setAlertList((prevAlertList) => {
-            delete alertAutoCloseTimeoutRegister.current[prevAlertList[prevAlertList.length - 1].id];
-            return prevAlertList.slice(0, prevAlertList.length - 1);
-          });
-        }, 50);
+    if (alertList.length) {
+      if (alertList.length === maxAlerts + 1) {
+        setAlertList((prevAlertList) => prevAlertList.slice(0, prevAlertList.length - 1));
       }
     }
-  }, [alertList, isNewAlertDispatched]);  // eslint-disable-line react-hooks/exhaustive-deps
+  }, [alertList]);  // eslint-disable-line react-hooks/exhaustive-deps
 
-  const pushAlert = ({ message = '', variant = 'filled', severity = 'info', autoClose = true, autoCloseDuration = 16500 }: Omit<AlertMessage, 'id' | 'in'>): void => {
+  const pushAlert = ({ message = '', variant = 'filled', severity = 'info', autoClose = true, autoCloseDuration = 5500 }: Omit<AlertMessage, 'id' | 'in'>): void => {
     setAlertQueue(prevAlertQueue => [
       {
         message,
@@ -87,14 +117,7 @@ export const AlertStackContextProvider: React.FC<{ maxAlerts: number, children: 
   }
 
   const removeAlert = (id: string): void => {
-    setAlertList((prevAlertList) => prevAlertList.map((alertElement) => ({
-      ...alertElement,
-      in: alertElement.id === id ? false : true
-    })));
-    setTimeout(() => {
-      delete alertAutoCloseTimeoutRegister.current[id];
-      setAlertList(prevAlertList => prevAlertList.filter(alert => alert.id !== id));
-    }, 100);
+    setAlertList(prevAlertList => prevAlertList.filter(alert => alert.id !== id));
   }
 
   return (
@@ -107,32 +130,7 @@ export const AlertStackContextProvider: React.FC<{ maxAlerts: number, children: 
       <Box zIndex={1200} position={'fixed'} display={'flex'} flexDirection={'column'} justifyContent={'flex-start'} alignItems={'flex-end'} top={8} right={8} role={'presentation'}>
         {
           alertList.map((alertElement) => (
-            <Collapse sx={{
-              alignContent: 'flex-end'
-            }} key={alertElement.id} in={alertElement.in} timeout={{
-              enter: 150,
-              exit: 150
-            }}>
-              <Box maxWidth={310} display={'flex'} flexDirection={'column'} justifySelf={'flex-end'}>
-                <Grow in={alertElement.in} timeout={{
-                  enter: 300,
-                  exit: 100
-                }}>
-                  <Alert
-                    component={'div'}
-                    variant={alertElement.variant}
-                    severity={alertElement.severity}
-                    sx={{
-                      mb: 1,
-                      [`& > .${alertClasses.message}`]: {
-                        wordWrap: 'break-word'
-                      }
-                    }}
-                    onClose={() => removeAlert(alertElement.id)}
-                  >{alertElement.message}</Alert>
-                </Grow>
-              </Box>
-            </Collapse>
+            <AlertElement key={alertElement.id} closeFunc={() => removeAlert(alertElement.id)} {...alertElement} />
           ))
         }
       </Box>

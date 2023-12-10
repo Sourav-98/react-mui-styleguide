@@ -2,7 +2,6 @@ import { AlertColor } from '@mui/material';
 
 export type AlertMessage = {
   id: string;
-  in?: boolean;
   message: string;
   variant?: 'outlined' | 'standard' | 'filled';
   severity?: AlertColor;
