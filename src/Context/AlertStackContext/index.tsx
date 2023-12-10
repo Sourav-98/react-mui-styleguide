@@ -1,5 +1,5 @@
 
-import React, { MutableRefObject, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import { AlertContextProps, AlertMessage } from './AlertStackContext';
 import { Alert, Box, Collapse, Grow, alertClasses } from '@mui/material';
@@ -12,61 +12,112 @@ let AlertsContextDefault = {
 
 const AlertStackContext: React.Context<AlertContextProps> = React.createContext<AlertContextProps>(AlertsContextDefault);
 
-export const AlertStackContextProvider: React.FC<{ maxAlerts: number, children: React.ReactNode }> = ({ maxAlerts, ...props }): JSX.Element => {
+const AlertElement: React.FC<AlertMessage & { closeFunc: () => void }> = ({ closeFunc, message, variant, severity, autoClose, autoCloseDuration }): JSX.Element => {
 
-  const [alertList, setAlertList] = useState<Array<AlertMessage>>([]);
+  const [open, setOpen] = useState<boolean>(false);
+  const delayCloseTimer = useRef(setTimeout(() => { }, 0));
+
+  const noDelayClose = () => {
+    if (delayCloseTimer) {
+      clearTimeout(delayCloseTimer.current);
+    }
+    setOpen(false);
+    setTimeout(() => closeFunc(), 100);
+  }
 
   useEffect(() => {
-    /** To restrict the number of alerts displated to the max limit set */
-    if(alertList.length === maxAlerts+1){
-      let lastAlertId = alertList[maxAlerts].id;
-      delete alertAutoCloseTimeoutRegister.current[lastAlertId];
-      setAlertList(prevAlertList => prevAlertList.filter(alert => alert.id !== lastAlertId));
+    setTimeout(() => setOpen(true), 50);
+  }, []);   // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (autoClose) {
+      delayCloseTimer.current = setTimeout(noDelayClose, autoCloseDuration);
     }
-}, [alertList, maxAlerts])
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  return (
+    <Collapse sx={{
+      alignContent: 'flex-end'
+    }} in={open} timeout={{
+      enter: 100,
+      exit: 100
+    }}>
+      <Box maxWidth={310} display={'flex'} flexDirection={'column'} justifySelf={'flex-end'}>
+        <Grow in={open} timeout={{
+          enter: 300,
+          exit: 100
+        }}>
+          <Alert
+            component={'div'}
+            variant={variant}
+            severity={severity}
+            sx={{
+              mb: 1,
+              [`& > .${alertClasses.message}`]: {
+                wordWrap: 'break-word'
+              }
+            }}
+            onClose={() => noDelayClose()}
+          >{message}</Alert>
+        </Grow>
+      </Box>
+    </Collapse>
+  )
+}
+
+export const AlertStackContextProvider: React.FC<{ maxAlerts: number, children: React.ReactNode }> = ({ maxAlerts, ...props }): JSX.Element => {
+
+  const [alertQueue, setAlertQueue] = useState<Array<Omit<AlertMessage, 'id' | 'in'>>>([]);
+  const [alertList, setAlertList] = useState<Array<AlertMessage>>([]);
   /**
-   * This will keep a record of alert message ids with their respective timeouts
+   * This is used to queued dispatch of alert messages
    */
-  const alertAutoCloseTimeoutRegister: MutableRefObject<Record<string, NodeJS.Timeout>> = useRef({
-    '_': setTimeout(() => {}, 0)
-  });
+  const [isNewAlertDispatched, setNewAlertDispatched] = useState<boolean>(false);
 
-  const pushAlert = ({ message = '', variant = 'filled', severity = 'info', autoClose = true, autoCloseDuration = 6500 }: Omit<AlertMessage, 'id' | 'in'>): void => {
-    let id: string = uuid();
-    // if (alertList.length && message === alertList[0].message)
-    //   return;
-    setAlertList(prevAlertsList => [
-      {
-        id: id,
-        message: message,
-        variant: variant,
-        severity: severity,
-        autoClose: autoClose,
-        autoCloseDuration: autoCloseDuration
-      }, ...prevAlertsList
-    ]);
-    setTimeout(() => {
-      setAlertList((prevAlertList) => {
-        let tempAlerts = [...prevAlertList];
-        tempAlerts[0].in = true;
-        return tempAlerts;
-      });
-      if(autoClose) {
-        alertAutoCloseTimeoutRegister.current[id] = setTimeout(() => removeAlert(id), autoCloseDuration);
+  useEffect(() => {
+    if (alertQueue.length && !isNewAlertDispatched) {
+      setNewAlertDispatched(true);
+      // if the alert queue contains a message, then push the last message in the queue to the alertList for display (with a delay of 151ms).
+      // remove that item from alert queue
+      setTimeout(() => {
+        setAlertList(prevAlertsList => [
+          {
+            id: uuid(),
+            message: alertQueue[alertQueue.length - 1].message,
+            variant: alertQueue[alertQueue.length - 1].variant,
+            severity: alertQueue[alertQueue.length - 1].severity,
+            autoClose: alertQueue[alertQueue.length - 1].autoClose,
+            autoCloseDuration: alertQueue[alertQueue.length - 1].autoCloseDuration
+          }, ...prevAlertsList
+        ]);
+        setNewAlertDispatched(false);
+        setAlertQueue(prevAlertQueue => prevAlertQueue.slice(0, prevAlertQueue.length - 1));
+      }, 200);
+    }
+  }, [alertQueue, isNewAlertDispatched]);
+
+  useEffect(() => {
+    if (alertList.length) {
+      if (alertList.length === maxAlerts + 1) {
+        setAlertList((prevAlertList) => prevAlertList.slice(0, prevAlertList.length - 1));
       }
-    }, 50);
+    }
+  }, [alertList]);  // eslint-disable-line react-hooks/exhaustive-deps
+
+  const pushAlert = ({ message = '', variant = 'filled', severity = 'info', autoClose = true, autoCloseDuration = 5500 }: Omit<AlertMessage, 'id' | 'in'>): void => {
+    setAlertQueue(prevAlertQueue => [
+      {
+        message,
+        variant,
+        severity,
+        autoClose,
+        autoCloseDuration
+      }, ...prevAlertQueue
+    ]);
   }
 
   const removeAlert = (id: string): void => {
-    setAlertList((prevAlertList) => prevAlertList.map((alertElement) => ({
-      ...alertElement,
-      in: alertElement.id === id ? false : true
-    })));
-    setTimeout(() => {
-      delete alertAutoCloseTimeoutRegister.current[id];
-      setAlertList(prevAlertList => prevAlertList.filter(alert => alert.id !== id));
-    }, 150);
+    setAlertList(prevAlertList => prevAlertList.filter(alert => alert.id !== id));
   }
 
   return (
@@ -79,32 +130,7 @@ export const AlertStackContextProvider: React.FC<{ maxAlerts: number, children: 
       <Box zIndex={1200} position={'fixed'} display={'flex'} flexDirection={'column'} justifyContent={'flex-start'} alignItems={'flex-end'} top={8} right={8} role={'presentation'}>
         {
           alertList.map((alertElement) => (
-            <Collapse sx={{
-              alignContent: 'flex-end'
-            }} key={alertElement.id} in={alertElement.in} timeout={{
-              enter: 150,
-              exit: 150
-            }}>
-              <Box maxWidth={310} display={'flex'} flexDirection={'column'} justifySelf={'flex-end'}>
-                <Grow in={alertElement.in} timeout={{
-                  enter: 300,
-                  exit: 100
-                }}>
-                  <Alert
-                    component={'div'}
-                    variant={alertElement.variant}
-                    severity={alertElement.severity}
-                    sx={{
-                      mb: 1,
-                      [`& > .${alertClasses.message}`]: {
-                        wordWrap: 'break-word'
-                      }
-                    }}
-                    onClose={() => removeAlert(alertElement.id)}
-                  >{alertElement.message}</Alert>
-                </Grow>
-              </Box>
-            </Collapse>
+            <AlertElement key={alertElement.id} closeFunc={() => removeAlert(alertElement.id)} {...alertElement} />
           ))
         }
       </Box>

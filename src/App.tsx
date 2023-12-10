@@ -24,10 +24,6 @@ function App() {
   const [momentLocale, setMomentLocale] = useState<string>('en');
 
   useEffect(() => {
-    console.log(moment.monthsShort());
-  }, []);
-
-  useEffect(() => {
     switch(i18n.language) {
       case 'de_DE': moment.locale('de'); setMomentLocale('de'); break;
       case 'es_ES': moment.locale('es'); setMomentLocale('es'); break;
