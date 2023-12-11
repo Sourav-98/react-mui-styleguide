@@ -1,5 +1,6 @@
 import { Navigate, RouteObject } from 'react-router-dom';
 import { lazy } from 'react';
+import AlertStack from './AlertStack';
 
 const TextFieldStyleGuide = lazy(() => import('./TextFields'));
 const AutoCompleteStyleGuide = lazy(() => import('./AutoComplete'));
@@ -32,6 +33,10 @@ export const styleGuidesRouterConfig: RouteObject[] = [
   {
     path: 'formik',
     element: <FormikStyleGuide />,
+  },
+  {
+    path: 'alert-stack',
+    element: <AlertStack/>
   },
   {
     path: '',

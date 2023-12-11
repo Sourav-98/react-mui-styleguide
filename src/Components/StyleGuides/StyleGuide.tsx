@@ -31,7 +31,7 @@ const StyleGuide: React.FC = (): JSX.Element => {
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
 
   const { pathname } = useLocation();
-  
+
   useEffect(() => {
     setDrawerOpen(false);
   }, [pathname]);
@@ -64,7 +64,9 @@ const StyleGuide: React.FC = (): JSX.Element => {
                         ? 'Formik'
                         : pathname.includes('/datepicker')
                           ? 'DatePicker'
-                          : ''}
+                          : pathname.includes('/alert-stack')
+                            ? 'Alert Stack'
+                            : ''}
             </Typography>
             <Box
               sx={{
@@ -137,6 +139,9 @@ const StyleGuide: React.FC = (): JSX.Element => {
           </ListItemButton>
           <ListItemButton sx={{ color: 'inherit' }} component={Link} to='./formik' selected={pathname.includes('/formik')}>
             <ListItemText sx={{ color: 'inherit' }}>{`Formik ${t('styleGuide')}`}</ListItemText>
+          </ListItemButton>
+          <ListItemButton sx={{ color: 'inherit' }} component={Link} to='./alert-stack' selected={pathname.includes('/alert-stack')}>
+            <ListItemText sx={{ color: 'inherit' }}>{`Alert Stack`}</ListItemText>
           </ListItemButton>
         </List>
       </Drawer>
