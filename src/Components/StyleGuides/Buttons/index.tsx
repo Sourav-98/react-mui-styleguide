@@ -1,11 +1,8 @@
 import { Button, Typography, Grid } from '@mui/material';
-import AlertStackContext from 'Context/AlertStackContext';
-import { useContext } from 'react';
 // import { useTranslation } from 'react-i18next';
 
 const ButtonStyleGuide: React.FC = (): JSX.Element => {
   // const { t } = useTranslation();
-  const alertContext = useContext(AlertStackContext);
 
   return (
     <Grid container spacing={2} p={2}>
@@ -18,76 +15,7 @@ const ButtonStyleGuide: React.FC = (): JSX.Element => {
         </Button>
       </Grid>
       <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-        <Button variant='outlined' fullWidth onClick={() => {
-          alertContext.pushAlert({
-            message: 'Hello world 1',
-            // autoClose: false
-          });
-          alertContext.pushAlert({
-            message: 'Hello world 2',
-            // autoClose: false
-          });
-          alertContext.pushAlert({
-            message: 'Hello world 3',
-            // autoClose: false
-          });
-          alertContext.pushAlert({
-            message: 'Hello world 4',
-            // autoClose: false
-          });
-          alertContext.pushAlert({
-            message: 'Hello world 5',
-            // autoClose: false
-          });
-          alertContext.pushAlert({
-            message: 'Hello world 6',
-            // autoClose: false
-          });
-          alertContext.pushAlert({
-            message: 'Hello world 7',
-            // autoClose: false
-          });
-          alertContext.pushAlert({
-            message: 'Hello world 8',
-            // autoClose: false
-          });
-          alertContext.pushAlert({
-            message: 'Hello world 9',
-            // autoClose: false
-          });
-          alertContext.pushAlert({
-            message: 'Hello world 10',
-            // autoClose: false
-          });
-          alertContext.pushAlert({
-            message: 'Hello world 11',
-            // autoClose: false
-          });
-          alertContext.pushAlert({
-            message: 'Hello world 12',
-            // autoClose: false
-          });
-          alertContext.pushAlert({
-            message: 'Hello world 13',
-            // autoClose: false
-          });
-          alertContext.pushAlert({
-            message: 'Hello world 14',
-            // autoClose: false
-          });
-          alertContext.pushAlert({
-            message: 'Hello world 15',
-            // autoClose: false
-          });
-          alertContext.pushAlert({
-            message: 'Hello world 16',
-            // autoClose: false
-          });
-          alertContext.pushAlert({
-            message: 'Hello world 17',
-            // autoClose: false
-          });
-        }}>
+        <Button variant='outlined' fullWidth >
           Primary
         </Button>
       </Grid>
@@ -97,10 +25,7 @@ const ButtonStyleGuide: React.FC = (): JSX.Element => {
         </Button>
       </Grid>
       <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-        <Button variant='outlined' color='error' fullWidth onClick={() => alertContext.pushAlert({
-          message: 'Hello world Long Text Lorem Ipsum',
-          severity: 'error'
-        })}>
+        <Button variant='outlined' color='error' fullWidth >
           Error
         </Button>
       </Grid>
