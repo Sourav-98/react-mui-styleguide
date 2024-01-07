@@ -114,6 +114,10 @@ const StyleGuide: React.FC = (): JSX.Element => {
                     i18n.changeLanguage('es_ES');
                     setAnchorEl(null);
                   }}>es-ES</MenuItem>
+                  <MenuItem selected={i18n.language === 'fr_FR'} onClick={() => {
+                    i18n.changeLanguage('fr_FR');
+                    setAnchorEl(null);
+                  }}>fr-FR</MenuItem>
                 </Menu>
               </Box>
             </Box>
@@ -126,7 +130,7 @@ const StyleGuide: React.FC = (): JSX.Element => {
             <ListItemText sx={{ color: 'inherit' }}>{`AutoComplete ${t('styleGuide')}`}</ListItemText>
           </ListItemButton>
           <ListItemButton sx={{ color: 'inherit' }} component={Link} to='./textfield' selected={pathname.includes('/textfield')}>
-            <ListItemText sx={{ color: 'inherit' }}>{`${t('textField:textField')} ${t('styleGuide')}`}</ListItemText>
+            <ListItemText sx={{ color: 'inherit' }}>{`${t('textField')} ${t('styleGuide')}`}</ListItemText>
           </ListItemButton>
           <ListItemButton sx={{ color: 'inherit' }} component={Link} to='./select' selected={pathname.includes('/select')}>
             <ListItemText sx={{ color: 'inherit' }}>{`${t('select')} ${t('styleGuide')}`}</ListItemText>

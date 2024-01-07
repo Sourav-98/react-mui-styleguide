@@ -19,11 +19,11 @@
     "@types/react": "^18.2.27",
     "@types/react-dom": "^18.2.12",
     "autosuggest-highlight": "^3.3.4",
+    "csv-parse": "^5.5.2",
     "formik": "^2.4.5",
     "i18next": "^22.5.1",
     "i18next-browser-languagedetector": "^7.2.0",
     "i18next-http-backend": "^2.4.1",
-    "locize-cli": "^7.14.12",
     "moment": "^2.29.4",
     "polished": "^4.2.2",
     "prettier": "^3.0.3",
@@ -39,7 +39,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "i18ngen": "node i18ngen/index.js en_US en_GB de_DE fr_FR es_ES",
+    "build": "npm run i18ngen | react-scripts build",
+    "i18ngen-build": "node i18ngen/index.js en_US en_GB de_DE fr_FR es_ES | cp -fr public/locales build/locales",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "format": "prettier . --write"
