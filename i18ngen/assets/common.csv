@@ -31,3 +31,4 @@ noOptions,No Options,No Options,Keine Optionen,Aucune option,Sin opciones
 textField,Text Field,Text Field,Textfeld,Champ de texte,Campo de texto
 select,Select,Select,Wählen,Sélectionner,Seleccionar
 button,Button,Button,Taste,Bouton,Botón
+welcomeText,"Hello {{name}}, you have {{count}} unread message","Hello {{name}}, you have {{count}} unread message","Hallo {{name}}, du hast {{count}} ungelesene Nachricht","Bonjour {{name}}, vous avez {{count}} message non lu","Hola {{name}}, tienes {{count}} mensaje sin leer."

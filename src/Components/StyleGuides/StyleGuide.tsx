@@ -76,6 +76,9 @@ const StyleGuide: React.FC = (): JSX.Element => {
                 alignItems: 'center',
               }}
             >
+              <Typography variant='body2'>
+                {t('welcomeText', { name: 'Sourav', count: 10})}
+              </Typography>
               <Tooltip arrow title={`Switch to ${themeContext.darkMode ? 'Light' : 'Dark'} Mode`}>
                 <Box>
                   <DarkModeSwitch size='small' aria-label='Toggle Preview Mode' checked={themeContext.darkMode} onClick={themeContext.toggleDarkMode} />
