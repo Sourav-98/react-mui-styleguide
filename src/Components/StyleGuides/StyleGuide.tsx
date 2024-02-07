@@ -23,7 +23,7 @@ import { useTranslation } from 'react-i18next';
 import TranslateIcon from '@mui/icons-material/Translate';
 
 const StyleGuide: React.FC = (): JSX.Element => {
-  const { t, i18n } = useTranslation(['common', 'textField']);
+  const { t, i18n } = useTranslation();
   const themeContext = useContext(ThemeContext);
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);

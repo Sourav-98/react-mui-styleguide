@@ -5,10 +5,13 @@ import Backend from 'i18next-http-backend';
 i18n
   .use(Backend)
   .use(initReactI18next).init({
-  // ns: ['common'],
+  ns: ['common'],
   defaultNS: 'common',
   // resources,
-  fallbackLng: 'en_US'
+  fallbackLng: 'en_US',
+  backend: {
+    loadPath: `${process.env.PUBLIC_URL}/locales/{{lng}}/{{ns}}.json`,
+  }
 });
 
 export default i18n;

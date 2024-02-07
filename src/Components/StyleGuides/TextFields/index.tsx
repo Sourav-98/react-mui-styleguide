@@ -1,28 +1,31 @@
 import { Box, Grid, InputAdornment, TextField, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import InputField from 'Elements/Input/InputField';
 
 const TextFieldStyleGuide: React.FC = (): JSX.Element => {
 
-  const { t } = useTranslation(['textField']);
+  const { t } = useTranslation(['common', 'textField']);
 
   return (
     <Grid container spacing={2} p={2}>
       <Grid item xs={12}>
-        <Typography variant='h6'>{`${t('common:outlined')} ${t('textField:textField')} - ${t('textField:colorSchemes')}`}</Typography>
+        <Typography variant='h6'>{`${t('outlined')} ${t('textField:textField')} - ${t('textField:colorSchemes')}`}</Typography>
       </Grid>
       <Grid item xs={12} sm={6} md={4} lg={3} xl={1.5}>
         <Box display={'flex'} flexDirection={'column'}>
-          <Typography variant='subtitle1' sx={(theme) => ({
-            color: theme.palette.grey[600]
-          })}>Disabled</Typography>
-          <TextField disabled placeholder='Outlined Disabled'/>
+          <InputField
+            label={t('textField:disabled')}
+            disabled placeholder='Outlined Disabled'
+          />
         </Box>
       </Grid>
       <Grid item xs={12} sm={6} md={4} lg={3} xl={1.5}>
         <Box display={'flex'} flexDirection={'column'}>
-          <Typography variant='subtitle1'>{`Primary`}</Typography>
-          <TextField placeholder='Outlined Primary'/>
+          <InputField
+            label={t('textField:primary')}
+            disabled placeholder='Outlined Primary'
+          />
         </Box>
       </Grid>
       <Grid item xs={12} sm={6} md={4} lg={3} xl={1.5}>

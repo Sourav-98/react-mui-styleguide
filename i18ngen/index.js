@@ -58,8 +58,6 @@ const generateTranslation = async (nameSpace, localeCodesConfig) => {
 };
 
 fs.rmSync(path.resolve(__dirname, "locales"), { recursive: true, force: true });
-generateTranslation("common", process.argv.slice(2));
-// generateTranslation("textField", process.argv.slice(2));
-// generateTranslation("flightHub", process.argv.slice(2));
-// generateTranslation("AWBHub", process.argv.slice(2));
-generateTranslation("errorToast", process.argv.slice(2));
+["common", "textField", "errorToast", "formik"].forEach((namespace) => {
+  generateTranslation(namespace, process.argv.slice(2));
+});

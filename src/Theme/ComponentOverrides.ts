@@ -6,6 +6,7 @@ import {
   menuItemClasses,
   Components,
   Theme,
+  outlinedInputClasses,
 } from '@mui/material';
 import type {} from '@mui/x-date-pickers/themeAugmentation';
 import type {} from '@mui/x-data-grid/themeAugmentation';
@@ -100,7 +101,13 @@ const ComponentOverrides: Components<Omit<Theme, 'components'>> = {
             duration: 80,
           }),
         },
-        [`&:not(.${inputBaseClasses.disabled},.${inputBaseClasses.error}):hover > fieldset`]: {
+        [`&:not(.${inputBaseClasses.disabled},.${inputBaseClasses.error}) > fieldset`]: {
+          borderColor: alpha(theme.palette.grey[600], 0.98)
+        },
+        [`&.${inputBaseClasses.disabled} > fieldset.${outlinedInputClasses.notchedOutline}`]: {
+          borderColor: alpha(theme.palette.grey[600], 0.35)
+        },
+        [`&:not(.${inputBaseClasses.disabled},.${inputBaseClasses.error}):hover > fieldset.${outlinedInputClasses.notchedOutline}`]: {
           transition: theme.transitions.create('border', {
             easing: theme.transitions.easing.easeOut,
             duration: 80,
@@ -294,7 +301,28 @@ const ComponentOverrides: Components<Omit<Theme, 'components'>> = {
     defaultProps: {
       dayOfWeekFormatter: (day) => `${day}`
     }
-  }
+  },
+  MuiFormLabel: {
+    styleOverrides: {
+      root: {
+        fontWeight: 500,
+        fontSize: '0.875rem',
+      },
+      asterisk: ({ theme }) => ({
+        color: theme.palette.error.main,
+        fontSize: '1.0rem',
+        lineHeight: '0.5rem',
+        fontWeight: 700,
+      }),
+    },
+  },
+  MuiFormHelperText: {
+    styleOverrides: {
+      root: {
+        fontSize: '0.77rem',
+      },
+    },
+  },
 };
 
 export default ComponentOverrides;

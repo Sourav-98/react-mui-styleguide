@@ -1,3 +1,5 @@
+import { Moment } from 'moment';
+
 export interface TextFieldDatePickerProps extends Partial<Omit<TextFieldProps, 'value'>> {
   /**
    * the text format of date to be used by the typable date picker. Default value is `DDMMMYY`
@@ -18,7 +20,7 @@ export interface TextFieldDatePickerProps extends Partial<Omit<TextFieldProps, '
   /**
    * the initial value to be set for the date picker
    */
-  value?: Moment | null;
+  value?: Moment | null | undefined;
   /**
    * to denote whether the date picker should pick today's date as the initial value (if `value` is not given). If not set, default value will be `null`
    */
@@ -26,6 +28,9 @@ export interface TextFieldDatePickerProps extends Partial<Omit<TextFieldProps, '
   /**
    * The date change callback handler will pass the current date (of type `Moment` or `null`) selection information to the parent component
    */
-  onDateChange?: (date: Moment | null) => void;
+  onDateChange?: (date: Moment | null | undefined) => void;
+  /**
+   * The date textfield `onBlur` override
+   */
   onBlur?: () => void;
 }

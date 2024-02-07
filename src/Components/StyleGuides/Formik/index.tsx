@@ -1,14 +1,25 @@
 import { Box, Grid, Paper, TextField, Typography } from '@mui/material';
 import TextFieldDatePicker from 'Elements/DatePickers/TextFieldDatePicker';
+import InputField from 'Elements/Input/InputField';
 import { StationTypeAhead } from 'Shared/StationTypeAhead';
 import { Form, Formik, FormikProps } from 'formik';
 import { Moment } from 'moment';
+import { useTranslation } from 'react-i18next';
+import * as Yup from 'yup';
 
-export { };
+const formValidationSchema = Yup.object().shape({
+  username: Yup.string()
+    .test('Username validity check', 'formik:usernameInvalid', (value) => {
+      if (!value) return true;
+      return /^\w+$/.test(value);
+    })
+    .required('formik:usernameMandatory')
+});
 
 const FormikStyleGuide: React.FC = (): JSX.Element => {
+  const { t } = useTranslation(['formik']);
   type LoginFormType = {
-    textfield1: string;
+    username: string;
     textfield2: string;
     textfield3: string;
     station1: string;
@@ -20,7 +31,7 @@ const FormikStyleGuide: React.FC = (): JSX.Element => {
   };
 
   const loginFormInitValues: LoginFormType = {
-    textfield1: '',
+    username: '',
     textfield2: '',
     textfield3: '',
     station1: '',
@@ -30,13 +41,19 @@ const FormikStyleGuide: React.FC = (): JSX.Element => {
     loginDate2: null,
     loginDate3: null,
   };
+
   return (
     <Grid container spacing={2} p={2}>
       <Grid item xs={12}>
         
       </Grid>
       <Grid item xs={12}>
-        <Formik initialValues={loginFormInitValues} onSubmit={(values, helpers) => { }}>
+        <Formik
+          initialValues={loginFormInitValues}
+          onSubmit={(values, helpers) => { }}
+          validationSchema={formValidationSchema}
+          validateOnChange
+        >
           {({
             values,
             errors,
@@ -49,22 +66,24 @@ const FormikStyleGuide: React.FC = (): JSX.Element => {
             <Grid container spacing={0} justifyContent={'center'} alignItems={'center'} height={'100%'}>
               <Grid item xs={12} style={{ width: '90%', maxWidth: 400 }}>
                 <Paper elevation={3} sx={{ padding: 3, display: 'flex', flexDirection: 'column' }}>
-                  <Typography variant='body1'>Formik Styling for touched fields</Typography>
+                  <Typography variant='body1'>Formik Form Validations</Typography>
                   <Form>
                     <Box display={'flex'} flexDirection={'column'}>
-                      <TextField
+                      <InputField
                         sx={{ mt: 1, mb: 1 }}
-                        error={touched.textfield1 && !!errors.textfield1}
-                        helperText={touched.textfield1 ? errors.textfield1 : null}
-                        touched={touched.textfield1 ? 'true' : 'false'}
-                        name='textfield1'
-                        placeholder='Outlined Primary'
-                        value={values.textfield1}
-                        aria-label='textfield1'
+                        error={touched.username && !!errors.username}
+                        helperText={touched.username ? t(errors.username || '') : null}
+                        touched={touched.username ? 'true' : 'false'}
+                        name='username'
+                        placeholder='Username'
+                        label="Username"
+                        value={values.username}
+                        aria-label='username'
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                          setFieldValue('textfield1', event.target.value);
+                          setFieldValue('username', event.target.value);
                         }}
-                        onBlur={() => setFieldTouched('textfield1', true, true)}
+                        onBlur={() => setFieldTouched('username', true, true)}
+                        required
                       />
                       <TextField
                         sx={{ mt: 1, mb: 1 }}
@@ -147,13 +166,12 @@ const FormikStyleGuide: React.FC = (): JSX.Element => {
                         sx={{ mt: 1, mb: 1 }}
                         aria-label='loginDate1'
                         name='loginDate'
+                        label='Login Date'
                         value={values.loginDate1}
                         error={touched.loginDate1 && !!errors.loginDate1}
                         helperText={touched.loginDate1 ? errors.loginDate1 : null}
                         touched={touched.loginDate1 ? 'true' : 'false'}
-                        onDateChange={(date) => {
-                          setFieldValue('loginDate1', date);
-                        }}
+                        onDateChange={(date) => setFieldValue('loginDate1', date)}
                         onBlur={() => setFieldTouched('loginDate1', true, true)}
                       />
                       <Typography variant='subtitle2'>Typable Datepicker Filled Info</Typography>
