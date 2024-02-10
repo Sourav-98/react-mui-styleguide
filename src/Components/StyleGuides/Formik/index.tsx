@@ -76,7 +76,7 @@ const FormikStyleGuide: React.FC = (): JSX.Element => {
                         touched={touched.username ? 'true' : 'false'}
                         name='username'
                         placeholder='Username'
-                        label="Username"
+                        label={t('formik:username', 'Username')}
                         value={values.username}
                         aria-label='username'
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
@@ -173,6 +173,7 @@ const FormikStyleGuide: React.FC = (): JSX.Element => {
                         touched={touched.loginDate1 ? 'true' : 'false'}
                         onDateChange={(date) => setFieldValue('loginDate1', date)}
                         onBlur={() => setFieldTouched('loginDate1', true, true)}
+                        datePickerActions={['today']}
                       />
                       <Typography variant='subtitle2'>Typable Datepicker Filled Info</Typography>
                       <TextFieldDatePicker

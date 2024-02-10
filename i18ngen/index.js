@@ -1,18 +1,17 @@
-const fs = require("fs");
-const path = require("path");
-const parse = require("csv-parse").parse;
+const fs = require('fs');
+const path = require('path');
+const parse = require('csv-parse').parse;
 
-const generateTranslation = async (nameSpace, localeCodesConfig) => {
-  const translationCsv = await fs.promises.readFile(
-    path.resolve(__dirname, `assets/${nameSpace}.csv`),
-    { encoding: "utf-8" }
-  );
-  const columns = translationCsv.split(/\n/)[0].split(",");
+const generateTranslation = async (client, nameSpace, localeCodesConfig) => {
+  const translationCsv = await fs.promises.readFile(path.resolve(__dirname, `assets/${client}/${nameSpace}.csv`), {
+    encoding: 'utf-8',
+  });
+  const columns = translationCsv.split(/\r\n/)[0].split(',');
   parse(
     translationCsv,
     {
-      delimiter: ",",
-      columns
+      delimiter: ',',
+      columns,
     },
     (err, res) => {
       if (err) {
@@ -29,26 +28,25 @@ const generateTranslation = async (nameSpace, localeCodesConfig) => {
         return accumulator;
       }, {});
       localeCodesConfig.forEach((localeCode) => {
-        fs.mkdirSync(path.resolve(__dirname, `../public/locales/${localeCode}`), {
+        fs.mkdirSync(path.resolve(__dirname, `../public/locales/${client}/${localeCode}`), {
           recursive: true,
         });
         fs.promises
           .writeFile(
-            path.resolve(__dirname, `../public/locales/${localeCode}/${nameSpace}.json`),
+            path.resolve(__dirname, `../public/locales/${client}/${localeCode}/${nameSpace}.json`),
             JSON.stringify(parsedLocale[localeCode]),
-            { encoding: "utf-8" }
+            { encoding: 'utf-8' }
           )
           .then(() => {
             console.log(
-              `Successfully generated translations for namespace: ${nameSpace}, locale: ${localeCode}`
+              `Successfully generated translations for namespace: ${nameSpace}, locale: ${localeCode}, keys: ${
+                Object.keys(parsedLocale).length
+              }`
             );
           })
           .catch((err) => {
             if (err) {
-              console.log(
-                `Error generating translations for ${localeCode}: `,
-                err
-              );
+              console.log(`Error generating translations for ${localeCode}: `, err);
               return;
             }
           });
@@ -57,7 +55,10 @@ const generateTranslation = async (nameSpace, localeCodesConfig) => {
   );
 };
 
-fs.rmSync(path.resolve(__dirname, "locales"), { recursive: true, force: true });
-["common", "textField", "errorToast", "formik"].forEach((namespace) => {
-  generateTranslation(namespace, process.argv.slice(2));
+fs.rmSync(path.resolve(__dirname, 'locales'), { recursive: true, force: true });
+
+['UW', 'AC'].forEach((client) => {
+  ['common', 'textField', 'errorToast', 'formik'].forEach((namespace) => {
+    generateTranslation(client, namespace, process.argv.slice(2));
+  });
 });

@@ -134,24 +134,24 @@ const ComponentOverrides: Components<Omit<Theme, 'components'>> = {
   MuiTextField: {
     styleOverrides: {
       root: ({ ownerState, theme }) => ({
-        ...(ownerState.touched === 'true' && {
-          [`& > .${inputBaseClasses.root}`]: {
-            backgroundColor: alpha(
-              ownerState.color === 'secondary'
-                ? theme.palette.secondary.main
-                : ownerState.color === 'success'
-                  ? theme.palette.success.main
-                  : ownerState.color === 'error'
-                    ? theme.palette.error.main
-                    : ownerState.color === 'warning'
-                      ? theme.palette.warning.main
-                      : ownerState.color === 'info'
-                        ? theme.palette.info.main
-                        : theme.palette.primary.main,
-              0.2
-            ),
-          },
-        }),
+        // ...(ownerState.touched === 'true' && {
+        //   [`& > .${inputBaseClasses.root}`]: {
+        //     backgroundColor: alpha(
+        //       ownerState.color === 'secondary'
+        //         ? theme.palette.secondary.main
+        //         : ownerState.color === 'success'
+        //           ? theme.palette.success.main
+        //           : ownerState.color === 'error'
+        //             ? theme.palette.error.main
+        //             : ownerState.color === 'warning'
+        //               ? theme.palette.warning.main
+        //               : ownerState.color === 'info'
+        //                 ? theme.palette.info.main
+        //                 : theme.palette.primary.main,
+        //       0.2
+        //     ),
+        //   },
+        // }),
       }),
     },
     defaultProps: {

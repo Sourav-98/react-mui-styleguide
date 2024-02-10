@@ -1,0 +1,5 @@
+Keys,en_US,en_GB,de_DE,fr_FR,es_ES
+dateMandatory,Date is mandatory,Date is mandatory,Date is mandatory,Date is mandatory,Date is mandatory
+usernameMandatory,Username is mandatory,Username is mandatory,Der Benutzername ist obligatorisch,Le nom d'utilisateur est obligatoire,El nombre de usuario es obligatorio
+usernameInvalid,Username is invalid,Username is invalid,Benutzername ist ungültig,Le nom d'utilisateur invalide,Nombre de usuario invalido
+username,Username,Username,Nutzername,Nom d'utilisateur,Nombre de usuario

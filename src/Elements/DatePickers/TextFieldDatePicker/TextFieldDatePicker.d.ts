@@ -1,3 +1,4 @@
+import { DatePickerProps } from '@mui/x-date-pickers';
 import { Moment } from 'moment';
 
 export interface TextFieldDatePickerProps extends Partial<Omit<TextFieldProps, 'value'>> {
@@ -16,7 +17,7 @@ export interface TextFieldDatePickerProps extends Partial<Omit<TextFieldProps, '
   /**
    * specifies the placement of the date picker's `Popper` component. Default value is `bottom-end`
    */
-  placement?: PopperPlacementType;
+  popperPlacement?: PopperPlacementType;
   /**
    * the initial value to be set for the date picker
    */
@@ -33,4 +34,8 @@ export interface TextFieldDatePickerProps extends Partial<Omit<TextFieldProps, '
    * The date textfield `onBlur` override
    */
   onBlur?: () => void;
+  /**
+   * optional date picker action overrides
+   */
+  datePickerActions?: Array<'clear' | 'cancel' | 'accept' | 'today'>;
 }

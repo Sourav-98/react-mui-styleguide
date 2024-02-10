@@ -10,7 +10,7 @@ i18n
   // resources,
   fallbackLng: 'en_US',
   backend: {
-    loadPath: `${process.env.PUBLIC_URL}/locales/{{lng}}/{{ns}}.json`,
+    loadPath: `${process.env.PUBLIC_URL}/locales/${window.tenant}/{{lng}}/{{ns}}.json`,
   }
 });
 

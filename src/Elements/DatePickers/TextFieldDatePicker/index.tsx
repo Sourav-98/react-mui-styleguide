@@ -17,11 +17,12 @@ import { DatePicker } from '@mui/x-date-pickers';
  */
 const TextFieldDatePicker: React.FC<TextFieldDatePickerProps> = ({
   dateFormat = 'DDMMMYY',
-  placement = 'bottom-end',
+  popperPlacement = 'bottom-end',
   value,
   defaultToday,
   onDateChange,
   onBlur,
+  datePickerActions,
   ...textFieldProps
 }: TextFieldDatePickerProps): JSX.Element => {
   const [date, setDate] = useState<Moment | null | undefined>(
@@ -174,7 +175,7 @@ const TextFieldDatePicker: React.FC<TextFieldDatePickerProps> = ({
         onChange={onDatePickerChangeHandler}
         PopperProps={{
           anchorEl: datepickerAnchorEl,
-          placement: placement,
+          placement: popperPlacement,
           modifiers: [
             {
               name: 'preventOverflow',
@@ -188,12 +189,13 @@ const TextFieldDatePicker: React.FC<TextFieldDatePickerProps> = ({
               },
             },
           ],
+          // ...datePickerProps.PopperProps
         }}
         ToolbarComponent={() => <></>}
         renderInput={() => <></>}
         componentsProps={{
           actionBar: {
-            actions: ['clear', 'accept', 'today'],
+            actions: datePickerActions || ['clear', 'accept', 'today'],
           },
         }}
       />
