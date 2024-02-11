@@ -4,24 +4,23 @@ import {
   CircularProgress,
   Box,
   Typography,
-  TextField,
 } from '@mui/material';
 import { MutableRefObject, SyntheticEvent, useEffect, useRef, useState } from 'react';
 import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
 import { StationTypeAheadProps } from './StationTypeAhead';
 import { StationOption, stationSearchMockAPI } from 'Services/api.service';
+import InputField from 'Elements/Input/InputField';
 
 export const StationTypeAhead: React.FC<StationTypeAheadProps> = ({
-  value,
   sx,
   onStationChange,
-  ...textFieldProps
+  ...inputFieldProps
 }): JSX.Element => {
   /**
    * The suggestive search `TextField` input value. It is set to `value` (if passed from the parent component) or an empty string
    */
-  const [stationSearchText, setStationSearchText] = useState<string>(() => value || '');
+  const [stationSearchText, setStationSearchText] = useState<string>(() => inputFieldProps.value || '');
   /**
    * A boolean marker to indicate whether search has to be performed or not
    */
@@ -100,7 +99,7 @@ export const StationTypeAhead: React.FC<StationTypeAheadProps> = ({
       /** Prevent updating the search text if it exceeds the character limit */
       return;
     }
-    setStationSearchText(inputValue);
+    setStationSearchText(inputValue.toUpperCase());
     if (reason === 'input') {
       /** if reason is `input` and the inputValue is not empty string, that means search has to be performed */
       setToBeSearched(true);
@@ -112,7 +111,7 @@ export const StationTypeAhead: React.FC<StationTypeAheadProps> = ({
      * onStationChange callback to pass the updated station code text to the parent component
      */
     if (onStationChange) {
-      onStationChange(inputValue);
+      onStationChange(inputValue.toUpperCase());
     }
   };
 
@@ -120,7 +119,7 @@ export const StationTypeAhead: React.FC<StationTypeAheadProps> = ({
     <Autocomplete
       /** For Station Suggestive Search, allow users to type any station code. Hence, the Autocomplete field will be of type `freeSolo` */
       freeSolo
-      disabled={textFieldProps.disabled}
+      disabled={inputFieldProps.disabled}
       inputValue={stationSearchText}
       sx={sx}
       options={stations}
@@ -178,10 +177,10 @@ export const StationTypeAhead: React.FC<StationTypeAheadProps> = ({
           </Box>
         );
       }}
-      renderInput={({inputProps, InputProps, ...props}) => (
-        <TextField
+      renderInput={({ inputProps, InputProps, ...props }) => (
+        <InputField
           {...props}
-          {...textFieldProps}
+          {...inputFieldProps}
           InputProps={{
             ...InputProps,
             endAdornment: (

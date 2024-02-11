@@ -3,3 +3,7 @@ dateMandatory,Date is mandatory,Date is mandatory,Date is mandatory,Date is mand
 usernameMandatory,User Name is mandatory,User Name is mandatory,Der Benutzername ist obligatorisch,Le nom d'utilisateur est obligatoire,El nombre de usuario es obligatorio
 usernameInvalid,User Name is invalid,User Name is invalid,Benutzername ist ungültig,Le nom d'utilisateur invalide,Nombre de usuario invalido
 username,User Name,User Name,Nutzername,Nom d'utilisateur,Nombre de usuario
+enterUsername,Enter Username,Enter Username,Geben Sie den Benutzernamen ein,Saisissez votre nom d'utilisateur,Introduzca su nombre de usuario
+passwordMandatory,Password is mandatory,Password is mandatory,Das Passwort ist obligatorisch,Le mot de passe est obligatoire,La contraseña es obligatoria
+passwordConfirmMismatch,Passwords do not match,Passwords do not match,Passwörter stimmen nicht überein,Les mots de passe ne correspondent pas,Las contraseñas no coinciden
+passwordConfirmMandatory,Please re-type your password,Please re-type your password,Bitte geben Sie ihr Passwort erneut ein,Veuillez retaper votre mot de passe,Por favor vuelva a escribir su contraseña

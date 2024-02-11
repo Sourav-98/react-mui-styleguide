@@ -1,5 +1,16 @@
-import { SxProps, TextFieldProps } from "@mui/material";
+import { SxProps, TextFieldProps } from '@mui/material';
 
 export type InputFieldProps = TextFieldProps & {
-    labelSx?: SxProps
-}
+  /**
+   * @override TextField's `value`
+   */
+  value?: string;
+  /**
+   * The tooltip title text
+   */
+  tooltipTitle?: string;
+  /**
+   * label styles to be overridden
+   */
+  labelSx?: SxProps;
+};

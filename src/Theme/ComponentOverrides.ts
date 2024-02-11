@@ -7,6 +7,9 @@ import {
   Components,
   Theme,
   outlinedInputClasses,
+  formHelperTextClasses,
+  filledInputClasses,
+  inputClasses,
 } from '@mui/material';
 import type {} from '@mui/x-date-pickers/themeAugmentation';
 import type {} from '@mui/x-data-grid/themeAugmentation';
@@ -51,6 +54,15 @@ const ComponentOverrides: Components<Omit<Theme, 'components'>> = {
   MuiInput: {
     styleOverrides: {
       root: ({ ownerState, theme }) => ({
+        ...(ownerState.required && {
+          [`& > .${inputClasses.input}`]: {
+            borderLeftWidth: 4,
+            borderLeftStyle: 'solid',
+            borderLeftColor: ownerState.error ? theme.palette.error.main : theme.palette.primary.main,
+            // borderTopLeftRadius: theme.spacing(0.5),
+            // borderTopRightRadius: theme.spacing(0.5),
+          },
+        }),
         [`&:not(.${inputBaseClasses.disabled},.${inputBaseClasses.error}):hover::before`]: {
           borderWidth: '1px',
           borderColor:
@@ -72,6 +84,14 @@ const ComponentOverrides: Components<Omit<Theme, 'components'>> = {
   MuiFilledInput: {
     styleOverrides: {
       root: ({ ownerState, theme }) => ({
+        ...(ownerState.required && {
+          [`& > .${filledInputClasses.input}`]: {
+            borderLeftWidth: 4,
+            borderLeftStyle: 'solid',
+            borderLeftColor: ownerState.error ? theme.palette.error.main : theme.palette.primary.main,
+            borderTopLeftRadius: theme.spacing(0.5),
+          },
+        }),
         [`&:not(.${inputBaseClasses.disabled},.${inputBaseClasses.error}):hover::before`]: {
           borderColor:
             ownerState.color === 'secondary'
@@ -95,6 +115,17 @@ const ComponentOverrides: Components<Omit<Theme, 'components'>> = {
   MuiOutlinedInput: {
     styleOverrides: {
       root: ({ ownerState, theme }) => ({
+        ...(ownerState.required && {
+          [`&::before`]: {
+            content: '" "',
+            position: 'absolute',
+            width: 4,
+            height: '100%',
+            backgroundColor: ownerState.error ? theme.palette.error.main : theme.palette.primary.main,
+            borderTopLeftRadius: theme.spacing(0.5),
+            borderBottomLeftRadius: theme.spacing(0.5)
+          },
+        }),
         [`& > fieldset`]: {
           transition: theme.transitions.create('border', {
             easing: theme.transitions.easing.easeIn,
@@ -134,24 +165,21 @@ const ComponentOverrides: Components<Omit<Theme, 'components'>> = {
   MuiTextField: {
     styleOverrides: {
       root: ({ ownerState, theme }) => ({
-        // ...(ownerState.touched === 'true' && {
-        //   [`& > .${inputBaseClasses.root}`]: {
-        //     backgroundColor: alpha(
-        //       ownerState.color === 'secondary'
-        //         ? theme.palette.secondary.main
-        //         : ownerState.color === 'success'
-        //           ? theme.palette.success.main
-        //           : ownerState.color === 'error'
-        //             ? theme.palette.error.main
-        //             : ownerState.color === 'warning'
-        //               ? theme.palette.warning.main
-        //               : ownerState.color === 'info'
-        //                 ? theme.palette.info.main
-        //                 : theme.palette.primary.main,
-        //       0.2
-        //     ),
-        //   },
-        // }),
+        [`& > p.${formHelperTextClasses.root}`]: {
+          marginLeft: theme.spacing(0.2),
+          marginRight: theme.spacing(0.2)
+        },
+        // ...(ownerState.required && {
+        //   [`& > .${outlinedInputClasses.root}::before`]: {
+        //     content: '" "',
+        //     position: 'absolute',
+        //     width: 4,
+        //     height: '100%',
+        //     backgroundColor: ownerState.error ? theme.palette.error.main : theme.palette.primary.main,
+        //     borderTopLeftRadius: theme.spacing(0.5),
+        //     borderBottomLeftRadius: theme.spacing(0.5)
+        //   }
+        // })
       }),
     },
     defaultProps: {
@@ -216,6 +244,8 @@ const ComponentOverrides: Components<Omit<Theme, 'components'>> = {
     styleOverrides: {
       root: ({ theme }) => ({
         margin: 5,
+        paddingTop: 2,
+        paddingBottom: 2,
         borderRadius: 4,
         borderColor: alpha('#000', 0),
         borderWidth: 1,
@@ -243,6 +273,8 @@ const ComponentOverrides: Components<Omit<Theme, 'components'>> = {
     styleOverrides: {
       root: ({ theme }) => ({
         margin: 5,
+        paddingTop: 2,
+        paddingBottom: 2,
         borderRadius: 4,
         borderColor: alpha('#000', 0),
         borderWidth: 1,

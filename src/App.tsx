@@ -24,6 +24,10 @@ function App() {
   const [momentLocale, setMomentLocale] = useState<string>('en');
 
   useEffect(() => {
+    /**
+     * Whenever the language selection is toggled, persist the language selection into localStorage with the key `current_locale`
+     */
+    localStorage.setItem('current_locale', i18n.language);
     switch(i18n.language) {
       case 'de_DE': moment.locale('de'); setMomentLocale('de'); break;
       case 'es_ES': moment.locale('es'); setMomentLocale('es'); break;

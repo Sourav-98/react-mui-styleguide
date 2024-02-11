@@ -1,4 +1,4 @@
-import { Box, FormLabel, TextField } from '@mui/material';
+import { Box, FormLabel, TextField, Tooltip } from '@mui/material';
 import { InputFieldProps } from './InputField';
 
 /**
@@ -7,14 +7,20 @@ import { InputFieldProps } from './InputField';
  * @param param0 `InputFieldProps`
  * @returns
  */
-const InputField: React.FC<InputFieldProps> = ({ sx, label, labelSx, required, name, ...textFieldProps }): JSX.Element => (
+const InputField: React.FC<InputFieldProps> = ({ sx, label, labelSx, tooltipTitle, ...textFieldProps }): JSX.Element => (
   <Box display={'flex'} flexDirection={'column'} sx={sx}>
     {label && (
-      <FormLabel htmlFor={name} required={required} sx={{ mb: 1, ...labelSx }}>
+      <FormLabel htmlFor={textFieldProps.name} required={textFieldProps.required} sx={{ mb: 0.5, ...labelSx }}>
         {label}
       </FormLabel>
     )}
-    <TextField name={name} required={required} {...textFieldProps} />
+    <Tooltip title={tooltipTitle}>
+      <TextField {...textFieldProps} InputProps={{
+        ...textFieldProps.InputProps,
+        // name: name,
+        required: textFieldProps.required
+      }}/>
+    </Tooltip>
   </Box>
 );
 

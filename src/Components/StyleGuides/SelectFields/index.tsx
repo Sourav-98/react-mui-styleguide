@@ -21,7 +21,7 @@ const SelectFieldsStyleGuide: React.FC = (): JSX.Element => {
       </Box>
       <Typography variant='h6'>Size: Small</Typography>
       <Box display={'flex'} flexDirection={'row'}>
-        <Select size='small' sx={{ m: 1, width: 200 }} value={1}>
+        <Select required size='small' sx={{ m: 1, width: 200 }} value={1}>
           <MenuItem value={1}>Outlined Select</MenuItem>
           <MenuItem value={2}>Menu 2</MenuItem>
           <MenuItem value={3}>Menu 3</MenuItem>

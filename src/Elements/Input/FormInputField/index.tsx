@@ -1,21 +1,20 @@
-import { Box, FormLabel, TextField } from '@mui/material';
+import React from 'react';
 import { FormInputFieldProps } from './FormInputField';
+import { useField } from 'formik';
+import InputField from '../InputField';
 
-/**
- * An MUi `TextField` wrapper component with a persistent `FormLabel`
- *
- * @param param0 `InputFieldProps`
- * @returns
- */
-const InputField: React.FC<FormInputFieldProps> = ({ sx, label, labelSx, required, name, ...textFieldProps }): JSX.Element => (
-  <Box display={'flex'} flexDirection={'column'} sx={sx}>
-    {label && (
-      <FormLabel htmlFor={name} required={required} sx={{ mb: 1, ...labelSx }}>
-        {label}
-      </FormLabel>
-    )}
-    <TextField name={name} required={required} {...textFieldProps} />
-  </Box>
-);
+const FormInputField: React.FC<FormInputFieldProps> = ({name, helperText, ...formInputFieldProps}: FormInputFieldProps) : JSX.Element => {
 
-export default InputField;
+  const [field, meta] = useField(name);
+
+  return (
+    <InputField
+      {...formInputFieldProps}
+      {...field}
+      helperText={helperText || ' '}
+      error={meta.touched && !!meta.error}
+    />
+  )
+}
+
+export default FormInputField;

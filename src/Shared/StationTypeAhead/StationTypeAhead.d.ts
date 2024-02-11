@@ -1,14 +1,11 @@
-import { TextFieldProps } from '@mui/material';
+import { AutocompleteRenderInputParams, TextFieldProps } from '@mui/material';
+import { FormInputFieldProps } from 'Elements/Input/FormInputField/FormInputField';
+import { InputFieldProps } from 'Elements/Input/InputField/InputField';
 
-export interface StationTypeAheadProps extends Partial<Omit<TextFieldProps, 'value' | 'color'>> {
+export type StationTypeAheadProps = InputFieldProps & {
   /**
-   * the initial station value to be set for the station typeahead component
-   * @override TextField's `value`
-   */
-  value?: string;
-  /**
-   * @description a callback function to send the value of the current selected or set station
+   * @description a callback function to send the value of the currently selected or set station
    * @param {string} selectedStation
    */
   onStationChange?: (selectedStation: string) => void;
-}
+};
