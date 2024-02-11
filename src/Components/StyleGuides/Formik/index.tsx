@@ -1,65 +1,70 @@
-import { Button, Grid, Paper, Typography } from '@mui/material';
+import { Grid, Paper, Typography } from '@mui/material';
 // import TextFieldDatePicker from 'Elements/DatePickers/TextFieldDatePicker';
 import FormInputField from 'Elements/Input/FormInputField';
-import { StationTypeAhead } from 'Shared/StationTypeAhead';
+import SubmitButton from 'Elements/Input/SubmitButton';
+import { FormStationTypeAhead } from 'Shared/StationTypeAhead';
 import { Form, Formik, FormikProps } from 'formik';
 import { Moment } from 'moment';
 import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 
+type LoginFormType = {
+  username: string;
+  password: string;
+  passwordConfirm: string;
+  station: string;
+  loginDate1: Moment | null;
+};
+
+const loginFormInitValues: LoginFormType = {
+  username: 'SOURAV RC',
+  password: '',
+  passwordConfirm: '',
+  station: 'ORD',
+  loginDate1: null,
+};
+
+const formValidationSchema = Yup.object().shape({
+  username: Yup.string()
+    .test('Username validity check', 'formik:usernameInvalid', (value) => {
+      if (!value) return true;
+      return /^\w+$/.test(value);
+    })
+    .required('formik:usernameMandatory'),
+  password: Yup.string().required('formik:passwordMandatory'),
+  passwordConfirm: Yup.string()
+    .when('password', {
+      is: (value: string) => value && value.length,
+      then: Yup.string().oneOf([Yup.ref('password'), undefined], 'formik:passwordConfirmMismatch')
+    })
+    .required('formik:passwordConfirmMandatory'),
+  station: Yup.string().required('Station is mandatory')
+});
+
 const FormikStyleGuide: React.FC = (): JSX.Element => {
   const { t } = useTranslation(['formik']);
-  type LoginFormType = {
-    username: string;
-    password: string;
-    passwordConfirm: string;
-    station: string;
-    loginDate1: Moment | null;
-  };
-
-  const loginFormInitValues: LoginFormType = {
-    username: '',
-    password: '',
-    passwordConfirm: '',
-    station: '',
-    loginDate1: null,
-  };
-
-  const formValidationSchema = Yup.object().shape({
-    username: Yup.string()
-      .test('Username validity check', 'formik:usernameInvalid', (value) => {
-        if (!value) return true;
-        return /^\w+$/.test(value);
-      })
-      .required('formik:usernameMandatory'),
-    password: Yup.string().required('formik:passwordMandatory'),
-    passwordConfirm: Yup.string()
-      .when('password', {
-        is: (value: string) => value && value.length,
-        then: Yup.string().oneOf([Yup.ref('password'), undefined], 'formik:passwordConfirmMismatch')
-      })
-      .required('formik:passwordConfirmMandatory'),
-    station: Yup.string().required('Station is mandatory')
-  });
+  
 
   return (
     <Grid container spacing={2} p={2}>
       <Grid item xs={12}>
         <Formik
           initialValues={loginFormInitValues}
-          onSubmit={(values, helpers) => { console.log(values); helpers.resetForm({values}) }}
+          onSubmit={(values, helpers) => { console.log(values); helpers.resetForm({values, touched: {
+            username: true,
+            password: true,
+            passwordConfirm: true,
+            station: true
+          }}) }}
           validationSchema={formValidationSchema}
           validateOnMount
           validateOnChange
         >
           {({
-            values,
             errors,
             touched,
             isSubmitting,
             isValid,
-            setFieldValue,
-            setFieldTouched
           }: FormikProps<LoginFormType>) => (
             <Grid container spacing={1} justifyContent={'center'} alignItems={'center'} height={'100%'}>
               <Grid item xs={12} style={{ width: '90%', maxWidth: 1200 }}>
@@ -70,7 +75,6 @@ const FormikStyleGuide: React.FC = (): JSX.Element => {
                       <Grid item xs={2}>
                         <FormInputField
                           name='username'
-                          value={values.username}
                           required
                           label={t('formik:username', 'Username')}
                           helperText={touched.username && !!errors.username ? t(errors.username || ''): null}
@@ -81,7 +85,6 @@ const FormikStyleGuide: React.FC = (): JSX.Element => {
                       <Grid item xs={2}>
                         <FormInputField
                           name='password'
-                          value={values.password}
                           required
                           label={t('formik:password', 'Password')}
                           helperText={touched.password && !!errors.password ? t(errors.password || '') : null}
@@ -92,7 +95,6 @@ const FormikStyleGuide: React.FC = (): JSX.Element => {
                       <Grid item xs={2}>
                         <FormInputField
                           name='passwordConfirm'
-                          value={values.passwordConfirm}
                           required
                           label={t('formik:passwordConfirm', 'Confirm Password')}
                           helperText={touched.passwordConfirm && !!errors.passwordConfirm ? t(errors.passwordConfirm || '') : null}
@@ -101,20 +103,17 @@ const FormikStyleGuide: React.FC = (): JSX.Element => {
                         />
                       </Grid>
                       <Grid item xs={2}>
-                        <StationTypeAhead
+                        <FormStationTypeAhead
                           name='station'
                           label='Station'
-                          error={touched.station && !!errors.station}
                           helperText={touched.station && !!errors.station ? errors.station : null}
-                          onStationChange={(selectedStation) => setFieldValue('station', selectedStation)}
-                          onBlur={() => setFieldTouched('station', true, true)}
                           required
                         />
                       </Grid>
                       <Grid item xs={1}>
-                        <Button type="submit" variant='contained' fullWidth color='primary' disabled={!isValid || isSubmitting}>
+                        <SubmitButton type="submit" variant='contained' fullWidth color='primary' isSubmitting={isSubmitting} disabled={isSubmitting}>
                           Submit
-                        </Button>
+                        </SubmitButton>
                       </Grid>
                     </Grid>
                   </Form>

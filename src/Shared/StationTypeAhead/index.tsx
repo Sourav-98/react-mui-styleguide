@@ -5,12 +5,13 @@ import {
   Box,
   Typography,
 } from '@mui/material';
-import { MutableRefObject, SyntheticEvent, useEffect, useRef, useState } from 'react';
+import React, { MutableRefObject, SyntheticEvent, useEffect, useRef, useState } from 'react';
 import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
-import { StationTypeAheadProps } from './StationTypeAhead';
+import { FormStationTypeAheadProps, StationTypeAheadProps } from './StationTypeAhead';
 import { StationOption, stationSearchMockAPI } from 'Services/api.service';
 import InputField from 'Elements/Input/InputField';
+import { useField, useFormikContext } from 'formik';
 
 export const StationTypeAhead: React.FC<StationTypeAheadProps> = ({
   sx,
@@ -201,3 +202,26 @@ export const StationTypeAhead: React.FC<StationTypeAheadProps> = ({
     />
   );
 };
+
+/**
+ * A `Formik` wrapper for the StationTypeAhead component
+ * @param param0 
+ * @returns 
+ */
+export const FormStationTypeAhead: React.FC<FormStationTypeAheadProps> = ({name, ...stationTypeAheadProps}): JSX.Element => {
+
+  const { setFieldValue, setFieldTouched } = useFormikContext<any>();
+  const [ field, meta ] = useField(name);
+
+  return (
+    <StationTypeAhead
+      {...stationTypeAheadProps}
+      value={field.value}
+      error={meta.touched && !!meta.error}
+      onStationChange={(station) => {
+        setFieldValue(name, station);
+      }}
+      onBlur={() => setFieldTouched(name, true, true)}
+    />
+  )
+}

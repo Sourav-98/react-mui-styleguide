@@ -9,3 +9,5 @@ export type StationTypeAheadProps = InputFieldProps & {
    */
   onStationChange?: (selectedStation: string) => void;
 };
+
+export type FormStationTypeAheadProps = FormInputFieldProps & StationTypeAheadProps;

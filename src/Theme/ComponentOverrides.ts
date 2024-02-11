@@ -10,6 +10,7 @@ import {
   formHelperTextClasses,
   filledInputClasses,
   inputClasses,
+  inputAdornmentClasses,
 } from '@mui/material';
 import type {} from '@mui/x-date-pickers/themeAugmentation';
 import type {} from '@mui/x-data-grid/themeAugmentation';
@@ -41,6 +42,18 @@ const ComponentOverrides: Components<Omit<Theme, 'components'>> = {
         paddingTop: 0,
         paddingBottom: 0,
         paddingLeft: 0,
+        [`&.${inputBaseClasses.adornedEnd}`]: {
+          paddingRight: 0,
+        },
+        [`&.${inputBaseClasses.adornedStart}`]: {
+          paddingLeft: 0,
+        },
+        // [`&.${inputBaseClasses.adornedEnd} > .${inputBaseClasses.input}`]: {
+        //   paddingRight: 0,
+        // },
+        // [`&.${inputBaseClasses.adornedStart} > .${inputBaseClasses.input}`]: {
+        //   paddingLeft: 0,
+        // },
       },
       sizeSmall: {
         [`& > .${inputBaseClasses.inputSizeSmall}`]: {
@@ -55,12 +68,23 @@ const ComponentOverrides: Components<Omit<Theme, 'components'>> = {
     styleOverrides: {
       root: ({ ownerState, theme }) => ({
         ...(ownerState.required && {
-          [`& > .${inputClasses.input}`]: {
+          [`&::before`]: {
+            height: '100%',
             borderLeftWidth: 4,
             borderLeftStyle: 'solid',
-            borderLeftColor: ownerState.error ? theme.palette.error.main : theme.palette.primary.main,
-            // borderTopLeftRadius: theme.spacing(0.5),
-            // borderTopRightRadius: theme.spacing(0.5),
+            borderLeftColor: ownerState.error
+              ? theme.palette.error.main
+              : ownerState.color === 'secondary'
+                ? theme.palette.secondary.main
+                : ownerState.color === 'success'
+                  ? theme.palette.success.main
+                  : ownerState.color === 'warning'
+                    ? theme.palette.warning.main
+                    : ownerState.color === 'error'
+                      ? theme.palette.error.main
+                      : ownerState.color === 'info'
+                        ? theme.palette.info.main
+                        : theme.palette.primary.main,
           },
         }),
         [`&:not(.${inputBaseClasses.disabled},.${inputBaseClasses.error}):hover::before`]: {
@@ -85,11 +109,24 @@ const ComponentOverrides: Components<Omit<Theme, 'components'>> = {
     styleOverrides: {
       root: ({ ownerState, theme }) => ({
         ...(ownerState.required && {
-          [`& > .${filledInputClasses.input}`]: {
+          [`&::before`]: {
+            height: '100%',
             borderLeftWidth: 4,
             borderLeftStyle: 'solid',
-            borderLeftColor: ownerState.error ? theme.palette.error.main : theme.palette.primary.main,
             borderTopLeftRadius: theme.spacing(0.5),
+            borderLeftColor: ownerState.error
+              ? theme.palette.error.main
+              : ownerState.color === 'secondary'
+                ? theme.palette.secondary.main
+                : ownerState.color === 'success'
+                  ? theme.palette.success.main
+                  : ownerState.color === 'warning'
+                    ? theme.palette.warning.main
+                    : ownerState.color === 'error'
+                      ? theme.palette.error.main
+                      : ownerState.color === 'info'
+                        ? theme.palette.info.main
+                        : theme.palette.primary.main,
           },
         }),
         [`&:not(.${inputBaseClasses.disabled},.${inputBaseClasses.error}):hover::before`]: {
@@ -106,8 +143,8 @@ const ComponentOverrides: Components<Omit<Theme, 'components'>> = {
                       ? theme.palette.info.main
                       : theme.palette.primary.main,
         },
-        [`&.${inputBaseClasses.adornedEnd}`]: {
-          paddingRight: 0,
+        [`&.${inputBaseClasses.root} > div.${inputAdornmentClasses.root}`]: {
+          marginTop: `0px !important`
         },
       }),
     },
@@ -121,9 +158,21 @@ const ComponentOverrides: Components<Omit<Theme, 'components'>> = {
             position: 'absolute',
             width: 4,
             height: '100%',
-            backgroundColor: ownerState.error ? theme.palette.error.main : theme.palette.primary.main,
+            backgroundColor: ownerState.error
+              ? theme.palette.error.main
+              : ownerState.color === 'secondary'
+                ? theme.palette.secondary.main
+                : ownerState.color === 'success'
+                  ? theme.palette.success.main
+                  : ownerState.color === 'warning'
+                    ? theme.palette.warning.main
+                    : ownerState.color === 'error'
+                      ? theme.palette.error.main
+                      : ownerState.color === 'info'
+                        ? theme.palette.info.main
+                        : theme.palette.primary.main,
             borderTopLeftRadius: theme.spacing(0.5),
-            borderBottomLeftRadius: theme.spacing(0.5)
+            borderBottomLeftRadius: theme.spacing(0.5),
           },
         }),
         [`& > fieldset`]: {
@@ -133,29 +182,30 @@ const ComponentOverrides: Components<Omit<Theme, 'components'>> = {
           }),
         },
         [`&:not(.${inputBaseClasses.disabled},.${inputBaseClasses.error}) > fieldset`]: {
-          borderColor: alpha(theme.palette.grey[600], 0.98)
+          borderColor: alpha(theme.palette.grey[600], 0.98),
         },
         [`&.${inputBaseClasses.disabled} > fieldset.${outlinedInputClasses.notchedOutline}`]: {
-          borderColor: alpha(theme.palette.grey[600], 0.35)
+          borderColor: alpha(theme.palette.grey[600], 0.35),
         },
-        [`&:not(.${inputBaseClasses.disabled},.${inputBaseClasses.error}):hover > fieldset.${outlinedInputClasses.notchedOutline}`]: {
-          transition: theme.transitions.create('border', {
-            easing: theme.transitions.easing.easeOut,
-            duration: 80,
-          }),
-          borderColor:
-            ownerState.color === 'secondary'
-              ? theme.palette.secondary.main
-              : ownerState.color === 'success'
-                ? theme.palette.success.main
-                : ownerState.color === 'warning'
-                  ? theme.palette.warning.main
-                  : ownerState.color === 'error'
-                    ? theme.palette.error.main
-                    : ownerState.color === 'info'
-                      ? theme.palette.info.main
-                      : theme.palette.primary.main,
-        },
+        [`&:not(.${inputBaseClasses.disabled},.${inputBaseClasses.error}):hover > fieldset.${outlinedInputClasses.notchedOutline}`]:
+          {
+            transition: theme.transitions.create('border', {
+              easing: theme.transitions.easing.easeOut,
+              duration: 80,
+            }),
+            borderColor:
+              ownerState.color === 'secondary'
+                ? theme.palette.secondary.main
+                : ownerState.color === 'success'
+                  ? theme.palette.success.main
+                  : ownerState.color === 'warning'
+                    ? theme.palette.warning.main
+                    : ownerState.color === 'error'
+                      ? theme.palette.error.main
+                      : ownerState.color === 'info'
+                        ? theme.palette.info.main
+                        : theme.palette.primary.main,
+          },
         [`&.${inputBaseClasses.adornedEnd}`]: {
           paddingRight: 0,
         },
@@ -167,19 +217,8 @@ const ComponentOverrides: Components<Omit<Theme, 'components'>> = {
       root: ({ ownerState, theme }) => ({
         [`& > p.${formHelperTextClasses.root}`]: {
           marginLeft: theme.spacing(0.2),
-          marginRight: theme.spacing(0.2)
+          marginRight: theme.spacing(0.2),
         },
-        // ...(ownerState.required && {
-        //   [`& > .${outlinedInputClasses.root}::before`]: {
-        //     content: '" "',
-        //     position: 'absolute',
-        //     width: 4,
-        //     height: '100%',
-        //     backgroundColor: ownerState.error ? theme.palette.error.main : theme.palette.primary.main,
-        //     borderTopLeftRadius: theme.spacing(0.5),
-        //     borderBottomLeftRadius: theme.spacing(0.5)
-        //   }
-        // })
       }),
     },
     defaultProps: {
@@ -309,10 +348,10 @@ const ComponentOverrides: Components<Omit<Theme, 'components'>> = {
     styleOverrides: {
       header: {
         '& > span': {
-          fontSize: 13
-        }
-      }
-    }
+          fontSize: 13,
+        },
+      },
+    },
   },
   MuiPickersDay: {
     styleOverrides: {
@@ -331,8 +370,8 @@ const ComponentOverrides: Components<Omit<Theme, 'components'>> = {
   },
   MuiDatePicker: {
     defaultProps: {
-      dayOfWeekFormatter: (day) => `${day}`
-    }
+      dayOfWeekFormatter: (day) => `${day}`,
+    },
   },
   MuiFormLabel: {
     styleOverrides: {
