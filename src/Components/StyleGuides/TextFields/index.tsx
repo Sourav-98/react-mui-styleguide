@@ -1,4 +1,4 @@
-import { Box, Container, Grid, InputAdornment, Paper, Typography } from '@mui/material';
+import { Container, Grid, InputAdornment, Paper, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import InputField from 'Elements/Input/InputField';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
