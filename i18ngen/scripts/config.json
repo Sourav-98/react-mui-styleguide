@@ -1,0 +1,4 @@
+{
+    "clients": ["UW", "AC"],
+    "nameSpaces": ["common", "textField", "errorToast", "formik"]
+}

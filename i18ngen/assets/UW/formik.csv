@@ -1,9 +1,9 @@
-Keys,en_US,en_GB,de_DE,fr_FR,es_ES
-dateMandatory,Date is mandatory,Date is mandatory,Date is mandatory,Date is mandatory,Date is mandatory
-usernameMandatory,Username is mandatory,Username is mandatory,Der Benutzername ist obligatorisch,Le nom d'utilisateur est obligatoire,El nombre de usuario es obligatorio
-usernameInvalid,Username is invalid,Username is invalid,Benutzername ist ungültig,Le nom d'utilisateur invalide,Nombre de usuario invalido
-username,Username,Username,Nutzername,Nom d'utilisateur,Nombre de usuario
-enterUsername,Enter Username,Enter Username,Geben Sie den Benutzernamen ein,Saisissez votre nom d'utilisateur,Introduzca su nombre de usuario
-passwordMandatory,Password is mandatory,Password is mandatory,Das Passwort ist obligatorisch,Le mot de passe est obligatoire,La contraseña es obligatoria
-passwordConfirmMismatch,Passwords do not match,Passwords do not match,Passwörter stimmen nicht überein,Les mots de passe ne correspondent pas,Las contraseñas no coinciden
-passwordConfirmMandatory,Please re-type your password,Please re-type your password,Bitte geben Sie ihr Passwort erneut ein,Veuillez retaper votre mot de passe,Por favor vuelva a escribir su contraseña
+Keys,Type,en_US,en_GB,de_DE,fr_FR,es_ES
+dateMandatory,label,Date is mandatory,Date is mandatory,Date is mandatory,Date is mandatory,Date is mandatory
+usernameMandatory,feedback,Username is mandatory,Username is mandatory,Der Benutzername ist obligatorisch,Le nom d'utilisateur est obligatoire,El nombre de usuario es obligatorio
+usernameInvalid,feedback,Username is invalid,Username is invalid,Benutzername ist ungültig,Le nom d'utilisateur invalide,Nombre de usuario invalido
+username,label,Username,Username,Nutzername,Nom d'utilisateur,Nombre de usuario
+enterUsername,label,Enter Username,Enter Username,Geben Sie den Benutzernamen ein,Saisissez votre nom d'utilisateur,Introduzca su nombre de usuario
+passwordMandatory,feedback,Password is mandatory,Password is mandatory,Das Passwort ist obligatorisch,Le mot de passe est obligatoire,La contraseña es obligatoria
+passwordConfirmMismatch,feedback,Passwords do not match,Passwords do not match,Passwörter stimmen nicht überein,Les mots de passe ne correspondent pas,Las contraseñas no coinciden
+passwordConfirmMandatory,feedback,Please re-type your password,Please re-type your password,Bitte geben Sie ihr Passwort erneut ein,Veuillez retaper votre mot de passe,Por favor vuelva a escribir su contraseña

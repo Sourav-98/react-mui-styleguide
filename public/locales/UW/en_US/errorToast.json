@@ -1,1 +1,1 @@
-{"401unauthorized":"401 Unauthorized - Please login again to continue","403forbidden":"403 Forbidden - You are not allowed to perform this request","404notFound":"404 Not Found - The resource you are looking for is unavailable","500internalError":"500 - Internal Service Error"}
+{"label":{"401unauthorized":"401 Unauthorized - Please login again to continue","403forbidden":"403 Forbidden - You are not allowed to perform this request","404notFound":"404 Not Found - The resource you are looking for is unavailable","500internalError":"500 - Internal Service Error"}}

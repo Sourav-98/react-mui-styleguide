@@ -1,9 +1,16 @@
 const fs = require('fs');
 const path = require('path');
 const parse = require('csv-parse').parse;
+const assetConfig = require('./config.json');
+console.log(assetConfig);
+
+const clients = ['UW', 'AC'];
+const nameSpaces = ['common', 'errorToast', 'textField', 'formik'];
+const assetsPath = '../assets';
+const publicLocalesPath = '../../public/locales';
 
 const generateTranslation = async (client, nameSpace, localeCodesConfig) => {
-  const translationCsv = await fs.promises.readFile(path.resolve(__dirname, `assets/${client}/${nameSpace}.csv`), {
+  const translationCsv = await fs.promises.readFile(path.resolve(__dirname, `${assetsPath}/${client}/${nameSpace}.csv`), {
     encoding: 'utf-8',
   });
   const columns = translationCsv.split(/\r\n/)[0].split(',');
@@ -23,17 +30,20 @@ const generateTranslation = async (client, nameSpace, localeCodesConfig) => {
           if (!accumulator[localeCode]) {
             accumulator[localeCode] = {};
           }
-          accumulator[localeCode][localeMap.Keys] = localeMap[localeCode];
+          if (!accumulator[localeCode][localeMap.Type]) {
+            accumulator[localeCode][localeMap.Type] = {}
+          }
+          accumulator[localeCode][localeMap.Type][localeMap.Keys] = localeMap[localeCode];
         });
         return accumulator;
       }, {});
       localeCodesConfig.forEach((localeCode) => {
-        fs.mkdirSync(path.resolve(__dirname, `../public/locales/${client}/${localeCode}`), {
+        fs.mkdirSync(path.resolve(__dirname, `${publicLocalesPath}/${client}/${localeCode}`), {
           recursive: true,
         });
         fs.promises
           .writeFile(
-            path.resolve(__dirname, `../public/locales/${client}/${localeCode}/${nameSpace}.json`),
+            path.resolve(__dirname, `${publicLocalesPath}/${client}/${localeCode}/${nameSpace}.json`),
             JSON.stringify(parsedLocale[localeCode]),
             { encoding: 'utf-8' }
           )
@@ -57,8 +67,8 @@ const generateTranslation = async (client, nameSpace, localeCodesConfig) => {
 
 fs.rmSync(path.resolve(__dirname, 'locales'), { recursive: true, force: true });
 
-['UW', 'AC'].forEach((client) => {
-  ['common', 'textField', 'errorToast', 'formik'].forEach((namespace) => {
+assetConfig.clients.forEach((client) => {
+  assetConfig.nameSpaces.forEach((namespace) => {
     generateTranslation(client, namespace, process.argv.slice(2));
   });
 });

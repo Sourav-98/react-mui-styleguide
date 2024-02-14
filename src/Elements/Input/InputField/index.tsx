@@ -15,11 +15,16 @@ const InputField: React.FC<InputFieldProps> = ({ sx, label, labelSx, tooltipTitl
       </FormLabel>
     )}
     <Tooltip title={tooltipTitle}>
-      <TextField {...textFieldProps} InputProps={{
-        ...textFieldProps.InputProps,
-        // name: name,
-        required: textFieldProps.required
-      }}/>
+      <TextField
+        {...textFieldProps}
+        InputProps={{
+          ...textFieldProps.InputProps,
+          required: textFieldProps.required
+        }}
+        inputProps={{
+          ...textFieldProps.inputProps
+        }}
+      />
     </Tooltip>
   </Box>
 );

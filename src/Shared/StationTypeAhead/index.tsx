@@ -184,6 +184,7 @@ export const StationTypeAhead: React.FC<StationTypeAheadProps> = ({
           {...inputFieldProps}
           InputProps={{
             ...InputProps,
+            ...inputFieldProps.InputProps,
             endAdornment: (
               <>
                 {isLoading && <CircularProgress size={20} />}
@@ -193,7 +194,9 @@ export const StationTypeAhead: React.FC<StationTypeAheadProps> = ({
           }}
           inputProps={{
             ...inputProps,
+            ...inputFieldProps.inputProps,
             style: {
+              ...inputFieldProps.inputProps?.style,
               textTransform: 'uppercase',
             },
           }}

@@ -212,7 +212,7 @@ const AutoCompleteStyleGuide: React.FC = (): JSX.Element => {
             <StationTypeAhead name="2" size='small' variant='filled' fullWidth placeholder='Station' />
           </Grid>
           <Grid item xs={6} sm={3} md={1.5}>
-            <StationTypeAhead name="1" label="Standard" size='small' variant='standard' fullWidth placeholder='Station' />
+            <StationTypeAhead name="1" label="Standard" size='small' variant='standard' value='MSP' fullWidth placeholder='Station' />
           </Grid>
         </Grid>
       </Paper>

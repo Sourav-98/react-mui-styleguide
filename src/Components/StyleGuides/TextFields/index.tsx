@@ -73,13 +73,13 @@ const TextFieldStyleGuide: React.FC = (): JSX.Element => {
             <Grid container spacing={1}>
               <Grid item xs={12} sm={6} md={4}>
                 <InputField
-                  label={t('textField:disabled')}
+                  label={t('label.textField:disabled')}
                   disabled placeholder='Outlined Disabled'
                 />
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
                 <InputField
-                  label={t('textField:required')}
+                  label={t('label.textField:required')}
                   required
                   placeholder='Outlined Primary'
                 />
@@ -94,7 +94,7 @@ const TextFieldStyleGuide: React.FC = (): JSX.Element => {
               <Grid item xs={12} sm={6} md={4}>
                 <InputField
                   error
-                  label={t('textField:requiredWithError')}
+                  label={t('label.textField:requiredWithError')}
                   required
                   placeholder='Outlined Primary'
                 />
@@ -115,14 +115,14 @@ const TextFieldStyleGuide: React.FC = (): JSX.Element => {
               <Grid item xs={12} sm={6} md={4}>
                 <InputField
                   variant='filled'
-                  label={t('textField:disabled')}
+                  label={t('label.textField:disabled')}
                   disabled placeholder='Outlined Disabled'
                 />
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
                 <InputField
                   variant='filled'
-                  label={t('textField:required')}
+                  label={t('label.textField:required')}
                   required
                   placeholder='Outlined Primary'
                 />
@@ -139,7 +139,7 @@ const TextFieldStyleGuide: React.FC = (): JSX.Element => {
                 <InputField
                   variant='filled'
                   error
-                  label={t('textField:requiredWithError')}
+                  label={t('label.textField:requiredWithError')}
                   required
                   placeholder='Outlined Primary'
                 />
@@ -161,14 +161,14 @@ const TextFieldStyleGuide: React.FC = (): JSX.Element => {
               <Grid item xs={12} sm={6} md={4}>
                 <InputField
                   variant='standard'
-                  label={t('textField:disabled')}
+                  label={t('label.textField:disabled')}
                   disabled placeholder='Outlined Disabled'
                 />
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
                 <InputField
                   variant='standard'
-                  label={t('textField:required')}
+                  label={t('label.textField:required')}
                   required
                   placeholder='Outlined Primary'
                 />
@@ -185,7 +185,7 @@ const TextFieldStyleGuide: React.FC = (): JSX.Element => {
                 <InputField
                   variant='standard'
                   error
-                  label={t('textField:requiredWithError')}
+                  label={t('label.textField:requiredWithError')}
                   required
                   placeholder='Outlined Primary'
                 />
@@ -355,6 +355,185 @@ const TextFieldStyleGuide: React.FC = (): JSX.Element => {
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
                 <InputField
+                  variant='standard'
+                  placeholder='Outlined'
+                  label="Icon End Adornment"
+                  required
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position='start'>
+                        <LanguageIcon />
+                      </InputAdornment>
+                    )
+                  }} />
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant='h6'>Adornments - Small TextFields</Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6} md={4}>
+                <InputField
+                  size="small"
+                  label="Text Adornment - Start"
+                  placeholder='Outlined'
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position='end'>$</InputAdornment>
+                    )
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6} md={4}>
+                <InputField
+                  size="small"
+                  label="Text Adornment - End"
+                  placeholder='Outlined'
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position='start'>kg</InputAdornment>
+                    )
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6} md={4}>
+                <InputField
+                  size="small"
+                  placeholder='Attach a file'
+                  label="Icon Start Adornment"
+                  required
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position='end'>
+                        <AttachFileIcon />
+                      </InputAdornment>
+                    )
+                  }} />
+              </Grid>
+              <Grid item xs={12} sm={6} md={4}>
+                <InputField
+                  size="small"
+                  placeholder='Type your language'
+                  label="Icon End Adornment"
+                  required
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position='start'>
+                        <LanguageIcon />
+                      </InputAdornment>
+                    )
+                  }} />
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item xs={12}>
+            <Grid container spacing={1}>
+              <Grid item xs={12} sm={6} md={4}>
+                <InputField
+                  size="small"
+                  variant='filled'
+                  label="Text Adornment - Start"
+                  placeholder='Outlined'
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position='end'>$</InputAdornment>
+                    )
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6} md={4}>
+                <InputField
+                  size="small"
+                  variant='filled'
+                  label="Text Adornment - End"
+                  placeholder='Outlined'
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position='start'>kg</InputAdornment>
+                    )
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6} md={4}>
+                <InputField
+                  size="small"
+                  variant='filled'
+                  placeholder='Start Adornment'
+                  label="Icon Start Adornment"
+                  required
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position='end'>
+                        <AttachFileIcon />
+                      </InputAdornment>
+                    )
+                  }} />
+              </Grid>
+              <Grid item xs={12} sm={6} md={4}>
+                <InputField
+                  size="small"
+                  variant='filled'
+                  placeholder='End Adornment'
+                  label="Icon End Adornment"
+                  required
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position='start'>
+                        <LanguageIcon />
+                      </InputAdornment>
+                    )
+                  }} />
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item xs={12}>
+            <Grid container spacing={1}>
+              <Grid item xs={12} sm={6} md={4}>
+                <InputField
+                  size="small"
+                  variant='standard'
+                  label="Text Adornment - Start"
+                  placeholder='Outlined'
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position='end'>$</InputAdornment>
+                    )
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6} md={4}>
+                <InputField
+                  size="small"
+                  variant='standard'
+                  label="Text Adornment - End"
+                  placeholder='Outlined'
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position='start'>kg</InputAdornment>
+                    )
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6} md={4}>
+                <InputField
+                  size="small"
+                  variant='standard'
+                  placeholder='Outlined'
+                  label="Icon Start Adornment"
+                  required
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position='end'>
+                        <AttachFileIcon />
+                      </InputAdornment>
+                    )
+                  }} />
+              </Grid>
+              <Grid item xs={12} sm={6} md={4}>
+                <InputField
+                  size="small"
                   variant='standard'
                   placeholder='Outlined'
                   label="Icon End Adornment"
