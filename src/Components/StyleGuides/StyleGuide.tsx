@@ -105,20 +105,20 @@ const StyleGuide: React.FC = (): JSX.Element => {
                     }
                   }}
                 >
-                  <MenuItem selected={i18n.language === 'en_US'} onClick={() => {
-                    i18n.changeLanguage('en_US');
+                  <MenuItem selected={i18n.language === 'en'} onClick={() => {
+                    i18n.changeLanguage('en');
                     setAnchorEl(null)
                   }}>en-US</MenuItem>
-                  <MenuItem selected={i18n.language === 'de_DE'} onClick={() => {
-                    i18n.changeLanguage('de_DE');
+                  <MenuItem selected={i18n.language === 'de'} onClick={() => {
+                    i18n.changeLanguage('de');
                     setAnchorEl(null)
                   }}>de-DE</MenuItem>
-                  <MenuItem selected={i18n.language === 'es_ES'} onClick={() => {
-                    i18n.changeLanguage('es_ES');
+                  <MenuItem selected={i18n.language === 'es'} onClick={() => {
+                    i18n.changeLanguage('es');
                     setAnchorEl(null);
                   }}>es-ES</MenuItem>
-                  <MenuItem selected={i18n.language === 'fr_FR'} onClick={() => {
-                    i18n.changeLanguage('fr_FR');
+                  <MenuItem selected={i18n.language === 'fr'} onClick={() => {
+                    i18n.changeLanguage('fr');
                     setAnchorEl(null);
                   }}>fr-FR</MenuItem>
                 </Menu>

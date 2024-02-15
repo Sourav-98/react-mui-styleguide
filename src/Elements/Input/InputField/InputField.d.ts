@@ -1,4 +1,4 @@
-import { SxProps, TextFieldProps } from '@mui/material';
+import { SxProps, TextFieldProps, TooltipProps } from '@mui/material';
 
 export type InputFieldProps = TextFieldProps & {
   /**
@@ -13,4 +13,5 @@ export type InputFieldProps = TextFieldProps & {
    * label styles to be overridden
    */
   labelSx?: SxProps;
+  toolTipPlacement?: "bottom" | "left" | "right" | "top" | "bottom-end" | "bottom-start" | "left-end" | "left-start" | "right-end" | "right-start" | "top-end" | "top-start" | undefined
 };

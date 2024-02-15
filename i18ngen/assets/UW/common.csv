@@ -1,36 +1,36 @@
-Keys,Type,en_US,en_GB,de_DE,fr_FR,es_ES
-hello,label,Hello,Hello,Hallo,Bonjour,Hola
-welcome,label,Welcome,Welcome,Willkommen,Accueillir,Bienvenido
-primary,label,Primary,Primary,Primär,Primaire,Primario
-secondary,label,Secondary,Secondary,Sekundär,Secondaire,Secundario
-success,label,Success,Success,Erfolg,Succès,Éxito
-error,label,Error,Error,Fehler,Erreur,Error
-warning,label,Warning,Warning,Warnung,Avertissement,Advertencia
-info,label,Info,Info,Die Info,Info,Información
-date,label,Date,Date,Datum,Date,Fecha
-time,label,Time,Time,Zeit,Temps,Tiempo
-day,label,Day,Day,Tag,Jour,Día
-month,label,Month,Month,Monat,Mois,Mes
-year,label,Year,Year,Jahr,Année,Año
-color,label,Color,Color,Farbe,Couleur,Color
-colors,label,Colors,Colors,Farben,Couleurs,Colores
-style,label,Style,Style,Stil,Style,Estilo
-styles,label,Styles,Styles,Stile,modes,Estilos
-theme,label,Theme,Theme,Thema,Thème,Tema
-themes,label,Themes,Themes,Themen,Thèmes,Temas
-scheme,label,Scheme,Scheme,Planen,Schème,Esquema
-schemes,label,Schemes,Schemes,Schemata,Schémas,Esquemas
-size,label,Size,Size,Größe,Taille,Tamaño
-sizes,label,Sizes,Sizes,Größen,Tailles,Tallas
-type,label,Type,Type,Typ,Taper,Tipo
-types,label,Types,Types,Typen,Les types,Tipos
-medium,label,Medium,Medium,Mittel,Moyen,Medio
-small,label,Small,Small,Klein,Petit,Pequeño
-search,label,Search,Search,Suchen,Recherche,Buscar
-noOptions,label,No Options,No Options,Keine Optionen,Aucune option,Sin opciones
-textField,label,Text Field,Text Field,Textfeld,Champ de texte,Campo de texto
-select,label,Select,Select,Wählen,Sélectionner,Seleccionar
-button,label,Button,Button,Taste,Bouton,Botón
-welcomeText,label,"Hello {{name}}, you have {{count}} unread message","Hello {{name}}, you have {{count}} unread message","Hallo {{name}}, du hast {{count}} ungelesene Nachricht","Bonjour {{name}}, vous avez {{count}} message non lu","Hola {{name}}, tienes {{count}} mensaje sin leer."
-outlined,label,Outlined,Outlined,Outlined,Outlined,Outlined
-styleGuide,label,Style Guide,Style Guide,Gestaltungsrichtlinie,Guide de style,Guía de estilo
+Keys,Type,en,de,fr,es
+hello,label,Hello,Hallo,Bonjour,Hola
+welcome,label,Welcome,Willkommen,Accueillir,Bienvenido
+primary,label,Primary,Primär,Primaire,Primario
+secondary,label,Secondary,Sekundär,Secondaire,Secundario
+success,label,Success,Erfolg,Succès,Éxito
+error,label,Error,Fehler,Erreur,Error
+warning,label,Warning,Warnung,Avertissement,Advertencia
+info,label,Info,Die Info,Info,Información
+date,label,Date,Datum,Date,Fecha
+time,label,Time,Zeit,Temps,Tiempo
+day,label,Day,Tag,Jour,Día
+month,label,Month,Monat,Mois,Mes
+year,label,Year,Jahr,Année,Año
+color,label,Color,Farbe,Couleur,Color
+colors,label,Colors,Farben,Couleurs,Colores
+style,label,Style,Stil,Style,Estilo
+styles,label,Styles,Stile,modes,Estilos
+theme,label,Theme,Thema,Thème,Tema
+themes,label,Themes,Themen,Thèmes,Temas
+scheme,label,Scheme,Planen,Schème,Esquema
+schemes,label,Schemes,Schemata,Schémas,Esquemas
+size,label,Size,Größe,Taille,Tamaño
+sizes,label,Sizes,Größen,Tailles,Tallas
+type,label,Type,Typ,Taper,Tipo
+types,label,Types,Typen,Les types,Tipos
+medium,label,Medium,Mittel,Moyen,Medio
+small,label,Small,Klein,Petit,Pequeño
+search,label,Search,Suchen,Recherche,Buscar
+noOptions,label,No Options,Keine Optionen,Aucune option,Sin opciones
+textField,label,Text Field,Textfeld,Champ de texte,Campo de texto
+select,label,Select,Wählen,Sélectionner,Seleccionar
+button,label,Button,Taste,Bouton,Botón
+welcomeText,label,"Hello {{name}}, you have {{count}} unread message","Hallo {{name}}, du hast {{count}} ungelesene Nachricht","Bonjour {{name}}, vous avez {{count}} message non lu","Hola {{name}}, tienes {{count}} mensaje sin leer."
+outlined,label,Outlined,Outlined,Outlined,Outlined
+styleGuide,label,Style Guide,Gestaltungsrichtlinie,Guide de style,Guía de estilo

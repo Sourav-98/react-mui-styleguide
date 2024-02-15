@@ -40,9 +40,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "i18ngen": "node i18ngen/scripts/parser.js en_US en_GB de_DE fr_FR es_ES",
+    "i18ngen": "node i18ngen/scripts/parser.js",
     "build": "npm run i18ngen | react-scripts build",
-    "i18ngen-build": "node i18ngen/scripts/parser.js en_US en_GB de_DE fr_FR es_ES | cp -fr public/locales build/locales",
+    "i18ngen-build": "node i18ngen/scripts/parser.js | cp -fr public/locales build/locales",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "format": "prettier . --write"

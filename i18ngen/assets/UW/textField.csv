@@ -1,4 +1,4 @@
-Keys,Type,en_US,en_GB,de_DE,fr_FR,es_ES
-textField,label,Text Field,Text Field,Text Field,Text Field,Text Field
-colorSchemes,label,Color Schemes,Color Schemes,Color Schemes,Color Schemes,Color Schemes
-disabled,label,Disabled,Disabled,Deaktiviert,Désactivé,Desactivada
+Keys,Type,en,de,fr,es
+textField,label,Text Field,Text Field,Text Field,Text Field
+colorSchemes,label,Color Schemes,Color Schemes,Color Schemes,Color Schemes
+disabled,label,Disabled,Deaktiviert,Désactivé,Desactivada

@@ -1,4 +1,17 @@
 {
-    "clients": ["UW", "AC"],
+    "clientLocales": [
+        {
+            "id": "UW",
+            "locales": ["en", "de", "fr", "es", "ru", "ja", "pt", "cn", "da"]
+        },
+        {
+            "id": "AC",
+            "locales": ["en", "de", "fr", "es", "ru", "ja", "pt", "cn", "da"]
+        },
+        {
+            "id": "DL",
+            "locales": ["en", "de", "fr", "es", "ru", "ja", "pt", "cn", "da"]
+        }
+    ],
     "nameSpaces": ["common", "textField", "errorToast", "formik"]
 }

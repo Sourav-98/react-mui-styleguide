@@ -10,7 +10,6 @@ import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 import 'moment/locale/de';
 import 'moment/locale/es'
-// import 'moment/locale/en';
 
 moment.locale('en', {
   // weekdaysMin : 'Di_Lu_Ma_Me_Je_Ve_Sa'.split('_'),
@@ -29,9 +28,9 @@ function App() {
      */
     localStorage.setItem('current_locale', i18n.language);
     switch(i18n.language) {
-      case 'de_DE': moment.locale('de'); setMomentLocale('de'); break;
-      case 'es_ES': moment.locale('es'); setMomentLocale('es'); break;
-      case 'en_US': 
+      case 'de': moment.locale('de'); setMomentLocale('de'); break;
+      case 'es': moment.locale('es'); setMomentLocale('es'); break;
+      case 'en': 
       default: moment.locale('en'); setMomentLocale('en'); break;
     }
   }, [i18n.language]);

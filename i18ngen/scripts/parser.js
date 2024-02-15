@@ -2,10 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const parse = require('csv-parse').parse;
 const assetConfig = require('./config.json');
-console.log(assetConfig);
 
-const clients = ['UW', 'AC'];
-const nameSpaces = ['common', 'errorToast', 'textField', 'formik'];
 const assetsPath = '../assets';
 const publicLocalesPath = '../../public/locales';
 
@@ -13,7 +10,7 @@ const generateTranslation = async (client, nameSpace, localeCodesConfig) => {
   const translationCsv = await fs.promises.readFile(path.resolve(__dirname, `${assetsPath}/${client}/${nameSpace}.csv`), {
     encoding: 'utf-8',
   });
-  const columns = translationCsv.split(/\r\n/)[0].split(',');
+  const columns = translationCsv.split(/\n/)[0].split(',');
   parse(
     translationCsv,
     {
@@ -25,6 +22,9 @@ const generateTranslation = async (client, nameSpace, localeCodesConfig) => {
         console.log(`Error parsing ${nameSpace}.csv: `, err);
         return;
       }
+      /**
+       * end result of parsedLocale would contain per-
+       */
       const parsedLocale = res.slice(1).reduce((accumulator, localeMap) => {
         localeCodesConfig.forEach((localeCode) => {
           if (!accumulator[localeCode]) {
@@ -49,14 +49,12 @@ const generateTranslation = async (client, nameSpace, localeCodesConfig) => {
           )
           .then(() => {
             console.log(
-              `Successfully generated translations for namespace: ${nameSpace}, locale: ${localeCode}, keys: ${
-                Object.keys(parsedLocale).length
-              }`
+              `Successfully generated translations for client: ${client}, namespace: ${nameSpace}, locale: ${localeCode}`
             );
           })
           .catch((err) => {
             if (err) {
-              console.log(`Error generating translations for ${localeCode}: `, err);
+              console.log(`Error generating translations for client: ${client}, namespace: ${nameSpace}, locale: ${localeCode}: `, err);
               return;
             }
           });
@@ -65,10 +63,10 @@ const generateTranslation = async (client, nameSpace, localeCodesConfig) => {
   );
 };
 
-fs.rmSync(path.resolve(__dirname, 'locales'), { recursive: true, force: true });
+fs.rmSync(path.resolve(__dirname, '../../public/locales'), { recursive: true, force: true });
 
-assetConfig.clients.forEach((client) => {
+assetConfig.clientLocales.forEach((client) => {
   assetConfig.nameSpaces.forEach((namespace) => {
-    generateTranslation(client, namespace, process.argv.slice(2));
+    generateTranslation(client.id, namespace, client.locales);
   });
 });

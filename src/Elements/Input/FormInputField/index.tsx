@@ -11,7 +11,7 @@ const FormInputField: React.FC<FormInputFieldProps> = ({name, helperText, ...for
     <InputField
       {...formInputFieldProps}
       {...field}
-      helperText={helperText || ' '}
+      helperText={helperText || null}
       error={meta.touched && !!meta.error}
     />
   )

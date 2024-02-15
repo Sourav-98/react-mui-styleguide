@@ -8,7 +8,7 @@ i18n
   ns: ['common'],
   defaultNS: 'common',
   // resources,
-  fallbackLng: localStorage.getItem('current_locale') || 'en_US',
+  fallbackLng: localStorage.getItem('current_locale') || 'en',
   backend: {
     loadPath: `${process.env.PUBLIC_URL}/locales/${window.tenant}/{{lng}}/{{ns}}.json`,
   }
