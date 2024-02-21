@@ -41,7 +41,7 @@
   "scripts": {
     "start": "react-scripts start",
     "i18ngen": "node i18ngen/scripts/parser.js",
-    "build": "npm run i18ngen | react-scripts build",
+    "build": "npm run i18ngen && react-scripts build",
     "i18ngen-build": "node i18ngen/scripts/parser.js | cp -fr public/locales build/locales",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
