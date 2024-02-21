@@ -21,6 +21,7 @@ import { ThemeContext } from 'Context/ThemeContext';
 import { DarkModeSwitch } from 'Elements/Switch';
 import { useTranslation } from 'react-i18next';
 import TranslateIcon from '@mui/icons-material/Translate';
+import { AppAlertsContextProvider } from 'Context/AppAlertsContext';
 
 const StyleGuide: React.FC = (): JSX.Element => {
   const { t, i18n } = useTranslation();
@@ -38,6 +39,7 @@ const StyleGuide: React.FC = (): JSX.Element => {
 
   return (
     <>
+      <AppAlertsContextProvider>
       <AppBar position='sticky' sx={{ mb: 2 }}>
         <Toolbar sx={{ width: '100%', display: 'flex' }}>
           <IconButton
@@ -172,6 +174,7 @@ const StyleGuide: React.FC = (): JSX.Element => {
           <Outlet />
         </Box>
       </Suspense>
+      </AppAlertsContextProvider>
     </>
   );
 };
