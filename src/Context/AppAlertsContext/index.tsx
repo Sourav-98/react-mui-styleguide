@@ -94,7 +94,7 @@ export const AppAlertsContextProvider: React.FC<{ children: React.ReactNode }> =
             <Typography component={'div'} variant='subtitle2' fontWeight={700}>
               {`Alerts (${_bannerCurrentIndex + 1} of ${_bannerAlerts.length})`}
             </Typography>
-            <Typography component={'div'} variant='body2'>
+            <Typography component={'div'} variant='body2' sx={{ minHeight: 70}}>
               {_bannerAlerts[_bannerCurrentIndex]?.content}
             </Typography>
             </Container>
