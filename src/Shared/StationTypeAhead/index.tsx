@@ -140,7 +140,8 @@ export const StationTypeAhead: React.FC<StationTypeAheadProps> = ({
         },
       }}
       onInputChange={stationSearchOnTextChangeHandler}
-      onChange={(_) => {
+      onChange={(_, value) => {
+        console.log(value);
         setStations([]);
       }}
       onBlur={() => {

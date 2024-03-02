@@ -1,19 +1,7 @@
 import { DatePickerProps } from '@mui/x-date-pickers';
 import { Moment } from 'moment';
 
-export interface TextFieldDatePickerProps extends Partial<Omit<TextFieldProps, 'value'>> {
-  /**
-   * the text format of date to be used by the typable date picker. Default value is `DDMMMYY`
-   */
-  dateFormat?:
-    | 'DD-MM-YYYY'
-    | 'MM-DD-YYYY'
-    | 'YYYY-MM-DD'
-    | 'DD/MM/YYYY'
-    | 'MM/DD/YYYY'
-    | 'DD/MM/YY'
-    | 'MM/DD/YY'
-    | 'DDMMMYY';
+export type TextFieldDatePickerProps = Omit<TextFieldProps, 'value'> & {
   /**
    * specifies the placement of the date picker's `Popper` component. Default value is `bottom-end`
    */

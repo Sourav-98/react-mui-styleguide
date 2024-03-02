@@ -1,5 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import TextFieldDatePicker from 'Elements/DatePickers/TextFieldDatePicker';
+import moment from 'moment';
 
 const DatePickerStyleGuide: React.FC = (): JSX.Element => {
   return (
@@ -15,7 +16,7 @@ const DatePickerStyleGuide: React.FC = (): JSX.Element => {
           <Typography variant='subtitle2' fontSize={13}>
             DatePicker Outlined
           </Typography>
-          <TextFieldDatePicker />
+          <TextFieldDatePicker value={moment('35234', 'DDMMMYY')} />
         </Box>
         <Box display={'flex'} flexDirection={'column'} m={1} width={170}>
           <Typography variant='subtitle2' fontSize={13}>

@@ -7,6 +7,7 @@ import { Form, Formik, FormikProps } from 'formik';
 import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 import { LoginFormType } from './FormikTypes';
+import TextFieldDatePicker from 'Elements/DatePickers/TextFieldDatePicker';
 
 
 
@@ -155,12 +156,13 @@ const FormikStyleGuide: React.FC = (): JSX.Element => {
                         label='Station'
                         helperText={touched.station && !!errors.station ? errors.station : null}
                         required
-                        inputProps={{
-                          style: {
-                            textAlign: 'right'
-                          }
-                        }}
                       />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextFieldDatePicker/>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextFieldDatePicker defaultToday/>
                     </Grid>
                     <Grid item xs={1}>
                       <SubmitButton sx={{ mt: 3.2}} type="submit" variant='contained' fullWidth color='primary' isSubmitting={isSubmitting} disabled={!isValid || isSubmitting}>

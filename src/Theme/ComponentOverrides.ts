@@ -342,7 +342,7 @@ const ComponentOverrides: Components<Omit<Theme, 'components'>> = {
   //     })
   //   }
   // },
-  MuiDayPicker: {
+  MuiDayCalendar: {
     styleOverrides: {
       header: {
         '& > span': {
@@ -357,7 +357,7 @@ const ComponentOverrides: Components<Omit<Theme, 'components'>> = {
         fontSize: 13,
         backgroundColor: 'transparent',
         '&[aria-current="date"]': {
-          backgroundColor: 'transparent',
+          // backgroundColor: 'transparent',
         },
         '&:hover, &.Mui-focusVisible': {
           backgroundColor: alpha(theme.palette.primary[200], 0.28),
