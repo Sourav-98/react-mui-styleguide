@@ -162,7 +162,7 @@ const FormikStyleGuide: React.FC = (): JSX.Element => {
                       <TextFieldDatePicker/>
                     </Grid>
                     <Grid item xs={12}>
-                      <TextFieldDatePicker defaultToday/>
+                      <TextFieldDatePicker required defaultToday/>
                     </Grid>
                     <Grid item xs={1}>
                       <SubmitButton sx={{ mt: 3.2}} type="submit" variant='contained' fullWidth color='primary' isSubmitting={isSubmitting} disabled={!isValid || isSubmitting}>

@@ -20,13 +20,14 @@ const TextFieldDatePicker: React.FC<TextFieldDatePickerProps> = ({
   value,
   defaultToday,
   onDateChange,
-  onBlur,
+  // onBlur,
   datePickerActions,
-  ...textFieldProps
+  ...inputFieldProps
 }: TextFieldDatePickerProps): JSX.Element => {
   const dateFormat = 'DDMMMYY';
   const dateFormatRegex = /^\d{2}[a-zA-Z]{3}\d{2}$/;
-  const offsetDateRegex = /^([+-])([0-9]+)$/;
+  const semiDateFormatRegex = /^\d{2}[a-zA-Z]{3}$/;
+  const offsetDateRegex = /^([+-])([0-9]*)$/;
   const [date, setDate] = useState<Moment | null | undefined>(
     value ? value : defaultToday ? moment() : null
   );
@@ -43,7 +44,7 @@ const TextFieldDatePicker: React.FC<TextFieldDatePickerProps> = ({
   useEffect(() => {
     setDateText(date ? !date.isValid() ? 'INDEF' : date?.format(dateFormat).toUpperCase() : '');
     if (onDateChange) onDateChange(date);
-  }, [date, onDateChange]);
+  }, [date]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onDatePickerTextChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDateText(event.target.value);
@@ -78,7 +79,7 @@ const TextFieldDatePicker: React.FC<TextFieldDatePickerProps> = ({
       /**
        * Check if date text field has the following types of text entered
        */
-      if (dateFormatRegex.test(event.target.value) || /^\d{2}[a-zA-Z]{3}$/.test(event.target.value)) {
+      if (dateFormatRegex.test(event.target.value) || semiDateFormatRegex.test(event.target.value)) {
         /**
          * This means that the text entered is in the format of DDMMMYY or DDMMM
          */
@@ -86,10 +87,13 @@ const TextFieldDatePicker: React.FC<TextFieldDatePickerProps> = ({
         if (event.target.value.length === 5) {
           dateText += new Date().getFullYear().toString().slice(2);
         }
-        let updatedDate: Moment = moment(dateText, dateFormat);
+        let updatedDate = moment(dateText, dateFormat);
+        /**
+         * If the date entered is valid, then only update the entered date. Otherwise, retain the previous date selected.
+         */
         if (updatedDate.isValid()) {
           setDate(updatedDate);
-          if (onBlur) onBlur();
+          // if (onBlur) onBlur();
           return;
         }
       } else if (event.target.value === '.') {
@@ -106,10 +110,10 @@ const TextFieldDatePicker: React.FC<TextFieldDatePickerProps> = ({
         if (regExpMatch !== null) {
           switch (regExpMatch[1]) {
             case '+':
-              setDate(moment().add(parseInt(regExpMatch[2]), 'day'));
+              setDate(moment().add(parseInt(regExpMatch[2] || '1'), 'day'));
               break;
             case '-':
-              setDate(moment().subtract(parseInt(regExpMatch[2]), 'day'));
+              setDate(moment().subtract(parseInt(regExpMatch[2] || '1'), 'day'));
               break;
             default:
               break;
@@ -122,24 +126,25 @@ const TextFieldDatePicker: React.FC<TextFieldDatePickerProps> = ({
       setDate(null);
       setDateText('');
     }
-    if (onBlur) onBlur();
+    // if (onBlur) onBlur();
   };
 
   const onDatePickerChangeHandler = (_value: Moment | null | undefined) => {
     setDate(_value);
-    if (onBlur) onBlur();
+    // if (onBlur) onBlur();
   };
 
   return (
     <>
       <InputField
-        {...textFieldProps}
+        {...inputFieldProps}
         value={dateText}
         onChange={onDatePickerTextChangeHandler}
         onKeyDown={onDatePickerTextKeyDownHandler}
         onBlur={onDatePickerTextBlurHandler}
         placeholder={dateFormat}
         InputProps={{
+          ...inputFieldProps.InputProps,
           ref: datePickerBoxRef,
           endAdornment: (
             <InputAdornment position='end'>
@@ -148,7 +153,7 @@ const TextFieldDatePicker: React.FC<TextFieldDatePickerProps> = ({
                 title='open calendar'
                 aria-label='toggle calendar'
                 onClick={() => setIsOpen((prev) => !prev)}
-                disabled={textFieldProps.disabled}
+                disabled={inputFieldProps.disabled}
               >
                 <CalendarTodayIcon />
               </IconButton>
@@ -156,9 +161,9 @@ const TextFieldDatePicker: React.FC<TextFieldDatePickerProps> = ({
           ),
         }}
         inputProps={{
-          ...textFieldProps.inputProps,
+          ...inputFieldProps.inputProps,
           style: {
-            ...textFieldProps?.inputProps?.style,
+            ...inputFieldProps?.inputProps?.style,
             textTransform: 'uppercase'
           }
         }}

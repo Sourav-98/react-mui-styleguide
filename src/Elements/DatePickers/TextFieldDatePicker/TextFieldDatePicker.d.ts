@@ -1,7 +1,7 @@
-import { DatePickerProps } from '@mui/x-date-pickers';
 import { Moment } from 'moment';
+import { InputFieldProps } from 'Elements/Input/InputField/InputField';
 
-export type TextFieldDatePickerProps = Omit<TextFieldProps, 'value'> & {
+export type TextFieldDatePickerProps = Omit<InputFieldProps, 'value'> & {
   /**
    * specifies the placement of the date picker's `Popper` component. Default value is `bottom-end`
    */
@@ -21,7 +21,7 @@ export type TextFieldDatePickerProps = Omit<TextFieldProps, 'value'> & {
   /**
    * The date textfield `onBlur` override
    */
-  onBlur?: () => void;
+  // onBlur?: () => void;
   /**
    * optional date picker action overrides
    */

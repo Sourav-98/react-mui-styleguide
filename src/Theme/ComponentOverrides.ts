@@ -233,7 +233,7 @@ const ComponentOverrides: Components<Omit<Theme, 'components'>> = {
           paddingRight: 0,
         },
         [`& > .${autocompleteClasses.endAdornment}`]: {
-          top: `calc(50% - 0.845em)`,
+          // top: `calc(50% - 0.845em)`,
         },
         [`&.${inputBaseClasses.sizeSmall} > .${inputBaseClasses.inputSizeSmall}`]: {
           paddingTop: `${smallInputPadding.TB}em`,
@@ -242,7 +242,7 @@ const ComponentOverrides: Components<Omit<Theme, 'components'>> = {
           paddingRight: 0,
         },
         [`&.${inputBaseClasses.sizeSmall} > .${autocompleteClasses.endAdornment}`]: {
-          top: `calc(50% - 0.845em)`,
+          // top: `calc(50% - 0.845em)`,
         },
         [`&.${inputBaseClasses.sizeSmall}`]: {
           paddingTop: '0px',
