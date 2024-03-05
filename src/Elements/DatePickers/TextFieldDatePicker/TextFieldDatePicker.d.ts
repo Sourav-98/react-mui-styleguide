@@ -19,9 +19,9 @@ export type TextFieldDatePickerProps = Omit<InputFieldProps, 'value'> & {
    */
   onDateChange?: (date: Moment | null | undefined) => void;
   /**
-   * The date textfield `onBlur` override
+   * The date textfield `onBlur` override. (typically Formik's `setFieldTouched` should be invoked in this usage)
    */
-  // onBlur?: () => void;
+  onBlur?: () => void;
   /**
    * optional date picker action overrides
    */

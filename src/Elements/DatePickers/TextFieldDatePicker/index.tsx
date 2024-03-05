@@ -20,7 +20,7 @@ const TextFieldDatePicker: React.FC<TextFieldDatePickerProps> = ({
   value,
   defaultToday,
   onDateChange,
-  // onBlur,
+  onBlur,
   datePickerActions,
   ...inputFieldProps
 }: TextFieldDatePickerProps): JSX.Element => {
@@ -107,6 +107,7 @@ const TextFieldDatePicker: React.FC<TextFieldDatePickerProps> = ({
          * This means a shortcut date entry was made, relative to today's date: [+|-]xxx
          */
         let regExpMatch = event.target.value.match(offsetDateRegex);
+        console.log(regExpMatch);
         if (regExpMatch !== null) {
           switch (regExpMatch[1]) {
             case '+':
@@ -121,17 +122,17 @@ const TextFieldDatePicker: React.FC<TextFieldDatePickerProps> = ({
         }
         return;
       }
-      setDateText(date?.format(dateFormat).toUpperCase() || '');
+      setDateText(date ? !date.isValid() ? 'INDEF' : date?.format(dateFormat).toUpperCase() : '');
     } else {
       setDate(null);
       setDateText('');
     }
-    // if (onBlur) onBlur();
+    if (onBlur) onBlur();
   };
 
   const onDatePickerChangeHandler = (_value: Moment | null | undefined) => {
     setDate(_value);
-    // if (onBlur) onBlur();
+    if (onBlur) onBlur();
   };
 
   return (
