@@ -1,4 +1,4 @@
-import { Container, Grid, MenuItem, Paper } from '@mui/material';
+import { Container, Divider, Grid, MenuItem, Paper } from '@mui/material';
 // import TextFieldDatePicker from 'Elements/DatePickers/TextFieldDatePicker';
 import FormInputField from 'Elements/Input/FormInputField';
 import SubmitButton from 'Elements/Input/SubmitButton';
@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 import { LoginFormType } from './FormikTypes';
 import TextFieldDatePicker from 'Elements/DatePickers/TextFieldDatePicker';
+import FileUploadManager from 'Elements/FileUploadManager';
 
 
 
@@ -20,31 +21,31 @@ const loginFormInitValues: LoginFormType = {
   loginDate1: null,
 };
 
-const formValidationSchema = Yup.object().shape({
-  username: Yup.string()
-    .test('Username validity check', 'formik:feedback.usernameInvalid', (value) => {
-      if (!value) return true;
-      return /^\w+$/.test(value);
-    })
-    .required('formik:feedback.usernameMandatory'),
-  password: Yup.string().when('loginType', {
-    is: (value: string) => value === 'PWD',
-    then: Yup.string().required('formik:feedback.passwordMandatory'),
-  }),
-  passwordConfirm: Yup.string().when('loginType', {
-    is: (value: string) => value === 'PWD',
-    then: Yup.string()
-      .when('password', {
-        is: (value: string) => value && value.length,
-        then: Yup.string().oneOf([Yup.ref('password'), undefined], 'formik:feedback.passwordConfirmMismatch')
-      })
-      .required('formik:feedback.passwordConfirmMandatory'),
-  }),
-  station: Yup.string().required('Station is mandatory')
-});
-
 const FormikStyleGuide: React.FC = (): JSX.Element => {
   const { t } = useTranslation(['formik']);
+
+  const formValidationSchema = Yup.object().shape({
+    username: Yup.string()
+      .test('Username validity check', t('formik:feedback.usernameInvalid') || '', (value) => {
+        if (!value) return true;
+        return /^\w+$/.test(value);
+      })
+      .required('formik:feedback.usernameMandatory'),
+    password: Yup.string().when('loginType', {
+      is: (value: string) => value === 'PWD',
+      then: Yup.string().required('formik:feedback.passwordMandatory'),
+    }),
+    passwordConfirm: Yup.string().when('loginType', {
+      is: (value: string) => value === 'PWD',
+      then: Yup.string()
+        .when('password', {
+          is: (value: string) => value && value.length,
+          then: Yup.string().oneOf([Yup.ref('password'), undefined], 'formik:feedback.passwordConfirmMismatch')
+        })
+        .required('formik:feedback.passwordConfirmMandatory'),
+    }),
+    station: Yup.string().required('Station is mandatory')
+  });
 
   return (
     <Container maxWidth={'md'}>
@@ -103,7 +104,7 @@ const FormikStyleGuide: React.FC = (): JSX.Element => {
                         name='username'
                         required
                         label={t('formik:label.username', 'Username')}
-                        helperText={touched.username && !!errors.username ? t(errors.username || '') : null}
+                        // helperText={touched.username && !!errors.username ? t(errors.username || '') : null}
                         placeholder={t('formik:label.username', 'Username') || ''}
                         aria-label='username'
                       />
@@ -174,7 +175,15 @@ const FormikStyleGuide: React.FC = (): JSX.Element => {
               )}
             </Formik>
           </Grid>
+          <Grid item xs={12}>
+          <FileUploadManager files={[new File([''], 'helloworld.txt', {
+          type: 'text/plain'
+        }), new File([''], 'helloworld.pdf', {
+          type: 'application/pdf'
+        })]} maxUploadSize={4} onChange={() => {}}/>
+          </Grid>
         </Grid>
+        
       </Paper>
     </Container>
 
