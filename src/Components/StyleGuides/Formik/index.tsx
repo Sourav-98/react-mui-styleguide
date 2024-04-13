@@ -178,7 +178,7 @@ const FormikStyleGuide: React.FC = (): JSX.Element => {
           <Grid item xs={12}>
           <FileUploadManager files={[new File([''], 'helloworld.txt', {
           type: 'text/plain'
-        }), new File([''], 'helloworld.pdf', {
+        }), new File([''], 'hellowkjasdkfjaklsdjfakljdflakjsorld.pdf', {
           type: 'application/pdf'
         })]} maxUploadSize={4} onChange={() => {}}/>
           </Grid>

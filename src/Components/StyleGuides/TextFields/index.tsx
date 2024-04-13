@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import InputField from 'Elements/Input/InputField';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import LanguageIcon from '@mui/icons-material/Language';
+import { ChargeCodeMask } from 'Utils/MaskedInputs';
 
 const TextFieldStyleGuide: React.FC = (): JSX.Element => {
 
@@ -545,6 +546,31 @@ const TextFieldStyleGuide: React.FC = (): JSX.Element => {
                       </InputAdornment>
                     )
                   }} />
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant='h6'>{`Masked Text`}</Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Grid container spacing={1}>
+              <Grid item xs={6} sm={4} md={3}>
+                <InputField
+                  label="Masking - Charge Codes"
+                  placeholder='XX,YY,ZZ'
+                  required
+                  InputProps={{
+                    inputComponent: ChargeCodeMask as any,
+                    endAdornment: (
+                      <InputAdornment position='start'>
+                        <LanguageIcon />
+                      </InputAdornment>
+                    )
+                  }}
+                  onChange={(e) => {
+                    console.log(e.target.value);
+                  }}
+                />
               </Grid>
             </Grid>
           </Grid>

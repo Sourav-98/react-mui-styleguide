@@ -1,5 +1,6 @@
 import { Autocomplete, Box, Grid, Paper, TextField, Typography } from '@mui/material';
 import InputField from 'Elements/Input/InputField';
+import { MultiSelectStationTypeAhead } from 'Shared/MultiSelectStationTypeAhead';
 import { StationTypeAhead } from 'Shared/StationTypeAhead';
 import { useTranslation } from 'react-i18next';
 
@@ -195,6 +196,10 @@ const AutoCompleteStyleGuide: React.FC = (): JSX.Element => {
           <Grid item xs={6} sm={3} md={1.5}>
             <Typography variant='subtitle1' fontSize={13}>Standard</Typography>
             <StationTypeAhead name="1" variant='standard' fullWidth placeholder='Station' />
+          </Grid>
+          <Grid item xs={12} sm={3}>
+            <Typography variant='subtitle1' fontSize={13}>Standard</Typography>
+            <MultiSelectStationTypeAhead values={['MSP', 'ORD']} name="1" variant='standard' fullWidth placeholder='Station' />
           </Grid>
           <Grid item xs={12}>
             <Typography variant='h6'>{`${t('size')} - ${t('small')}`}</Typography>

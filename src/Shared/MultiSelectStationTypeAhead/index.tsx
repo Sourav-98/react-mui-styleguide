@@ -8,21 +8,22 @@ import {
 import React, { MutableRefObject, SyntheticEvent, useEffect, useRef, useState } from 'react';
 import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
-import { FormStationTypeAheadProps, StationTypeAheadProps } from './StationTypeAhead';
+import { MultiSelectStationTypeAheadProps, FormMultiSelectStationTypeAheadProps } from './MultiSelectStationTypeAhead';
 import { StationOption, stationSearchMockAPI } from 'Services/api.service';
 import InputField from 'Elements/Input/InputField';
 import { useField, useFormikContext } from 'formik';
 
-export const StationTypeAhead: React.FC<StationTypeAheadProps> = ({
+export const MultiSelectStationTypeAhead: React.FC<MultiSelectStationTypeAheadProps> = ({
   sx,
-  value,
-  onStationChange,
+  values,
+  onStationsListChange,
   ...inputFieldProps
 }): JSX.Element => {
+  const [selectedStationsList, setSelectedStationsList] = useState<Array<string>>([]);
   /**
    * The suggestive search `TextField` input value. It is set to `value` (if passed from the parent component) or an empty string
    */
-  const [stationSearchText, setStationSearchText] = useState<string>(() => value || '');
+  const [stationSearchText, setStationSearchText] = useState<string>('');
   /**
    * A boolean marker to indicate whether search has to be performed or not
    */
@@ -49,9 +50,14 @@ export const StationTypeAhead: React.FC<StationTypeAheadProps> = ({
   const maxStationCodeLength: number = 3;
 
   useEffect(() => {
-    if (stationSearchText !== value)
-      setStationSearchText(value || '');
-  }, [value]);
+    if(onStationsListChange) {
+      onStationsListChange(selectedStationsList);
+    }
+  }, selectedStationsList);
+
+  useEffect(() => {
+    setSelectedStationsList(values || []);
+  }, [values]);
 
   useEffect(() => {
     let abortController = new AbortController();
@@ -61,7 +67,7 @@ export const StationTypeAhead: React.FC<StationTypeAheadProps> = ({
        */
       setLoading(true);
       debounceTimeout.current = setTimeout(() => {
-        stationSearchMockAPI(stationSearchText, {
+        stationSearchMockAPI(stationSearchText || '', {
           signal: abortController.signal,
         })
           .then((res) => {
@@ -114,20 +120,15 @@ export const StationTypeAhead: React.FC<StationTypeAheadProps> = ({
       /** else, prevent performing any search */
       setToBeSearched(false);
     }
-    /**
-     * onStationChange callback to pass the updated station code text to the parent component
-     */
-    if (onStationChange) {
-      onStationChange(inputValue.toUpperCase());
-    }
   };
 
   return (
     <Autocomplete
       /** For Station Suggestive Search, allow users to type any station code. Hence, the Autocomplete field will be of type `freeSolo` */
       freeSolo
+      multiple
       disabled={inputFieldProps.disabled}
-      inputValue={stationSearchText}
+      value={selectedStationsList}
       sx={sx}
       options={stations}
       componentsProps={{
@@ -146,7 +147,14 @@ export const StationTypeAhead: React.FC<StationTypeAheadProps> = ({
         },
       }}
       onInputChange={stationSearchOnTextChangeHandler}
-      onChange={(_) => {
+      onChange={(_, values) => {
+        setSelectedStationsList(values.map((value) => {
+          if (typeof value === 'string') {
+            return value.toUpperCase();
+          } else {
+            return (value as StationOption).stationCode;
+          }
+        }));
         setStations([]);
       }}
       onBlur={() => {
@@ -156,9 +164,8 @@ export const StationTypeAhead: React.FC<StationTypeAheadProps> = ({
         setLoading(false);
       }}
       filterOptions={(options) => options}
-      isOptionEqualToValue={(option, value) => option.OId === value.OId}
       getOptionLabel={(option) => {
-        if (typeof option === 'string') return option;
+        if (typeof option === 'string') return option.toUpperCase();
         else return (option as StationOption).stationCode;
       }}
       renderOption={(props, option, { inputValue }) => {
@@ -191,6 +198,7 @@ export const StationTypeAhead: React.FC<StationTypeAheadProps> = ({
           InputProps={{
             ...InputProps,
             ...inputFieldProps.InputProps,
+            
             endAdornment: (
               <>
                 {isLoading && <CircularProgress size={20} />}
@@ -201,6 +209,7 @@ export const StationTypeAhead: React.FC<StationTypeAheadProps> = ({
           inputProps={{
             ...inputProps,
             ...inputFieldProps.inputProps,
+            maxLength: 3,
             style: {
               ...inputFieldProps.inputProps?.style,
               textTransform: 'uppercase',
@@ -217,18 +226,18 @@ export const StationTypeAhead: React.FC<StationTypeAheadProps> = ({
  * @param param0 
  * @returns 
  */
-export const FormStationTypeAhead: React.FC<FormStationTypeAheadProps> = ({name, ...stationTypeAheadProps}): JSX.Element => {
+export const FormMultiSelectStationTypeAhead: React.FC<FormMultiSelectStationTypeAheadProps> = ({name, ...stationTypeAheadProps}): JSX.Element => {
 
   const { setFieldValue, setFieldTouched } = useFormikContext<any>();
   const [ field, meta ] = useField(name);
 
   return (
-    <StationTypeAhead
+    <MultiSelectStationTypeAhead
       {...stationTypeAheadProps}
-      value={field.value}
+      // value={field.value}
       error={meta.touched && !!meta.error}
-      onStationChange={(station) => {
-        setFieldValue(name, station);
+      onStationsListChange={(stations) => {
+        setFieldValue(name, stations);
       }}
       onBlur={() => setFieldTouched(name, true, true)}
     />

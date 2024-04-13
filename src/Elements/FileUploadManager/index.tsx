@@ -16,14 +16,14 @@ const FileCard: React.FC<{ file: File, onRemove: () => void }> = ({ file, onRemo
     }
 
     return (
-        <Paper elevation={2} sx={{ width: '100%', display: 'flex', p: 1, justifyContent: 'space-between' }}>
-            <Box display={'flex'}>
-                <Box width={40} height={40} display={'flex'} justifyContent={'center'} alignItems={'center'}>
+        <Paper elevation={2} sx={{ width: '100%', display: 'flex', p: 1 }}>
+            <Box width={30} height={30} display={'flex'} justifyContent={'center'} alignItems={'center'}>
                     <FaFilePdf fontSize={'24pt'} fill='#b40c00' />
-                </Box>
-                <Typography variant='subtitle1'>{file.name}</Typography>
             </Box>
-            <Box display={'flex'} justifyContent={'center'} alignItems={'center'}>
+            <Box display={'flex'} flexGrow={1} overflow={'hidden'} textOverflow={'ellipsis'}>
+                <Typography variant='subtitle1' component={'span'}>{file.name}</Typography>
+            </Box>
+            <Box width={30} height={30} display={'flex'} justifyContent={'center'} alignItems={'center'}>
                 <IconButton size='small' onClick={onRemove}>
                     <CloseIcon />
                 </IconButton>
@@ -62,14 +62,14 @@ const FileUploadManager: React.FC<FileUploadManagerProps> = ({ maxUploadSize, fi
                         }}
                     />
                     <label htmlFor="raised-button-file">
-                        <IconButton component="span">
+                        <IconButton size='small' component="span">
                             <AttachFileIcon/>
                         </IconButton>
                     </label>
                 </Grid>
                 {
                     _files.map((file, index) => (
-                        <Grid key={index} item xs={6} sm={4} md={2} lg={1}>
+                        <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
                             <FileCard file={file} onRemove={() => {
                                 setFiles(prev => {
                                     let newFiles = [...prev];
