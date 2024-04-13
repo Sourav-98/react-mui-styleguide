@@ -7,19 +7,16 @@ interface CustomProps {
 }
 
 export const ChargeCodeMask = React.forwardRef<HTMLInputElement, CustomProps>(
-  function TextMaskCustom(props, ref) {
-    const { onChange, ...other } = props;
-    return (
-      <IMaskInput
-        {...other}
-        mask="##,##,##"
-        definitions={{
-          '#': /[a-zA-Z]/,
-        }}
-        inputRef={ref}
-        onAccept={(value: any) => onChange({ target: { name: props.name, value } })}
-        overwrite
-      />
-    );
-  },
+  ({ onChange, ...props }, ref) => (
+    <IMaskInput
+      {...props}
+      mask="##,##,##"
+      definitions={{
+        '#': /[a-zA-Z]/,
+      }}
+      inputRef={ref}
+      onAccept={(value) => onChange({ target: { name: props.name, value } })}
+      overwrite
+    />
+  )
 );
