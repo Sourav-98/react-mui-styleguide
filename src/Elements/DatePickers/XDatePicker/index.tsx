@@ -40,23 +40,37 @@ const XDatePicker: React.FC<XDatePickerProps> = ({
    * @note just entering `+` or `-`, without an offset number will perform an offset date selection by `1 day`
    */
   const offsetDateRegex = /^([+-])([0-9]*)$/;
-  const [date, setDate] = useState<Moment | null>(value ? moment.utc(value, dateFormat) : defaultToday ? moment.utc() : null);
+  const [date, setDate] = useState<Moment | null>(null);
   const [dateText, setDateText] = useState<string>('');
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [datepickerAnchorEl, setDatepickerAnchorEl] = useState<null | HTMLElement>(null);
   const datePickerBoxRef: RefObject<HTMLDivElement> = createRef();
 
   useEffect(() => {
+    if (defaultToday && onChange) {
+      let updatedDate = moment.utc();
+      setDate(updatedDate);
+      onChange(updatedDate);
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
     setDatepickerAnchorEl(datePickerBoxRef.current);
   }, [datePickerBoxRef]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    setDate(value ? moment.utc(value, dateFormat) : null);
+    console.log('Value: ', value, ' Moment -> ', moment.utc(value));
+    let updatedDate = null;
+    switch (typeof value) {
+      case 'number': updatedDate = moment.utc(value); break;
+      case 'string': updatedDate = moment.utc(value, dateFormat); break;
+      default : updatedDate = value as Moment;
+    }
+    setDate(updatedDate);
   }, [value]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     setDateText(date ? (!date.isValid() ? 'INDEF' : date?.format(dateFormat).toUpperCase()) : '');
-    if (onChange) onChange(date);
   }, [date]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onDatePickerTextChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,30 +78,32 @@ const XDatePicker: React.FC<XDatePickerProps> = ({
   };
 
   const onDatePickerTextKeyDownHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    let updatedDate: Moment | null = null;
     if (['ArrowUp', 'ArrowDown'].includes(event.key)) {
       event.preventDefault();
       if (date !== null) {
         switch (event.key) {
           case 'ArrowUp':
-            setDate((prevDate) => moment.utc(prevDate, dateFormat).add(1, 'day'));
+            updatedDate = moment.utc(date, dateFormat).add(1, 'day');
+            // setDate((prevDate) => moment.utc(prevDate, dateFormat).add(1, 'day'));
             break;
           case 'ArrowDown':
-            setDate((prevDate) => moment.utc(prevDate, dateFormat).subtract(1, 'day'));
+            updatedDate = moment.utc(date, dateFormat).subtract(1, 'day');
+            // setDate((prevDate) => moment.utc(prevDate, dateFormat).subtract(1, 'day'));
             break;
-          // case 'ArrowLeft':
-          //   setDate((prevDate) => moment(prevDate, dateFormat).subtract(7, 'day'));
-          //   break;
-          // case 'ArrowRight':
-          //   setDate((prevDate) => moment(prevDate, dateFormat).add(7, 'day'));
-          //   break;
           default:
             break;
         }
       }
     }
+    if (updatedDate && updatedDate.isValid()) {
+      setDate(updatedDate);
+      onChange && onChange(updatedDate);
+    }
   };
 
   const onDatePickerTextBlurHandler = (event: React.FocusEvent<HTMLInputElement>) => {
+    let updatedDate: Moment | null = null;
     if (event.target.value !== '') {
       /**
        * Check if date text field has the following types of text entered
@@ -100,51 +116,37 @@ const XDatePicker: React.FC<XDatePickerProps> = ({
         if (event.target.value.length === 5) {
           dateText += new Date().getFullYear().toString().slice(2);
         }
-        let updatedDate = moment.utc(dateText, dateFormat);
-        /**
-         * If the date entered is valid, then only update the entered date. Otherwise, retain the previous date selected.
-         */
-        if (updatedDate.isValid()) {
-          setDate(updatedDate);
-          if (onBlur) onBlur();
-          return;
-        }
+        updatedDate = moment.utc(dateText, dateFormat);
       } else if (event.target.value === '.') {
         /**
          * This means today's date is to be set
          */
-        setDate(moment.utc());
-        if (onBlur) onBlur();
-        return;
+        updatedDate = moment.utc();
       } else if (offsetDateRegex.test(event.target.value)) {
         let regExpMatch = event.target.value.match(offsetDateRegex);
         if (regExpMatch !== null) {
           switch (regExpMatch[1]) {
             case '+':
-              setDate(moment.utc().add(parseInt(regExpMatch[2] || '1'), 'day'));
-              if (onBlur) onBlur();
+              updatedDate = moment.utc().add(parseInt(regExpMatch[2] || '1'), 'day');
               break;
             case '-':
-              setDate(moment.utc().subtract(parseInt(regExpMatch[2] || '1'), 'day'));
-              if (onBlur) onBlur();
+              updatedDate = moment.utc().subtract(parseInt(regExpMatch[2] || '1'), 'day');
               break;
             default:
               break;
           }
         }
-        return;
       }
-      setDateText(date ? (!date.isValid() ? 'INDEF' : date?.format(dateFormat).toUpperCase()) : '');
-    } else {
-      setDate(null);
-      setDateText('');
     }
-    if (onBlur) onBlur();
+    setDate(updatedDate);
+    onChange && onChange(updatedDate);
+    onBlur && onBlur();
   };
 
   const onDatePickerChangeHandler = (_value: Moment | null) => {
     setDate(_value);
-    if (onBlur) onBlur();
+    onChange && onChange(_value);
+    onBlur && onBlur();
   };
 
   return (

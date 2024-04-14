@@ -16,11 +16,11 @@ import moment from 'moment';
 const loginFormInitValues: LoginFormType = {
   loginType: 'PWD',
   username: 'RC',
-  password: '',
-  passwordConfirm: '',
+  password: 'asdf',
+  passwordConfirm: 'asdf',
   station: 'ORD',
-  loginDate1: '',
-  loginDate2: '12MAX23',
+  loginDate1: null,
+  loginDate2: 1913102217078,
 };
 
 const FormikStyleGuide: React.FC = (): JSX.Element => {
@@ -47,7 +47,7 @@ const FormikStyleGuide: React.FC = (): JSX.Element => {
         .required('formik:feedback.passwordConfirmMandatory'),
     }),
     station: Yup.string().required('Station is mandatory'),
-    loginDate2: Yup.string().required('Date is mandatory')
+    // loginDate2: Yup.string().required('Date is mandatory')
   });
 
   return (
@@ -62,7 +62,7 @@ const FormikStyleGuide: React.FC = (): JSX.Element => {
                 await new Promise((resolve) => setTimeout(resolve, 1000));
                 helpers.resetForm({
                   values: {
-                    ...loginFormInitValues,
+                    ...values,
                     loginType: values.loginType
                   }
                 })
@@ -101,7 +101,7 @@ const FormikStyleGuide: React.FC = (): JSX.Element => {
                           setFieldValue('loginType', e.target.value);
                           if (e.target.value === 'MFA') {
                             setTimeout(() => {
-                              setFieldValue('loginDate1', '');
+                              setFieldValue('loginDate1', null);
                             }, 0);
                           }
                         }}
@@ -171,10 +171,10 @@ const FormikStyleGuide: React.FC = (): JSX.Element => {
                       />
                     </Grid>
                     <Grid item xs={12}>
-                      <FormXDatePicker name='loginDate1'/>
+                      <FormXDatePicker name='loginDate1' defaultToday/>
                     </Grid>
                     <Grid item xs={12}>
-                      <FormXDatePicker name='loginDate2' required/>
+                      <FormXDatePicker name='loginDate2'/>
                     </Grid>
                     <Grid item xs={1}>
                       <SubmitButton sx={{ mt: 3.2}} type="submit" variant='contained' fullWidth color='primary' isSubmitting={isSubmitting} disabled={!isValid || isSubmitting}>

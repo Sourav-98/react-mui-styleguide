@@ -19,7 +19,7 @@ const FormXDatePicker: React.FC<FormXDatePickerProps> = ({ value, ...formInputFi
       value={value || _.value}
       onChange={(date) => {
         setTimeout(() => {
-          setFieldValue(formInputFieldProps.name, date ? date.isValid() ? moment(date).format('DDMMMYY').toUpperCase() : 'INDEF' : '')
+          setFieldValue(formInputFieldProps.name, date)
         }, 0);
         formInputFieldProps.onChange && formInputFieldProps.onChange(date); // event propagation
       }}

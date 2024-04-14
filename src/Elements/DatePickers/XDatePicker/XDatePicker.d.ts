@@ -12,7 +12,7 @@ export type XDatePickerProps = Omit<InputFieldProps, 'value' | 'onChange'> & {
   /**
    * the initial value to be set for the date picker, in the DDMMMYY string format
    */
-  value?: string;
+  value?: string | number | Moment | null;
   /**
    * to denote whether the date picker should pick today's date as the initial value (if `value` is not given). If not set, default value will be `null`
    */
