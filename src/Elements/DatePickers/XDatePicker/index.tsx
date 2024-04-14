@@ -47,10 +47,10 @@ const XDatePicker: React.FC<XDatePickerProps> = ({
   const datePickerBoxRef: RefObject<HTMLDivElement> = createRef();
 
   useEffect(() => {
-    if (defaultToday && onChange) {
+    if (defaultToday && !value) {
       let updatedDate = moment.utc();
       setDate(updatedDate);
-      onChange(updatedDate);
+      onChange && onChange(updatedDate);
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -64,7 +64,7 @@ const XDatePicker: React.FC<XDatePickerProps> = ({
     switch (typeof value) {
       case 'number': updatedDate = moment.utc(value); break;
       case 'string': updatedDate = moment.utc(value, dateFormat); break;
-      default : updatedDate = value as Moment;
+      default : updatedDate = value ? moment.utc(value) : null;
     }
     setDate(updatedDate);
   }, [value]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -103,8 +103,10 @@ const XDatePicker: React.FC<XDatePickerProps> = ({
   };
 
   const onDatePickerTextBlurHandler = (event: React.FocusEvent<HTMLInputElement>) => {
-    let updatedDate: Moment | null = null;
-    if (event.target.value !== '') {
+    let updatedDate = date;
+    if (event.target.value === '') {
+      updatedDate = null;
+    } else {
       /**
        * Check if date text field has the following types of text entered
        */

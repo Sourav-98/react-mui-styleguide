@@ -19,8 +19,9 @@ const loginFormInitValues: LoginFormType = {
   password: 'asdf',
   passwordConfirm: 'asdf',
   station: 'ORD',
-  loginDate1: null,
+  loginDate1: new Date(),
   loginDate2: 1913102217078,
+  mfaPin: ''
 };
 
 const FormikStyleGuide: React.FC = (): JSX.Element => {
@@ -174,7 +175,7 @@ const FormikStyleGuide: React.FC = (): JSX.Element => {
                       <FormXDatePicker name='loginDate1' defaultToday/>
                     </Grid>
                     <Grid item xs={12}>
-                      <FormXDatePicker name='loginDate2'/>
+                      <FormXDatePicker name='loginDate2' defaultToday/>
                     </Grid>
                     <Grid item xs={1}>
                       <SubmitButton sx={{ mt: 3.2}} type="submit" variant='contained' fullWidth color='primary' isSubmitting={isSubmitting} disabled={!isValid || isSubmitting}>
