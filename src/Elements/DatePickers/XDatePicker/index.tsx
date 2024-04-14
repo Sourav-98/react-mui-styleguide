@@ -146,8 +146,8 @@ const XDatePicker: React.FC<XDatePickerProps> = ({
   };
 
   const onDatePickerChangeHandler = (_value: Moment | null) => {
-    setDate(_value);
-    onChange && onChange(_value);
+    setDate(_value ? _value.utc(): null);
+    onChange && onChange(_value ? _value.utc(): null);
     onBlur && onBlur();
   };
 
