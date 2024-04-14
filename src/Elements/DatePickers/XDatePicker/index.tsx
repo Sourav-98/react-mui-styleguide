@@ -1,5 +1,5 @@
-import { RefObject, createRef, useEffect, useState } from 'react';
-import { TextFieldDatePickerProps } from './TextFieldDatePicker';
+import React, { RefObject, createRef, useEffect, useState } from 'react';
+import { XDatePickerProps } from './XDatePicker';
 import moment, { Moment } from 'moment';
 import InputField from 'Elements/Input/InputField';
 import { IconButton, InputAdornment } from '@mui/material';
@@ -12,38 +12,51 @@ import { DatePicker } from '@mui/x-date-pickers';
  *    . -> today's date
  *    +x -> x days ahead of today's date
  *    -x -> x days behind of today's date
- * @param {TextFieldDatePickerProps} datePickerProps
+ * @param {XDatePickerProps} datePickerProps
  * @returns
  */
-const TextFieldDatePicker: React.FC<TextFieldDatePickerProps> = ({
+const XDatePicker: React.FC<XDatePickerProps> = ({
   popperPlacement = 'bottom-end',
   value,
   defaultToday,
-  onDateChange,
+  onChange,
   onBlur,
   datePickerActions,
+  datePickerMinDate,
+  datePickerMaxDate,
   ...inputFieldProps
-}: TextFieldDatePickerProps): JSX.Element => {
+}: XDatePickerProps): JSX.Element => {
   const dateFormat = 'DDMMMYY';
+  /**
+   * This is to check if just the complete was entered in the `DDMMMYY` format.
+   */
   const dateFormatRegex = /^\d{2}[a-zA-Z]{3}\d{2}$/;
+  /**
+   * This is to check if just the day and the month was entered in the `DDMMM` format. `XDatePicker` will automatically add the current year to the selection.
+   */
   const semiDateFormatRegex = /^\d{2}[a-zA-Z]{3}$/;
+  /**
+   * This is to check if the date entry was made relative to today's date: [+|-]xxx (where xxx denotes any digit)
+   * @note just entering `+` or `-`, without an offset number will perform an offset date selection by `1 day`
+   */
   const offsetDateRegex = /^([+-])([0-9]*)$/;
-  const [date, setDate] = useState<Moment | null | undefined>(
-    value ? value : defaultToday ? moment() : null
-  );
+  const [date, setDate] = useState<Moment | null>(value ? moment.utc(value, dateFormat) : defaultToday ? moment.utc() : null);
   const [dateText, setDateText] = useState<string>('');
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [datepickerAnchorEl, setDatepickerAnchorEl] = useState<null | HTMLElement>(null);
   const datePickerBoxRef: RefObject<HTMLDivElement> = createRef();
-  
 
   useEffect(() => {
     setDatepickerAnchorEl(datePickerBoxRef.current);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [datePickerBoxRef]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    setDateText(date ? !date.isValid() ? 'INDEF' : date?.format(dateFormat).toUpperCase() : '');
-    if (onDateChange) onDateChange(date);
+    setDate(value ? moment.utc(value, dateFormat) : null);
+  }, [value]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    setDateText(date ? (!date.isValid() ? 'INDEF' : date?.format(dateFormat).toUpperCase()) : '');
+    if (onChange) onChange(date);
   }, [date]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onDatePickerTextChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,10 +69,10 @@ const TextFieldDatePicker: React.FC<TextFieldDatePickerProps> = ({
       if (date !== null) {
         switch (event.key) {
           case 'ArrowUp':
-            setDate((prevDate) => moment(prevDate, dateFormat).add(1, 'day'));
+            setDate((prevDate) => moment.utc(prevDate, dateFormat).add(1, 'day'));
             break;
           case 'ArrowDown':
-            setDate((prevDate) => moment(prevDate, dateFormat).subtract(1, 'day'));
+            setDate((prevDate) => moment.utc(prevDate, dateFormat).subtract(1, 'day'));
             break;
           // case 'ArrowLeft':
           //   setDate((prevDate) => moment(prevDate, dateFormat).subtract(7, 'day'));
@@ -87,34 +100,33 @@ const TextFieldDatePicker: React.FC<TextFieldDatePickerProps> = ({
         if (event.target.value.length === 5) {
           dateText += new Date().getFullYear().toString().slice(2);
         }
-        let updatedDate = moment(dateText, dateFormat);
+        let updatedDate = moment.utc(dateText, dateFormat);
         /**
          * If the date entered is valid, then only update the entered date. Otherwise, retain the previous date selected.
          */
         if (updatedDate.isValid()) {
           setDate(updatedDate);
-          // if (onBlur) onBlur();
+          if (onBlur) onBlur();
           return;
         }
       } else if (event.target.value === '.') {
         /**
          * This means today's date is to be set
          */
-        setDate(moment());
+        setDate(moment.utc());
+        if (onBlur) onBlur();
         return;
       } else if (offsetDateRegex.test(event.target.value)) {
-        /**
-         * This means a shortcut date entry was made, relative to today's date: [+|-]xxx
-         */
         let regExpMatch = event.target.value.match(offsetDateRegex);
-        console.log(regExpMatch);
         if (regExpMatch !== null) {
           switch (regExpMatch[1]) {
             case '+':
-              setDate(moment().add(parseInt(regExpMatch[2] || '1'), 'day'));
+              setDate(moment.utc().add(parseInt(regExpMatch[2] || '1'), 'day'));
+              if (onBlur) onBlur();
               break;
             case '-':
-              setDate(moment().subtract(parseInt(regExpMatch[2] || '1'), 'day'));
+              setDate(moment.utc().subtract(parseInt(regExpMatch[2] || '1'), 'day'));
+              if (onBlur) onBlur();
               break;
             default:
               break;
@@ -122,7 +134,7 @@ const TextFieldDatePicker: React.FC<TextFieldDatePickerProps> = ({
         }
         return;
       }
-      setDateText(date ? !date.isValid() ? 'INDEF' : date?.format(dateFormat).toUpperCase() : '');
+      setDateText(date ? (!date.isValid() ? 'INDEF' : date?.format(dateFormat).toUpperCase()) : '');
     } else {
       setDate(null);
       setDateText('');
@@ -130,7 +142,7 @@ const TextFieldDatePicker: React.FC<TextFieldDatePickerProps> = ({
     if (onBlur) onBlur();
   };
 
-  const onDatePickerChangeHandler = (_value: Moment | null | undefined) => {
+  const onDatePickerChangeHandler = (_value: Moment | null) => {
     setDate(_value);
     if (onBlur) onBlur();
   };
@@ -165,8 +177,8 @@ const TextFieldDatePicker: React.FC<TextFieldDatePickerProps> = ({
           ...inputFieldProps.inputProps,
           style: {
             ...inputFieldProps?.inputProps?.style,
-            textTransform: 'uppercase'
-          }
+            textTransform: 'uppercase',
+          },
         }}
       />
       <DatePicker
@@ -174,29 +186,16 @@ const TextFieldDatePicker: React.FC<TextFieldDatePickerProps> = ({
         open={isOpen}
         onClose={() => setIsOpen(false)}
         onChange={onDatePickerChangeHandler}
-        minDate={moment('01JAN24', 'DDMMMYY')}
-        maxDate={moment('01APR24', 'DDMMMYY')}
+        minDate={datePickerMinDate}
+        maxDate={datePickerMaxDate}
         slotProps={{
           popper: {
             anchorEl: datepickerAnchorEl,
             placement: popperPlacement,
-            modifiers: [
-              {
-                name: 'preventOverflow',
-                enabled: true,
-                options: {
-                  altAxis: true,
-                  altBoundary: true,
-                  tether: true,
-                  rootBoundary: 'document',
-                  padding: 8,
-                },
-              },
-            ],
           },
           actionBar: {
             actions: datePickerActions || ['clear', 'accept', 'today'],
-          }
+          },
         }}
         slots={{
           toolbar: () => <></>,
@@ -204,11 +203,11 @@ const TextFieldDatePicker: React.FC<TextFieldDatePickerProps> = ({
         sx={{
           height: 0,
           maxHeight: 0,
-          display: 'none'
+          display: 'none',
         }}
       />
     </>
   );
 };
 
-export default TextFieldDatePicker;
+export default XDatePicker;

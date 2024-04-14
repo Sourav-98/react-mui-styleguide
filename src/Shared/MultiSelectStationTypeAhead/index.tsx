@@ -53,7 +53,7 @@ export const MultiSelectStationTypeAhead: React.FC<MultiSelectStationTypeAheadPr
     if(onStationsListChange) {
       onStationsListChange(selectedStationsList);
     }
-  }, selectedStationsList);
+  }, [selectedStationsList]);
 
   useEffect(() => {
     setSelectedStationsList(values || []);

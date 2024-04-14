@@ -1,17 +1,17 @@
-import { SxProps, TextFieldProps, TooltipProps } from '@mui/material';
+import { SxProps, TextFieldProps, Theme } from '@mui/material';
 
-export type InputFieldProps = TextFieldProps & {
-  /**
-   * @override TextField's `value`
-   */
+export type InputFieldProps = Omit<TextFieldProps, 'value'> & {
   value?: string;
-  /**
-   * The tooltip title text
-   */
-  tooltipTitle?: string;
   /**
    * label styles to be overridden
    */
-  labelSx?: SxProps;
-  toolTipPlacement?: "bottom" | "left" | "right" | "top" | "bottom-end" | "bottom-start" | "left-end" | "left-start" | "right-end" | "right-start" | "top-end" | "top-start" | undefined
+  labelSx?: SxProps<Theme>;
+  /**
+   * `TextField` styles to be overridden
+   */
+  textFieldSx?: SxProps<Theme>;
+  /**
+   * Provision for `MenuItem` children components
+   */
+  children?: React.ReactNode
 };

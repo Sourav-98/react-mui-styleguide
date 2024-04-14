@@ -559,6 +559,7 @@ const TextFieldStyleGuide: React.FC = (): JSX.Element => {
                   label="Masking - Charge Codes"
                   placeholder='XX,YY,ZZ'
                   required
+                  value="wwwwww"
                   InputProps={{
                     inputComponent: ChargeCodeMask as any,
                     endAdornment: (

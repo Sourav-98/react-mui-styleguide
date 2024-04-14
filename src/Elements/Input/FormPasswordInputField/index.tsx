@@ -1,22 +1,22 @@
 import React from 'react';
-import { FormInputFieldProps } from './FormInputField';
+import { FormInputFieldProps } from '../FormInputField/FormInputField';
 import { useField } from 'formik';
-import InputField from '../InputField';
+import PasswordInputField from '../PasswordInputField';
 
 /**
- * An `InputField` HOC to be used within the `Formik` context
+ * A `PasswordInputField` HOC to be used within the `Formik` context
  * @note  if `helperText` is set, the value will be respected.
  *        if `helperText` is assigned `null`, this means no helperText is to be shown after validation.
  *        else, show the field validation error message for the `helperText`
  */
-const FormInputField: React.FC<FormInputFieldProps> = ({
+const FormPasswordInputField: React.FC<FormInputFieldProps> = ({
   name,
   ...formInputFieldProps
 }: FormInputFieldProps): JSX.Element => {
   const [field, meta] = useField(name);
 
   return (
-    <InputField
+    <PasswordInputField
       /**
        * @warning do not change the order of the `field` and `formInputFieldProps` destructuring
        */
@@ -35,4 +35,4 @@ const FormInputField: React.FC<FormInputFieldProps> = ({
   );
 };
 
-export default FormInputField;
+export default FormPasswordInputField;

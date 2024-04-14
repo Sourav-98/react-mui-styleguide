@@ -4,6 +4,7 @@ export type LoginFormType = {
   password: string;
   passwordConfirm: string;
   station: string;
-  loginDate1: Moment | null;
+  loginDate1: string;
+  loginDate2: string;
   mfaPin?: string;
 };

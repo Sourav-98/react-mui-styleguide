@@ -1,5 +1,4 @@
 import { Container, Divider, Grid, MenuItem, Paper } from '@mui/material';
-// import TextFieldDatePicker from 'Elements/DatePickers/TextFieldDatePicker';
 import FormInputField from 'Elements/Input/FormInputField';
 import SubmitButton from 'Elements/Input/SubmitButton';
 import { FormStationTypeAhead } from 'Shared/StationTypeAhead';
@@ -7,8 +6,10 @@ import { Form, Formik, FormikProps } from 'formik';
 import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 import { LoginFormType } from './FormikTypes';
-import TextFieldDatePicker from 'Elements/DatePickers/TextFieldDatePicker';
+import XDatePicker from 'Elements/DatePickers/XDatePicker';
 import FileUploadManager from 'Elements/FileUploadManager';
+import FormXDatePicker from 'Elements/DatePickers/FormXDatePicker';
+import moment from 'moment';
 
 
 
@@ -18,7 +19,8 @@ const loginFormInitValues: LoginFormType = {
   password: '',
   passwordConfirm: '',
   station: 'ORD',
-  loginDate1: null,
+  loginDate1: '',
+  loginDate2: '12MAX23',
 };
 
 const FormikStyleGuide: React.FC = (): JSX.Element => {
@@ -44,7 +46,8 @@ const FormikStyleGuide: React.FC = (): JSX.Element => {
         })
         .required('formik:feedback.passwordConfirmMandatory'),
     }),
-    station: Yup.string().required('Station is mandatory')
+    station: Yup.string().required('Station is mandatory'),
+    loginDate2: Yup.string().required('Date is mandatory')
   });
 
   return (
@@ -74,6 +77,7 @@ const FormikStyleGuide: React.FC = (): JSX.Element => {
                 touched,
                 isSubmitting,
                 isValid,
+                setFieldValue,
                 resetForm
               }: FormikProps<LoginFormType>) => (
                 <Form>
@@ -93,7 +97,14 @@ const FormikStyleGuide: React.FC = (): JSX.Element => {
                           }
                         }}
                         title='Select your login mode.'
-                        toolTipPlacement='top'
+                        onChange={(e) => {
+                          setFieldValue('loginType', e.target.value);
+                          if (e.target.value === 'MFA') {
+                            setTimeout(() => {
+                              setFieldValue('loginDate1', '');
+                            }, 0);
+                          }
+                        }}
                       >
                         <MenuItem value="PWD">Password</MenuItem>
                         <MenuItem value="MFA">MFA</MenuItem>
@@ -104,7 +115,7 @@ const FormikStyleGuide: React.FC = (): JSX.Element => {
                         name='username'
                         required
                         label={t('formik:label.username', 'Username')}
-                        // helperText={touched.username && !!errors.username ? t(errors.username || '') : null}
+                        helperText={touched.username && !!errors.username ? t(errors.username || '') : null}
                         placeholder={t('formik:label.username', 'Username') || ''}
                         aria-label='username'
                       />
@@ -160,10 +171,10 @@ const FormikStyleGuide: React.FC = (): JSX.Element => {
                       />
                     </Grid>
                     <Grid item xs={12}>
-                      <TextFieldDatePicker/>
+                      <FormXDatePicker name='loginDate1'/>
                     </Grid>
                     <Grid item xs={12}>
-                      <TextFieldDatePicker required defaultToday/>
+                      <FormXDatePicker name='loginDate2' required/>
                     </Grid>
                     <Grid item xs={1}>
                       <SubmitButton sx={{ mt: 3.2}} type="submit" variant='contained' fullWidth color='primary' isSubmitting={isSubmitting} disabled={!isValid || isSubmitting}>
