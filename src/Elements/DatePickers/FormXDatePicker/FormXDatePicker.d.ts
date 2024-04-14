@@ -2,7 +2,7 @@ import { FormInputFieldProps } from 'Elements/Input/FormInputField/FormInputFiel
 import { XDatePickerProps } from '../XDatePicker/XDatePicker';
 
 export type FormXDatePickerProps = Omit<FormInputFieldProps, 'onChange' | 'value'> &
-  Partial<Pick<XDatePickerProps, 'popperPlacement' | 'defaultToday' | 'datePickerActions' | 'onChange'>> & {
+  Partial<Pick<XDatePickerProps, 'popperPlacement' | 'defaultToday' | 'datePickerActions' | 'onChange' | 'onBlur'>> & {
     /**
      * The date value in `string` or `Moment` to be set for the date picker component. 
      */

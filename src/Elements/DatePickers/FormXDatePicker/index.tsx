@@ -19,21 +19,23 @@ const FormXDatePicker: React.FC<FormXDatePickerProps> = ({ value, ...formInputFi
       value={value || _.value}
       onChange={(date) => {
         setTimeout(() => {
-          setFieldValue(formInputFieldProps.name, date ? moment(date).format('DDMMMYY').toUpperCase() : '')
+          setFieldValue(formInputFieldProps.name, date ? date.isValid() ? moment(date).format('DDMMMYY').toUpperCase() : 'INDEF' : '')
         }, 0);
+        formInputFieldProps.onChange && formInputFieldProps.onChange(date); // event propagation
       }}
       onBlur={() => {
         setTimeout(() => {
           setFieldTouched(formInputFieldProps.name, true, true)
         }, 0);
+        formInputFieldProps.onBlur && formInputFieldProps.onBlur(); // event propagation
       }}
       error={meta.touched && !!meta.error}
       helperText={
         formInputFieldProps.helperText || formInputFieldProps.helperText === null
           ? formInputFieldProps.helperText
           : meta.touched && !!meta.error
-          ? meta.error
-          : null
+            ? meta.error
+            : null
       }
     />
   );
